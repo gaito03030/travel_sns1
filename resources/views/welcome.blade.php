@@ -5,7 +5,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>MOKKAI
+        </title>
+        <p>はろえぶりわん</p>
+
+        <p>ただいま</p>
 
         <p>こんにちは</p>
         <p>www</p>
