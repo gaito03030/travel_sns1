@@ -15,10 +15,14 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('name')->comment('ユーザー名');
+            $table->string('email')->unique()->comment('メールアドレス');
+            $table->timestamp('email_verified_at')->nullable()->comment('メールアドレス認証用？');
+            $table->string('password',30)->comment('パスワード');
+            $table->string('icon_url',255)->comment('アイコン画像のURL');
+            $table->string('company_flg', 64)->comment('企業ユーザか一般ユーザか判別するためのフラグ');
+            $table->text('bio')->nullable()->comment('自己紹介');
+            $table->string('web_url')->nullable()->comment('webサイトのURL');
             $table->rememberToken();
             $table->timestamps();
         });
