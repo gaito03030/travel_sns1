@@ -48,7 +48,11 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        //
+        //モデルコース一件取得
+
+        $post = Post::with('user','detail')->get();
+
+       return $post;
     }
 
     /**

@@ -19,6 +19,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/test', [PostsController::class,'index']);
+
+//一般ユーザ側　モデルコース一件表示
+Route::get('/posts/{id}', [PostsController::class,'show']);
+
+
 Route::get('company_mypage',[UsersController::class,'index']);
 Auth::routes();
 
