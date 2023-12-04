@@ -52,6 +52,11 @@ class PostsController extends Controller
 
         $post = Post::with('user:id,name,icon_url','category','pref','details','spots')->find($id);
 
+        if($post->status !== 1){
+            //ステータスが公開中以外の場合はnot found を表示
+            abort(404);
+        }
+
         //return $post;
         return view('post',compact(['post']));
     }
