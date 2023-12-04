@@ -50,9 +50,10 @@ class PostsController extends Controller
     {
         //モデルコース一件取得
 
-        $post = Post::with('user','detail')->get();
+        $post = Post::with('user:id,name,icon_url','category','pref','details','spots')->find($id);
 
-       return $post;
+        //return $post;
+        return view('post',compact(['post']));
     }
 
     /**
