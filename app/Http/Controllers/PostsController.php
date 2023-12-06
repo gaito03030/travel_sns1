@@ -15,8 +15,24 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $return =  Post::all();
-        return view('test',compact('return'));
+        // $return =  Post::all();
+        // return view('test',compact('return'));
+
+
+            // // ログインしているユーザーの情報を取得
+            // $user = auth()->user();
+
+            // // ログインしているユーザーの投稿を取得
+            // $userPosts = $user->posts;
+    
+            // return view('company_mypage', compact('userPosts'));
+
+            // すべての投稿を取得
+        $allPosts = Post::all();
+        $id = auth()->user()->id;
+        $myPosts = User::with('posts')->find($id);
+        // return $myPosts;
+        return view('company_mypage', compact(['myPosts']));
     }
 
     /**
