@@ -5,12 +5,28 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Post extends Model
 {
     use HasFactory;
 
     public function user(){
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
+    }
+
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
+
+    public function pref(){
+        return $this->belongsTo(Pref::class);
+    }
+
+    public function details(){
+        return $this->hasMany(Detail::class);
+    }
+    public function spots(){
+        return $this->hasMany(Spot::class);
     }
 
 }

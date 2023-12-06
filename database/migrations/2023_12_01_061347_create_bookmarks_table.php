@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('bookmarks', function (Blueprint $table) {
             $table->id();
-            $table->text('category')->comment('カテゴリー名');
+            $table->foreignId('post_id')->constrained('posts');
+            $table->foreignId('user_id')->constrained('users')->comment('フォローをしたユーザのID');
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categorys');
+        Schema::dropIfExists('bookmarks');
     }
 };

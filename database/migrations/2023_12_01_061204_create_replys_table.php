@@ -13,9 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('replys', function (Blueprint $table) {
             $table->id();
-            $table->text('category')->comment('カテゴリー名');
+            $table->foreignId('comment_id')->constrained('comments')->comment('コメントID');
+            $table->foreignId('user_id')->constrained('users')->comment('ユーザID');
+            $table->text('detail')->comment('内容');
+            $table->timestamps();
+            $table->dropColumn('updated_at');
         });
     }
 
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categorys');
+        Schema::dropIfExists('replys');
     }
 };
