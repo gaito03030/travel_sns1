@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id()->comment('投稿ID');
             $table->foreignId('user_id')->constrained('users')->comment('投稿者ユーザーID')->change();
-            $table->foreignId('category')->constrained('categorys')->comment('カテゴリーID')->change();
+            $table->foreignId('category_id')->constrained('categorys')->comment('カテゴリーID')->change();
             $table->string('title')->comment('タイトル');
             $table->string('main_img_url')->comment('メイン画像URL');
             $table->integer('status')->comment('公開状況(1=公開,0=非公開)');

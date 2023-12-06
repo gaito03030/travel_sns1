@@ -22,7 +22,7 @@ Route::get('/', function () {
 //Route::get('/test', [PostsController::class,'index']);
 
 //一般ユーザ側　モデルコース一件表示
-Route::get('/posts/{id}', [PostsController::class,'show']);
+Route::get('/posts/{id}', [PostsController::class,'show'])->name('post');
 
 //company_mypageのためのルートを通す
 Route::get('/company_mypage',[PostsController::class,'index']);
@@ -30,6 +30,10 @@ Route::get('/company_mypage',[PostsController::class,'index']);
 
 Route::get('posts',[PostsController::class,'index']);
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 

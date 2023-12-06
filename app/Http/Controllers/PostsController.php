@@ -66,9 +66,15 @@ class PostsController extends Controller
     {
         //モデルコース一件取得
 
-        $post = Post::with('user','detail')->get();
+        $post = Post::with('user:id,name,icon_url','category','pref','details','spots')->find($id);
 
-       return $post;
+        if($post->status !== 1){
+            //ステータスが公開中以外の場合はnot found を表示
+            abort(404);
+        }
+
+        //return $post;
+        return view('post',compact(['post']));
     }
 
     /**
