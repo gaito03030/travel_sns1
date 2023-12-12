@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name')->comment('ユーザー名');
             $table->string('email')->unique()->comment('メールアドレス');
             $table->timestamp('email_verified_at')->nullable()->comment('メールアドレス認証用？');
-            $table->string('password',30)->comment('パスワード');
+            $table->string('password',255)->comment('パスワード');
             $table->string('icon_url',255)->comment('アイコン画像のURL');
             $table->string('company_flg', 64)->comment('企業ユーザか一般ユーザか判別するためのフラグ');
             $table->text('bio')->nullable()->comment('自己紹介');

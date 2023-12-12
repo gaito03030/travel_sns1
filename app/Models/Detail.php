@@ -9,7 +9,16 @@ class Detail extends Model
 {
     use HasFactory;
 
-    public function post(){
+    //タイムスタンプの無効
+    public $timestamps = false;
+
+    protected $guarded = [
+        'id',
+        'post_id'
+    ];
+
+    public function post()
+    {
         return $this->belongsTo('App\Post');
     }
 }
