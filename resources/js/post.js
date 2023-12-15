@@ -2,6 +2,7 @@
 
 $(function () {
 
+    console.log("20231214");
     /**フォームの要素追加、削除 */
 
     /**
@@ -45,16 +46,16 @@ $(function () {
          */
         if ($list.find('.js_item').length == 0) {
             //存在しない
-            console.log($list.is('[data-input="detials"]'));
+            console.log($list.is('[data-input="details"]'));
             console.log($list.is('[data-input="dates"]'));
             console.log($list.is('[data-input="spots"]'));
 
             //リストのdate-input属性の値がdetailsの時
-            if ($list.is('[data-input="detials"]')) {
+            if ($list.is('[data-input="details"]')) {
                 $list.append(
                     '<li class="js_item">' +
                     '<input type="text" name="detail_title[0]" class="js_input" placeholder="タイトル（例 持ち物リスト）"><br>' +
-                    '<textarea type="text" name="detial_content[0]" class="js_input" placeholder="内容"></textarea>' +
+                    '<textarea type="text" name="detail_content[0]" class="js_input" placeholder="内容"></textarea>' +
                     '<button class="js_remove-btn">削除</button>' +
                     '</li>'
                 );

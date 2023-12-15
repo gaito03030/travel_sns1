@@ -14,22 +14,28 @@
         <label for="status">
             <input type="hidden" name="status" value="0">
             <input type="checkbox" id="status" name="status" value="1">
-            公開する
+            公開する<br>
         </label>
+        <input type="file" name="main_image"><br>
+        カテゴリーを選択<br>
+        @foreach($datas['category'] as $category)
+        <label><input type="radio" name="category" value="{{$category->id}}">{{ $category->category }}</label>
+        @endforeach<br>
+        <label for="pref">県を選択</label>
+        <select name="pref" id="pref">
+            @foreach($datas['pref'] as $pref)
+            <option value="{{ $pref -> id }}">{{ $pref->name }}</option>
+            @endforeach
+        </select>
+        <br>
         タイトル:<input type="text" name="title" placeholder="タイトル"><br>
         概要：<textarea name="description" placeholder="概要"></textarea><br>
         <h3>詳細</h3>
         <div class="js_items">
-            <ul class="js_item_list" data-input="detials">
+            <ul class="js_item_list" data-input="details">
                 <li class="js_item">
                     <input type="text" name="detail_title[0]" class="js_input" placeholder="タイトル（例 持ち物リスト）"><br>
                     <textarea type="text" name="detail_content[0]" class="js_input" placeholder="内容"></textarea>
-                    <button class="js_remove_btn">削除</button><br>
-
-                </li>
-                <li class="js_item">
-                    <input type="text" name="detail_title[1]" class="js_input" placeholder="タイトル（例 持ち物リスト）"><br>
-                    <textarea type="text" name="detail_content[1]" class="js_input" placeholder="内容"></textarea>
                     <button class="js_remove_btn">削除</button><br>
 
                 </li>
