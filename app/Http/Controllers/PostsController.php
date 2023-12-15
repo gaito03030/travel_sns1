@@ -19,29 +19,30 @@ class PostsController extends Controller
         // return view('test',compact('return'));
 
 
-            // // ログインしているユーザーの情報を取得
-            // $user = auth()->user();
+        // // ログインしているユーザーの情報を取得
+        // $user = auth()->user();
 
-            // // ログインしているユーザーの投稿を取得
-            // $userPosts = $user->posts;
-    
-            // return view('company_mypage', compact('userPosts'));
+        // // ログインしているユーザーの投稿を取得
+        // $userPosts = $user->posts;
 
-            // すべての投稿を取得
+        // return view('company_mypage', compact('userPosts'));
+
+        // すべての投稿を取得
         $allPosts = Post::all();
         $id = auth()->user()->id;
-        
+
         $myPosts = Post::where('user_id', $id)->get();
         // dd($myPosts);
 
         //ログインしているユーザー名
         $userName = User::find($id)->name;
-        
-        return view('company_mypage', compact(['myPosts'],'userName'));
+
+        return view('company_mypage', compact(['myPosts'], 'userName'));
     }
 
     //投稿削除処理
-    public function delete($id){
+    public function delete($id)
+    {
         $post = Post::find($id);
         return $post;
 
@@ -247,11 +248,11 @@ class PostsController extends Controller
 
                 for ($i = 0; $i < count($request['detail_title']); $i++) {
                     $post_detail = new Detail;
-    
+
                     $post_detail->post_id = $request['post_id'];
                     $post_detail->title = $request['detail_title'][$i];
                     $post_detail->content = $request['detail_content'][$i];
-    
+
                     $post_detail->save();
                 }
             }
@@ -269,9 +270,9 @@ class PostsController extends Controller
             //requestから新しいスポットを登録
             for ($i = 0; $i < $request['date_length']; $i++) {
                 for ($l = 0; $l < count($request['spot_title_' . ($i + 1)]); $l++) {
-    
+
                     $post_spot = new Spot;
-    
+
                     $post_spot->post_id = $request['post_id'];
                     $post_spot->title = $request['spot_title_' . ($i + 1)][$l];
                     $post_spot->description = $request['spot_description_' . ($i + 1)][$l];
@@ -279,11 +280,11 @@ class PostsController extends Controller
                     $post_spot->time = $request['spot_time_' . ($i + 1)][$l];
                     $post_spot->address = $request['spot_address_' . ($i + 1)][$l];
                     $post_spot->icon = "icon_default.png";
-    
+
                     $post_spot->save();
                 }
             }
-    
+
             //古いspotsを削除
             foreach ($old_spots as $old_spot) {
                 $old_spot->delete();
@@ -331,6 +332,6 @@ class PostsController extends Controller
 
         //ログインしているユーザー名
         $userName = User::find($id)->name;
-        return view('company_mypage', compact(['myPosts'],'userName'));
+        return view('company_mypage', compact(['myPosts'], 'userName'));
     }
 }
