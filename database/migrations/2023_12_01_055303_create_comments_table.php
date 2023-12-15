@@ -19,7 +19,6 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->comment('ユーザID');
             $table->text('detail')->comment('内容');
             $table->timestamps();
-            $table->dropColumn('updated_at');
         });
     }
 

@@ -3,8 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\LogController;
+use App\Http\Controllers\RepliesController;
+use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\UsersController;
 use App\Models\Post;
+use App\Models\Reply;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +39,11 @@ Route::post('/create/post',[PostsController::class,'store'])->name('create.store
 
 Route::get('/create/edit/{id}',[PostsController::class,'edit'])->name('create.edit');
 Route::post('/create/update',[PostsController::class,'update'])->name('create.update');
+
+//投稿コメント返信ページ
+Route::post('/comment/{postId}',[CommentsController::class,'store'])->name('comment.store');
+Route::get('/reply/{postId}/{commentId}',[RepliesController::class,'create'])->name('reply.create');
+Route::post('/reply/store',[RepliesController::class,'store'])->name('reply.store');
 
 //company_mypageのためのルートを通す
 Route::get('/company_mypage',[PostsController::class,'index']);

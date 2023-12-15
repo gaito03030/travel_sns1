@@ -43,4 +43,8 @@ class Post extends Model
         return $this->hasMany(Spot::class);
     }
 
+    public function comments(){
+        return $this->hasmany(Comment::class);
+    }
+
 }

@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Auth;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Detail;
 use App\Models\Spot;
 use App\Models\Pref;
@@ -160,14 +161,20 @@ class PostsController extends Controller
         //モデルコース一件取得
 
         $post = Post::with('user:id,name,icon_url', 'category', 'pref', 'details', 'spots')->find($id);
+        $comments = Comment::with('user:id,name,icon_url','replies')->where('post_id',$id)->get();
 
         if ($post->status !== 1) {
             //ステータスが公開中以外の場合はnot found を表示
             abort(404);
         }
 
-        //return $post;
-        return view('post', compact(['post']));
+        $data = [
+            'post'=>$post,
+            'comments'=> $comments
+        ];
+
+        //return $data;
+        return view('post', compact(['data']));
     }
 
     /**
