@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bookmarks', function (Blueprint $table) {
+        Schema::create('follows', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('post_id')->constrained('posts');
-            $table->foreignId('user_id')->constrained('users')->comment('フォローをしたユーザのID');
+            $table->bigInteger('user_id');
+            $table->bigInteger('followed_user_id');
+            $table->timestamps();  
         });
     }
 
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bookmarks');
+        Schema::dropIfExists('follows');
     }
 };
