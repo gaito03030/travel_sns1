@@ -64,11 +64,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+       
+       $icon_def ='img/icon_default.png';
         return User::create([
             'icon_url' => "default_icon.jpg",
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'icon_url' =>$icon_def,
             'company_flg' => '0',
             'bio' => null,
             'web_url' => null
