@@ -33,51 +33,9 @@
         .number {
             padding-right: 20px;
         }
-
-        .open {
-            cursor: pointer;
-        }
-
-        #pop-up {
-            display: none;
-        }
-
-        .overlay {
-            display: none;
-        }
-
-        #pop-up:checked+.overlay {
-            display: block;
-            position: fixed;
-            width: 100%;
-            height: 100vh;
-            top: 0;
-            left: 0;
-            z-index: 9999;
-            background: rgba(0, 0, 0, 0.6);
-        }
-
-        .window {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            width: 90vw;
-            max-width: 360px;
-            padding: 20px;
-            height: 300px;
-            background-color: #fff;
-            border-radius: 4px;
-            align-items: center;
-            transform: translate(-50%, -50%);
-        }
-
-        .close {
-            position: absolute;
-            top: 4px;
-            right: 4px;
-            cursor: pointer;
-        }
     </style>
+
+
 
 </head>
 
@@ -95,7 +53,7 @@
                 </div>
                 <div class="myinfo_text">
                     {{-- <p class="my_name">XXXXX旅館</p> --}}
-                    <p class="my_name">{{ $userName }}</p>
+                    <p class="my_name">{{ $user_info->name }}</p>
                     <p class="followers">000</p>
                     <p class="followers_title">followers</p>
                 </div>
@@ -111,7 +69,7 @@
         <main class="main">
             <!-- ここからがページごとの表示部分 -->
             <section class="main_header flex">
-                <h2>マイモデルコース</h2>
+                <h2>マイ企業管理情報</h2>
                 <div class="header_inner flex">
                     <form class="search_wrap" action="{{ route('company_mypage.posts') }}" method="get">
                         <input class="input_search" type="search" placeholder="検索" name="search"
@@ -128,40 +86,41 @@
                     @yield('content')
 
 
-                    @foreach ($myPosts as $post)
-                        <div class="mymodel">
-                            <p><img src="{{ asset('storage/' . $post->main_img_url) }}" width="300px" height="200px"
-                                    alt="main_imag_url"></p>
-                            <p class="travel_title">{{ $post->title }}</p>
-                            <p class="travel_status"><?php
-                            if ($post->status !== 1) {
-                                echo '非公開中';
-                            } else {
-                                echo '公開中';
-                            }
-                            ?></p>
-                            <p>{{ $post->description }}</p>
-                            <!-- 他の投稿情報を表示する -->
+                    <div>
+                        
+                        <img src=" {{asset('storage/'.$user_info->icon_url)}}
+                        "width="200px"
+                            height="200px" alt="User Icon">
+                        <?php
+                        //企業の名前表示
+                        $user_name = $user_info->name;
+                        //企業のひとこと(bio)
+                        $user_bio = $user_info->bio;
+                        //公式ホームページURL
+                        $user_url = $user_info->web_url;
+                        //userのアイコンを取得
+                        $user_icon = $user_info->icon_url;
+                        echo '<h3>' . $user_name . '</h3>';
+                        echo '<br>';
+                        echo '<div class=number_group>
+                                                                                                                                 <p class=number>公開中の投稿' .
+                            $posts_number .
+                            '件</p>  ';
+                        echo '<p class=number>お気に入り X件</p>  ';
+                        echo '<p class=number>総ブックマーク X件</p> </div> ';
+                        echo '<br>';
+                        echo 'ひとこと' . '<br>';
+                        echo $user_bio;
+                        echo '<br>';
+                        echo '公式ホームページURL';
+                        echo '<br>';
+                        echo $user_url;
+                        
+                        ?>
 
-                            <label class="open" for="pop-up">削除</label>
-                            <input type="checkbox" id="pop-up">
-                            <div class="overlay">
-                                <div class="window">
-                                    <label class="close" for="pop-up">閉じる</label>
-                                    <form method="POST" action="{{ route('company_mypage.delete', $post->id) }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit">はい</button>
-                                    </form>
-                                    
-                                    <p><a href="company_mypage?">いいえ</a></p>
-                                </div>
-                            </div>
-                            <a href="index.php">編集</a>
-                        </div>
+                        <div><a href="{{ route('user_edit') }}">変更</a></div>
 
-                        <hr>
-                    @endforeach
+                    </div>
                 </main>
                 <div class="courses">
                     <section class="course"></section>

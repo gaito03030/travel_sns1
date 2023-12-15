@@ -1,0 +1,188 @@
+@charset "utf-8";
+
+body {
+    margin: 0;
+    background-color: #f6f6f6;
+    color: #A6A6A6;
+}
+
+header {
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    padding: 0 1em;
+}
+
+img {
+    vertical-align: bottom;
+}
+
+h1 {
+    margin: 0;
+    width: 200px;
+}
+
+h1 a {
+    color: #333;
+}
+
+h2 {
+    color: #737373;
+    font-weight: 500;
+    font-size: 1.2em;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: #598F78;
+    height: 100vh;
+    width: 20%;
+    padding: 0;
+    margin: 0;
+}
+
+main {
+    width: 80%;
+    margin-left: 20%;
+    padding: 60px 24px;
+}
+
+.flex {
+    display: flex;
+    flex: auto;
+    align-items: flex-start;
+}
+
+.button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    background-color: #5FBB94;
+    padding: 6px 16px;
+    border-radius: 6px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.button:hover {
+    transition: all .3s;
+    background-color: #4F7967;
+}
+
+
+.nav {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav a {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    padding: 16px 20px;
+    font-size: .9em;
+    font-weight: bold;
+}
+.nav a img{
+    margin-left: .4em;
+    margin-right: 1em;
+}
+
+.nav a:hover {
+    transition: all .3s;
+    background-color: #4F7967;
+}
+
+.nav_myinfo {
+    padding: 60px 0px 30px 0px;
+    color: #fff;
+    background-color: #55997C;
+    text-align: center;
+    line-height: .8em;
+}
+
+
+.img_cover_circle {
+    display: block;
+    width: 30%;
+    margin: 1em auto;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    border: solid 1.5px #E6C155;
+    padding: 4px;
+}
+
+.img_cover_circle img {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/*メインコンテンツのヘッダー部分（h2周辺）*/
+.main_header {
+    align-items: center;
+}
+
+.header_inner {
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/*検索ボックス*/
+
+.search_wrap {
+    position: relative;
+    max-width: 300px;
+    height: 36px;
+    width: 30%;
+}
+
+.input_search {
+    height: 36px;
+    padding: 0 10px;
+    width: 100%;
+    max-width: 300px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 2px;
+    background-color: #fff;
+    border: solid 1px #A6A6A6;
+}
+
+
+.search_button {
+    height: 20px;
+    position: absolute;
+    /*アイコン左右の位置調整*/
+    right: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    color: #A6A6A6;
+    padding: 0 10px;
+    background-color: #fefefe;
+    border: none;
+    /*アイコンサイズ*/
+    font-size: 16px;
+}
+
+.search_button:hover {
+    transition: all .3s;
+    color: #E6C155;
+}
+
+/*マイモデルコース新規追加ボタン*/
+.create_button {
+    margin: 0 1.2em;
+    padding: 6px 20px;
+}

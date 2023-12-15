@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
 
+
+
+
 class PostsController extends Controller
 {
     /**
@@ -15,26 +18,28 @@ class PostsController extends Controller
      */
     public function index()
     {
-        // $return =  Post::all();
-        // return view('test',compact('return'));
-
-
-            // // ログインしているユーザーの情報を取得
-            // $user = auth()->user();
-
-            // // ログインしているユーザーの投稿を取得
-            // $userPosts = $user->posts;
-    
-            // return view('company_mypage', compact('userPosts'));
-
-            // すべての投稿を取得
-        $allPosts = Post::all();
         $id = auth()->user()->id;
-        $myPosts = User::with('posts')->find($id);
-        // return $myPosts;
-        return view('company_mypage', compact(['myPosts']));
+        
+        $myPosts = Post::where('user_id', $id)->get();
+        // dd($myPosts);
+
+        //ログインしているユーザー名
+        $userName = User::find($id)->name;
+        
+        return view('company_mypage', compact(['myPosts'],'userName'));
     }
 
+    //投稿削除処理
+    public function delete($id){
+        $post = Post::find($id);
+        return $post;
+
+
+        //行を削除
+        // $post->delete();
+
+        // return redirect()->route('company_mypage');
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -66,15 +71,15 @@ class PostsController extends Controller
     {
         //モデルコース一件取得
 
-        $post = Post::with('user:id,name,icon_url','category','pref','details','spots')->find($id);
+        $post = Post::with('user:id,name,icon_url', 'category', 'pref', 'details', 'spots')->find($id);
 
-        if($post->status !== 1){
+        if ($post->status !== 1) {
             //ステータスが公開中以外の場合はnot found を表示
             abort(404);
         }
 
         //return $post;
-        return view('post',compact(['post']));
+        return view('post', compact(['post']));
     }
 
     /**
@@ -109,5 +114,30 @@ class PostsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    // 検索機能の値取得とviewに値を返す
+    public function search(Request $request)
+    {
+
+        //ログインしているユーザーの取得
+        $id = auth()->user()->id;
+        // dd($id);
+
+        // 検索フォームから送信された検索語句を取得
+        $searchTerm = $request->input('search');
+        // dd($searchTerm);
+
+        // ログインユーザーに関連する投稿を検索
+        $myPosts = Post::where('user_id', $id)
+            ->where(function ($query) use ($searchTerm) {
+                $query->where('title', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('description', 'like', '%' . $searchTerm . '%');
+            })->get();
+        // dd($myPosts);
+
+        //ログインしているユーザー名
+        $userName = User::find($id)->name;
+        return view('company_mypage', compact(['myPosts'],'userName'));
     }
 }

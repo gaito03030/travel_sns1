@@ -79,6 +79,8 @@
         }
     </style>
 
+
+
 </head>
 
 <body>
@@ -95,7 +97,7 @@
                 </div>
                 <div class="myinfo_text">
                     {{-- <p class="my_name">XXXXX旅館</p> --}}
-                    <p class="my_name">{{ $userName }}</p>
+                    <p class="my_name">{{ $user_info->name }}</p>
                     <p class="followers">000</p>
                     <p class="followers_title">followers</p>
                 </div>
@@ -111,7 +113,7 @@
         <main class="main">
             <!-- ここからがページごとの表示部分 -->
             <section class="main_header flex">
-                <h2>マイモデルコース</h2>
+                <h2>マイ企業管理情報</h2>
                 <div class="header_inner flex">
                     <form class="search_wrap" action="{{ route('company_mypage.posts') }}" method="get">
                         <input class="input_search" type="search" placeholder="検索" name="search"
@@ -128,40 +130,40 @@
                     @yield('content')
 
 
-                    @foreach ($myPosts as $post)
-                        <div class="mymodel">
-                            <p><img src="{{ asset('storage/' . $post->main_img_url) }}" width="300px" height="200px"
-                                    alt="main_imag_url"></p>
-                            <p class="travel_title">{{ $post->title }}</p>
-                            <p class="travel_status"><?php
-                            if ($post->status !== 1) {
-                                echo '非公開中';
-                            } else {
-                                echo '公開中';
-                            }
-                            ?></p>
-                            <p>{{ $post->description }}</p>
-                            <!-- 他の投稿情報を表示する -->
+                    <div>
 
-                            <label class="open" for="pop-up">削除</label>
-                            <input type="checkbox" id="pop-up">
-                            <div class="overlay">
-                                <div class="window">
-                                    <label class="close" for="pop-up">閉じる</label>
-                                    <form method="POST" action="{{ route('company_mypage.delete', $post->id) }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit">はい</button>
-                                    </form>
-                                    
-                                    <p><a href="company_mypage?">いいえ</a></p>
-                                </div>
+
+                        <img src=" {{asset('storage/'.$user_info->icon_url)}}
+                        "width="200px"
+                            height="200px" alt="User Icon">
+                    
+                        <label class="open" for="pop-up">画像を変更</label>
+                        <input type="checkbox" id="pop-up">
+                        <div class="overlay">
+                            <div class="window">
+                                <label class="close" for="pop-up">閉じる</label>
+                                <h3>変更する画像を選択してください</h3>
+                                <form action="{{route('user_edit.img',$user_info->id)}}" method="POST" enctype="multipart/form-data" >
+                                    @csrf
+                                    @method('PUT')
+                                    <input type="file" name="img_path">
+                                    <p><input type="submit" value="変更"></p>
+                                </form>
                             </div>
-                            <a href="index.php">編集</a>
                         </div>
 
-                        <hr>
-                    @endforeach
+                        <form action="{{ route('user_edit.store', $user_info->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <p>名前:<input type="text" name="name" value="{{ $user_info->name }}"></p>
+                            <p>ひとこと:<input type="text" name="bio" value="{{ $user_info->bio }}"></p>
+                            <p>公式ホームページURL:<input type="text" name="web_url" value="{{ $user_info->web_url }}"></p>
+                            <p><input type="submit" value="変更"></p>
+                        </form>
+
+
+
+                    </div>
                 </main>
                 <div class="courses">
                     <section class="course"></section>
