@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Models\Post;
@@ -23,9 +24,21 @@ Route::get('/', function () {
 
 //management_companyにルートを通す
 Route::get('management_company',[UsersController::class,'index'])->name('management_company');
+Route::get('/test', [PostsController::class,'test']);
 
 //一般ユーザ側　モデルコース一件表示
 Route::get('/posts/{id}', [PostsController::class,'show'])->name('post');
+
+//log出すようのページ
+Route::get('/log',[LogController::class,'index'])->name('log');
+
+//企業側　モデルコース作成画面
+Route::get('/create/',[PostsController::class,'create'])->name('company_create_post');
+
+Route::post('/create/post',[PostsController::class,'store'])->name('create.store');
+
+Route::get('/create/edit/{id}',[PostsController::class,'edit'])->name('create.edit');
+Route::post('/create/update',[PostsController::class,'update'])->name('create.update');
 
 //company_mypageのためのルートを通す
 Route::get('/company_mypage',[PostsController::class,'index'])->name('company_mypage');
@@ -53,11 +66,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
+Route::get('posts',[PostsController::class,'index']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
