@@ -51,4 +51,20 @@ class User extends Authenticatable
     public function posts(){
         return $this->hasMany(Post::class);
     }
+
+    public function bookmarks()
+    {
+        return $this->hasMany(Bookmark::class);
+    }
+
+    /** user が　bookmark をしているか確認するメソッド */
+    public function is_bookmark($postId)
+    {
+        return $this->bookmarks()->where('post_id', $postId)->exists();
+    }
+
+    public function bookmark_posts()
+    {
+        return $this->belongsToMany(Post::class, 'bookmarks', 'user_id', 'post_id');
+    }
 }

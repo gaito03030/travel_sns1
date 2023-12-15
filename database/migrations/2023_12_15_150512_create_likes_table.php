@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('follows', function (Blueprint $table) {
+        Schema::create('likes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->comment('フォローしたユーザー');
-            $table->foreignId('followed_user_id')->constrained('users')->comment('フォローされたユーザー');;
-            $table->timestamps();  
+            $table->foreignId('user_id')->constrained('users')->comment('いいねしたユーザー');
+            $table->foreignId('post_id')->constrained('posts')->comment('投稿');
+            $table->timestamps();
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('follows');
+        Schema::dropIfExists('likes');
     }
 };

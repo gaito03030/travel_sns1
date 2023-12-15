@@ -33,6 +33,20 @@
     <p>address:{{$spot->address}}</p>
     @endforeach
 
+    <h3>ブックマーク</h3>
+    @if (!Auth::user()->is_bookmark($data['post']->id))
+        <form action="{{ route('bookmark.store', $data['post']->id) }}" method="post">
+            @csrf
+            <button>お気に入り登録</button>
+        </form>
+        @else
+        <form action="{{ route('bookmark.destroy', $data['post']->id) }}" method="post">
+            @csrf
+            @method('delete')
+            <button>お気に入り解除</button>
+        </form>
+        @endif
+
     <!-- コメント -->
     <h3>コメント</h3>
     @forelse($data['post']->comments as $comment)

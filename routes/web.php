@@ -5,6 +5,7 @@ use App\Http\Controllers\PostsController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\RepliesController;
 use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\BookmarksController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Models\Post;
@@ -69,6 +70,10 @@ Route::put('/user_edit/img/{id}',[UsersController::class,'uploadImg'])->name('us
 
 Route::get('posts',[PostsController::class,'index']);
  
+//ブックマーク機能
+Route::post('/posts/{post}/bookmark', [BookmarksController::class, 'store'])->name('bookmark.store');
+    Route::delete('/posts/{post}/unbookmark', [BookmarksController::class, 'destroy'])->name('bookmark.destroy');
+Route::get('/bookmarks', [BookmarksController::class, 'bookmark_posts'])->name('bookmarks');
 
 Auth::routes();
 

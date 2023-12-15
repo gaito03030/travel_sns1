@@ -346,4 +346,6 @@ class PostsController extends Controller
         $userName = User::find($id)->name;
         return view('company_mypage', compact(['myPosts'], 'userName'));
     }
+
+    
 }
