@@ -31,12 +31,17 @@ Route::get('/', function () {
 Route::get('management_company',[UsersController::class,'index'])->name('management_company');
 Route::get('/test', [PostsController::class,'test']);
 
+//timeline
+Route::get('/timeline',[PostsController::class,'post_timeline']);
+
 //一般ユーザ側　モデルコース一件表示
 Route::get('/posts/{id}', [PostsController::class,'show'])->name('post');
 
 //一般ユーザ側　検索
 Route::get('/search',[PostsController::class,'post_search_show'])->name('post_search_show');
 Route::get('/search/result',[PostsController::class,'post_search_result'])->name('post_search_result');
+// 一般ユーザー側から見た企業ページ
+Route::get('/userpage',[UsersController::class,'userside_comp_prof']);
 
 //log出すようのページ
 Route::get('/log',[LogController::class,'index'])->name('log');
@@ -92,3 +97,4 @@ Route::get('posts',[PostsController::class,'index']);
 //ログアウト機能
 // Route::get('/logout', 'Auth\LoginController@logout');
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class,'logout']);
+
