@@ -66,4 +66,16 @@ class UsersController extends Controller
        
         return redirect()->route('user_edit');
     }
+
+    public function userside_comp_prof(){
+        $user_id = auth()->user()->id;
+        //$company = User::find($user_id)->where('company_flg', '=', '0')->get();
+        $company = User::with('posts')->find($user_id);
+
+        //return $company;
+        if($company->company_flg == 0){
+        return view('userside_comp_prof',compact('company'));
+        // return $company;
+        }
+    }
 }
