@@ -49,7 +49,7 @@
         <nav class="main_nav">
             <div class="nav_myinfo">
                 <div class="img_cover_circle">
-                    <img src="./img/icon_default.png" width="50px" height="50px">
+                    <img src="{{ asset($user_info->icon_url) }}" width="50px" height="50px">
                 </div>
                 <div class="myinfo_text">
                     {{-- <p class="my_name">XXXXX旅館</p> --}}
@@ -59,11 +59,11 @@
                 </div>
             </div>
             <ul class="nav">
-                <li><a href="index.html"><img src="img/home.png" width="26px">ホーム</a></li>
-                <li><a href="index.html"><img src="img/create.png" width="26px">新規作成</a></li>
-                <li><a href="{{ 'management_company' }}"><img src="img/mypage.png" width="26px">マイ企業情報管理</a></li>
-                <li><a href="index.html"><img src="img/alert.png" width="26px">通知</a></li>
-                <li><a href="/logout">ログアウト</a></li>
+                <li><a href="{{ url('/company_mypage') }}"><img src="img/home.png" width="26px">ホーム</a></li>
+                <li><a href="{{ url('/create') }}"><img src="img/create.png" width="26px">新規作成</a></li>
+                <li><a href="{{ url('/management_company') }}"><img src="img/mypage.png" width="26px">マイ企業情報管理</a></li>
+                <li><a href="{{ url('/notification') }}"><img src="img/alert.png" width="26px">通知</a></li>
+                <li><a href="{{ url('/logout') }}">ログアウト</a></li>
             </ul>
         </nav>
         <main class="main">
@@ -85,10 +85,9 @@
                 <main class="py-4">
                     @yield('content')
 
-
                     <div>
                         
-                        <img src=" {{asset('storage/'.$user_info->icon_url)}}
+                        <img src=" {{asset($user_info->icon_url)}}
                         "width="200px"
                             height="200px" alt="User Icon">
                         <?php

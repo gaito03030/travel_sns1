@@ -67,4 +67,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Post::class, 'bookmarks', 'user_id', 'post_id');
     }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
 }

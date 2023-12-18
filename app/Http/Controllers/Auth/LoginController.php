@@ -44,4 +44,10 @@ class LoginController extends Controller
     protected function loggedOut(\Illuminate\Http\Request $request) {
         return redirect('login');
       }
+
+    public function redirectPath()
+    {
+        return '/company_mypage';
+        //例）return 'costs/index';
+    }
 }

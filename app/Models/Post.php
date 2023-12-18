@@ -47,8 +47,8 @@ class Post extends Model
         return $this->hasmany(Comment::class);
     }
 
-    public function bookmark_posts()
+    public function bookmark_users()
     {
-        return $this->belongsToMany(Post::class, 'bookmarks', 'user_id', 'post_id');
+        return $this->belongsToMany(User::class, 'bookmarks', 'post_id', 'user_id');
     }
 }

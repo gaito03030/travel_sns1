@@ -34,6 +34,7 @@
     @endforeach
 
     <h3>ブックマーク</h3>
+    <p>ブックマーク数:{{$data['bookmarks']}}件</p>
     @if (!Auth::user()->is_bookmark($data['post']->id))
         <form action="{{ route('bookmark.store', $data['post']->id) }}" method="post">
             @csrf

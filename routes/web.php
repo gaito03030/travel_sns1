@@ -7,6 +7,7 @@ use App\Http\Controllers\RepliesController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\BookmarksController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Models\Post;
 use App\Models\Reply;
@@ -26,7 +27,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//management_companyにルートを通す
+//企業情報管理ページにルートを通す
 Route::get('management_company',[UsersController::class,'index'])->name('management_company');
 Route::get('/test', [PostsController::class,'test']);
 
@@ -72,17 +73,17 @@ Route::get('posts',[PostsController::class,'index']);
  
 //ブックマーク機能
 Route::post('/posts/{post}/bookmark', [BookmarksController::class, 'store'])->name('bookmark.store');
-    Route::delete('/posts/{post}/unbookmark', [BookmarksController::class, 'destroy'])->name('bookmark.destroy');
+Route::delete('/posts/{post}/unbookmark', [BookmarksController::class, 'destroy'])->name('bookmark.destroy');
 Route::get('/bookmarks', [BookmarksController::class, 'bookmark_posts'])->name('bookmarks');
+
+Route::get('/notification',[NotificationsController::class,'index'])->name('notification');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('posts',[PostsController::class,'index']);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //ログアウト機能
 // Route::get('/logout', 'Auth\LoginController@logout');

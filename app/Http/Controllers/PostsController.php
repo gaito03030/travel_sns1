@@ -179,6 +179,7 @@ class PostsController extends Controller
 
         $post = Post::with('user:id,name,icon_url', 'category', 'pref', 'details', 'spots')->find($id);
         $comments = Comment::with('user:id,name,icon_url','replies')->where('post_id',$id)->get();
+        $bookmarks = Post::find($id)->bookmark_users()->get();
 
         if ($post->status !== 1) {
             //ステータスが公開中以外の場合はnot found を表示
@@ -187,7 +188,8 @@ class PostsController extends Controller
 
         $data = [
             'post'=>$post,
-            'comments'=> $comments
+            'comments'=> $comments,
+            'bookmarks' => count($bookmarks)
         ];
 
         //return $data;

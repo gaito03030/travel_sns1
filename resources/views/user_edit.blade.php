@@ -103,11 +103,11 @@
                 </div>
             </div>
             <ul class="nav">
-                <li><a href="index.html"><img src="img/home.png" width="26px">ホーム</a></li>
-                <li><a href="index.html"><img src="img/create.png" width="26px">新規作成</a></li>
-                <li><a href="{{ 'management_company' }}"><img src="img/mypage.png" width="26px">マイ企業情報管理</a></li>
-                <li><a href="index.html"><img src="img/alert.png" width="26px">通知</a></li>
-                <li><a href="/logout">ログアウト</a></li>
+                <li><a href="{{ url('/company_mypage') }}"><img src="img/home.png" width="26px">ホーム</a></li>
+                <li><a href="{{ url('/create') }}"><img src="img/create.png" width="26px">新規作成</a></li>
+                <li><a href="{{ url('/management_company') }}"><img src="img/mypage.png" width="26px">マイ企業情報管理</a></li>
+                <li><a href="{{ url('/notification') }}"><img src="img/alert.png" width="26px">通知</a></li>
+                <li><a href="{{ url('/logout') }}">ログアウト</a></li>
             </ul>
         </nav>
         <main class="main">

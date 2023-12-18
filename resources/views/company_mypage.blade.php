@@ -91,7 +91,7 @@
         <nav class="main_nav">
             <div class="nav_myinfo">
                 <div class="img_cover_circle">
-                    <img src="./img/icon_default.png" width="50px" height="50px">
+                    <img src="" width="50px" height="50px">
                 </div>
                 <div class="myinfo_text">
                     {{-- <p class="my_name">XXXXX旅館</p> --}}
@@ -101,11 +101,11 @@
                 </div>
             </div>
             <ul class="nav">
-                <li><a href="index.html"><img src="img/home.png" width="26px">ホーム</a></li>
-                <li><a href="index.html"><img src="img/create.png" width="26px">新規作成</a></li>
-                <li><a href="{{ 'management_company' }}"><img src="img/mypage.png" width="26px">マイ企業情報管理</a></li>
-                <li><a href="index.html"><img src="img/alert.png" width="26px">通知</a></li>
-                <li><a href="/logout">ログアウト</a></li>
+                <li><a href="{{ url('/company_mypage') }}"><img src="img/home.png" width="26px">ホーム</a></li>
+                <li><a href="{{ url('/create') }}"><img src="img/create.png" width="26px">新規作成</a></li>
+                <li><a href="{{ url('/management_company') }}"><img src="img/mypage.png" width="26px">マイ企業情報管理</a></li>
+                <li><a href="{{ url('/notification') }}"><img src="img/alert.png" width="26px">通知</a></li>
+                <li><a href="{{ url('/logout') }}">ログアウト</a></li>
             </ul>
         </nav>
         <main class="main">
@@ -114,8 +114,7 @@
                 <h2>マイモデルコース</h2>
                 <div class="header_inner flex">
                     <form class="search_wrap" action="{{ route('company_mypage.posts') }}" method="get">
-                        <input class="input_search" type="search" placeholder="検索" name="search"
-                            value="{{ request('search') }}">
+                        <input class="input_search" type="search" placeholder="検索" name="search" value="{{ request('search') }}">
                         <button type="submit" class="search_button">
                             <i class="fas fa-search fa-fw"></i>
                         </button>
@@ -129,38 +128,37 @@
 
 
                     @foreach ($myPosts as $post)
-                        <div class="mymodel">
-                            <p><img src="{{ asset('storage/' . $post->main_img_url) }}" width="300px" height="200px"
-                                    alt="main_imag_url"></p>
-                            <p class="travel_title">{{ $post->title }}</p>
-                            <p class="travel_status"><?php
-                            if ($post->status !== 1) {
-                                echo '非公開中';
-                            } else {
-                                echo '公開中';
-                            }
-                            ?></p>
-                            <p>{{ $post->description }}</p>
-                            <!-- 他の投稿情報を表示する -->
+                    <div class="mymodel">
+                        <p><img src="{{ asset('storage/' . $post->main_img_url) }}" width="300px" height="200px" alt="main_imag_url"></p>
+                        <p class="travel_title">{{ $post->title }}</p>
+                        <p class="travel_status"><?php
+                                                    if ($post->status !== 1) {
+                                                        echo '非公開中';
+                                                    } else {
+                                                        echo '公開中';
+                                                    }
+                                                    ?></p>
+                        <p>{{ $post->description }}</p>
+                        <!-- 他の投稿情報を表示する -->
 
-                            <label class="open" for="pop-up">削除</label>
-                            <input type="checkbox" id="pop-up">
-                            <div class="overlay">
-                                <div class="window">
-                                    <label class="close" for="pop-up">閉じる</label>
-                                    <form method="POST" action="{{ route('company_mypage.delete', $post->id) }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit">はい</button>
-                                    </form>
-                                    
-                                    <p><a href="company_mypage?">いいえ</a></p>
-                                </div>
+                        <label class="open" for="pop-up">削除</label>
+                        <input type="checkbox" id="pop-up">
+                        <div class="overlay">
+                            <div class="window">
+                                <label class="close" for="pop-up">閉じる</label>
+                                <form method="POST" action="{{ route('company_mypage.delete', $post->id) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">はい</button>
+                                </form>
+
+                                <p><a href="company_mypage?">いいえ</a></p>
                             </div>
-                            <a href="index.php">編集</a>
                         </div>
+                        <a href="index.php">編集</a>
+                    </div>
 
-                        <hr>
+                    <hr>
                     @endforeach
                 </main>
                 <div class="courses">
