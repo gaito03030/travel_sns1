@@ -349,5 +349,12 @@ class PostsController extends Controller
         return view('company_mypage', compact(['myPosts'], 'userName'));
     }
 
+    public function post_timeline()
+    {
+        $item = Post::where('status','=', '0')->get();
+        return view('post_timeline',compact('item'));
+    }
+
+
     
 }
