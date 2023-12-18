@@ -34,6 +34,10 @@ Route::get('/test', [PostsController::class,'test']);
 //一般ユーザ側　モデルコース一件表示
 Route::get('/posts/{id}', [PostsController::class,'show'])->name('post');
 
+//一般ユーザ側　検索
+Route::get('/search',[PostsController::class,'post_search_show'])->name('post_search_show');
+Route::get('/search/result',[PostsController::class,'post_search_result'])->name('post_search_result');
+
 //log出すようのページ
 Route::get('/log',[LogController::class,'index'])->name('log');
 

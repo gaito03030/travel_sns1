@@ -46,6 +46,22 @@ class PostsController extends Controller
         return view('company_mypage', compact(['myPosts'], 'userName'));
     }
 
+    /**
+     * ユーザ側検索画面
+     */
+
+    public function post_search_show()
+    {
+        $prefs = Pref::all();
+        $categorys = Category::all();
+
+        return view('user_search',compact('prefs','categorys'));
+    }
+
+    public function post_search_result(Request $request){
+        return $request;
+    }
+
     //投稿削除処理
     public function delete($id)
     {
@@ -178,7 +194,7 @@ class PostsController extends Controller
         //モデルコース一件取得
 
         $post = Post::with('user:id,name,icon_url', 'category', 'pref', 'details', 'spots')->find($id);
-        $comments = Comment::with('user:id,name,icon_url','replies')->where('post_id',$id)->get();
+        $comments = Comment::with('user:id,name,icon_url', 'replies')->where('post_id', $id)->get();
         $bookmarks = Post::find($id)->bookmark_users()->get();
 
         if ($post->status !== 1) {
@@ -187,8 +203,8 @@ class PostsController extends Controller
         }
 
         $data = [
-            'post'=>$post,
-            'comments'=> $comments,
+            'post' => $post,
+            'comments' => $comments,
             'bookmarks' => count($bookmarks)
         ];
 
@@ -348,6 +364,4 @@ class PostsController extends Controller
         $userName = User::find($id)->name;
         return view('company_mypage', compact(['myPosts'], 'userName'));
     }
-
-    
 }
