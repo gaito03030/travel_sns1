@@ -1,5 +1,3 @@
-
-
 $(function () {
 
     console.log("20231214");

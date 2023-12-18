@@ -133,7 +133,7 @@
                         <p class="travel_title">{{ $post->title }}</p>
                         <p class="travel_status"><?php
                                                     if ($post->status !== 1) {
-                                                        echo '非公開中';
+                                                        echo '非公開';
                                                     } else {
                                                         echo '公開中';
                                                     }
@@ -155,7 +155,7 @@
                                 <p><a href="company_mypage?">いいえ</a></p>
                             </div>
                         </div>
-                        <a href="index.php">編集</a>
+                        <a href="{{ url( '/create/edit/'.$post->id ) }}">編集</a>
                     </div>
 
                     <hr>

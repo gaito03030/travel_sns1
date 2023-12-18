@@ -98,7 +98,7 @@
         <input type="submit" value="登録">
     </form>
     <script src="{{ asset('js/jquery-3.7.0.min.js') }}"></script>
-    <script src="{{ asset('js/post.js?77777') }}"></script>
-</body>
+    <!--jsの読み込み-->
+    @vite('resources/js/post.js')</body>
 
 </html>
