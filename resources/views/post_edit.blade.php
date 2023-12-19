@@ -99,6 +99,7 @@
     </form>
     <script src="{{ asset('js/jquery-3.7.0.min.js') }}"></script>
     <!--jsの読み込み-->
-    @vite('resources/js/post.js')</body>
+    @vite('resources/js/post.js')
+</body>
 
 </html>
