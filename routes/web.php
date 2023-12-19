@@ -99,3 +99,9 @@ Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class,'logout'
 
 //テスト:一般ユーザー ＞投稿画面＞アイコンクリック＞投稿した企業を表示
 Route::get('test_show/{user_id}',[FollowsController::class,'index'])->name('test_show');
+
+//テスト:企業＞フォローする
+Route::get('test_follow/{id}',[FollowsController::class,'follow'])->name('test_follow');
+
+//フォローリスト一覧
+Route::get('follow_list',[FollowsController::class,'showFollowedCompanies'])->name('follow_list');
