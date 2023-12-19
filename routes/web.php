@@ -88,7 +88,17 @@ Route::get('/bookmarks', [BookmarksController::class, 'bookmark_posts'])->name('
 
 Route::get('/notification',[NotificationsController::class,'index'])->name('notification');
 
+//一般ユーザの登録
 Auth::routes();
+// 企業ユーザー登録
+// Route::get('register/company', 'Auth\RegisterController@showCompanyRegistrationForm')->name('register.company');
+// Auth::routes(['register_company' => true]);
+Route::get('register/company',[App\Http\Controllers\Auth\RegisterController::class,'show'])->name('register.company');
+Route::post('register/info', [App\Http\Controllers\Auth\RegisterController::class,'showCompanyRegistrationForm'])->name('register.info.post');
+// Route::post('register/company', 'Auth\RegisterController@register')->name('register.company.post');
+
+
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
