@@ -48,6 +48,10 @@
         </form>
         @endif
 
+        <!-- いいね -->
+        <h3>いいね</h3>
+        <p>いいね数</p>
+
     <!-- コメント -->
     <h3>コメント</h3>
     @forelse($data['post']->comments as $comment)

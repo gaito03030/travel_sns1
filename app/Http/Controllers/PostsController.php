@@ -351,7 +351,7 @@ class PostsController extends Controller
 
     public function post_timeline()
     {
-        $item = Post::where('status','=', '0')->get();
+        $item = Post::where('status','=', '1')->get();
         return view('post_timeline',compact('item'));
     }
 
