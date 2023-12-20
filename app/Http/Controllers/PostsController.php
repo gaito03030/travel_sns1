@@ -55,11 +55,92 @@ class PostsController extends Controller
         $prefs = Pref::all();
         $categorys = Category::all();
 
-        return view('user_search',compact('prefs','categorys'));
+        return view('user_search', compact('prefs', 'categorys'));
     }
 
-    public function post_search_result(Request $request){
-        return $request;
+    public function post_search_result(Request $request)
+    {
+
+        $query = Post::with('user:id,name,icon_url', 'category', 'pref', 'details', 'spots')->where('status', '=', '1');
+
+        $narrow = [];
+
+        //県絞り込み
+        if (isset($request['checked_pref'])) {
+            $pref_id = $request['checked_pref'];
+            $query->where('pref_id',$pref_id);
+
+            $pref = Pref::find($pref_id);
+
+            $narrow += ['pref' => $pref->name];
+        }
+
+        //カテゴリー絞り込み
+        if (isset($request['checked_category'])) {
+            $category_id = $request['checked_category'];
+            $query->where('category_id',$category_id);
+
+            $category = Category::find($category_id);
+
+            $narrow += ['category' => $category->category];
+
+        }
+
+        //予算
+        
+        if(!empty($request['price_min'])){
+            $price_min = $request['price_min'];
+            $query->where('price','>=',$price_min);
+
+            $narrow += ['price_min' => $price_min];
+
+        }
+        if(!empty($request['price_max'])){
+            $price_max = $request['price_max'];
+            $query->where('price','<=',$price_max);
+
+            $narrow += ['price_max' => $price_max];
+
+        }
+        
+
+        //フリーワード検索
+        if (isset($request['search_text'])) {
+            $search_word = $request['search_text'];
+            // 全角スペースを半角に変換
+            $spaceConversion = mb_convert_kana($search_word, 's');
+
+            // 単語を半角スペースで区切り、配列にする（例："山田 翔" → ["山田", "翔"]）
+            $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
+
+            foreach ($wordArraySearched as $word) {
+                $query->where(function($query) use($word){
+                    $query->orwhere('title', 'like', '%' . $word . '%')
+                        ->orwhere('description', 'like', '%' . $word . '%');
+                });
+                /*
+                $query->where('title', 'like', '%' . $word . '%')
+                    ->orWhere('description', 'like', '%' . $word . '%');
+                    */
+            }
+
+            $narrow += ['search_text' => $search_word];
+
+        }
+
+        //dd($query->toSql(), $query->getBindings());
+ 
+        $posts = $query->get();
+        $count = count($posts);
+
+        //検索結果画面
+        $return = [
+            'narrow' => $narrow,
+            'count' => $count,
+            'posts' => $posts,
+        ];
+
+        return $return;
     }
 
     //投稿削除処理
@@ -367,10 +448,7 @@ class PostsController extends Controller
 
     public function post_timeline()
     {
-        $item = Post::where('status','=', '0')->get();
-        return view('post_timeline',compact('item'));
+        $item = Post::where('status', '=', '0')->get();
+        return view('post_timeline', compact('item'));
     }
-
-
-    
 }

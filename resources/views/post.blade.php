@@ -8,6 +8,12 @@
 </head>
 
 <body>
+    <ul class="nav">
+        <li><a href="{{ url('/timeline') }}">ホーム</a></li>
+        <li><a href="{{ url('/search') }}">検索</a></li>
+        <li><a href="#">マイページ</a></li>
+        <li><a href="{{ url('/notification') }}">通知</a></li>
+    </ul>
     <h2>Post</h2>
     <p>id:{{$data['post']->id}}</p>
     <p>title:{{$data['post']->title}}</p>
