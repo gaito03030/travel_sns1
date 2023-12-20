@@ -108,10 +108,18 @@ class RegisterController extends Controller
         //     'bio' => '',
         //     'web_url' => ''
         // ]);
-        
-        return redirect('home');
-     
+             
+    }
 
+    public function redirectPath()
+    {
+        $user = auth()->user()->company_flg;
+        if($user == 0){
+            return 'company_mypage';
+        }else{
+            return 'timeline';
+        }
+        //例）return 'costs/index';
     }
   
 }
