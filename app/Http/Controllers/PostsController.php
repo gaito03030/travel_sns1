@@ -427,25 +427,41 @@ class PostsController extends Controller
 
         //ログインしているユーザーの取得
         $id = auth()->user()->id;
-        // dd($id);
 
-        // 検索フォームから送信された検索語句を取得
-        $searchTerm = $request->input('search');
-        // dd($searchTerm);
 
-        // ログインユーザーに関連する投稿を検索
-        $myPosts = Post::where('user_id', $id)
-            ->where(function ($query) use ($searchTerm) {
-                $query->where('title', 'like', '%' . $searchTerm . '%')
-                    ->orWhere('description', 'like', '%' . $searchTerm . '%');
-            })->get();
-        // dd($myPosts);
+        $userName = auth()->user()->name;
 
-        //ログインしているユーザー名
-        $userName = User::find($id)->name;
-        return view('company_mypage', compact(['myPosts'], 'userName'));
-    }
+        // 全角スペースを半角に変換
+        //オプションsは	「全角」スペースを「半角」に変換
+        $spaceConversion = mb_convert_kana($request->input('search'), 's');
 
+        // 単語を半角スペースで区切り、配列にする（例："山田 翔" → ["山田", "翔"]）
+        $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
+
+        $query = Post::where('user_id', $id);
+
+        foreach ($wordArraySearched as $word) {
+                $query->where('title', 'like', '%' . $word . '%')
+                    ->orWhere('description', 'like', '%' . $word . '%');
+            };
+
+            $myPosts = $query->get();
+
+
+            // // 検索フォームから送信された検索語句を取得
+            // $searchTerm = $request->input('search');
+
+            // // ログインユーザーに関連する投稿を検索
+            // $myPosts = Post::query()
+            //     ->where('user_id', $id)
+            //     ->where('title', 'like', '%' . $searchTerm . '%')
+            //     ->orWhere('description', 'like', '%' . $searchTerm . '%')
+            //     ->get();
+
+
+            return view('company_mypage', compact(['myPosts'], 'userName'));
+        }
+    
     public function post_timeline()
     {
         $item = Post::where('status', '=', '0')->get();

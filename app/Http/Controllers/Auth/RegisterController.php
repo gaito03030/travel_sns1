@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -64,17 +65,53 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-       
-       $icon_def ='img/icon_default.png';
+
+
+        
         return User::create([
             'icon_url' => "default_icon.jpg",
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'icon_url' =>$icon_def,
-            'company_flg' => '0',
+            'company_flg' => 1,
             'bio' => null,
             'web_url' => null
         ]);
     }
+
+    public function show(){
+        return view('register_company');
+    }
+
+    //company_flgで企業だった場合の処理
+    //company_flg = 0が企業側
+    public function showCompanyRegistrationForm(Request $request)
+    {
+
+        $user = new User;
+        $user->icon_url = "default_icon.jpg";
+        $user->name = $request->input('name');
+        $user->email= $request->input('email');
+        $user->password= Hash::make($request->input('password'));
+        $user->company_flg = 0;
+        $user->bio = null;
+        $user->web_url = null;
+
+        $user->save();
+        
+        //  User::create([
+        //     'icon_url' => "default_icon.jpg",
+        //     'name' => $request['name'],
+        //     'email' => $request['email'],
+        //     'password' => Hash::make($request['password']),
+        //     'company_flg' => 0,
+        //     'bio' => '',
+        //     'web_url' => ''
+        // ]);
+        
+        return redirect('home');
+     
+
+    }
+  
 }

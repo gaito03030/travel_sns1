@@ -38,6 +38,7 @@
         <br>
         <input type="submit" value="検索">
     </form>
+    <li><a href="{{ url('/logout') }}">ログアウト</a></li>
 </body>
 
 </html>

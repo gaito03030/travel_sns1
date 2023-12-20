@@ -70,6 +70,7 @@
 
         <input type="submit" value="登録">
     </form>
+    <a href="{{ url('/logout') }}">ログアウト</a>
     <script src="{{ asset('js/jquery-3.7.0.min.js') }}"></script>
     <script src="{{ asset('js/post.js') }}"></script>
 </body>

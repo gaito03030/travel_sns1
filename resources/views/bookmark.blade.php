@@ -12,6 +12,6 @@
     @foreach($data['posts'] as $post)
         <a href="{{ url('/posts/'.$post->id) }}">{{$post->title}}</a>
     @endforeach
-    
+    <a href="{{ url('/logout') }}">ログアウト</a>
 </body>
 </html>

@@ -98,7 +98,8 @@
         </div>
     </form>
     </div>
-
+    
+    <a href="{{ url('/logout') }}">ログアウト</a>
 
 </body>
 
