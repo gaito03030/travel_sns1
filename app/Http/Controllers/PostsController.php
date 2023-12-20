@@ -113,16 +113,12 @@ class PostsController extends Controller
             // 単語を半角スペースで区切り、配列にする（例："山田 翔" → ["山田", "翔"]）
             $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
 
-            foreach ($wordArraySearched as $word) {
-                $query->where(function($query) use($word){
+            $query->where(function($query) use($wordArraySearched){
+                    foreach ($wordArraySearched as $word) {
                     $query->orwhere('title', 'like', '%' . $word . '%')
                         ->orwhere('description', 'like', '%' . $word . '%');
+                    }
                 });
-                /*
-                $query->where('title', 'like', '%' . $word . '%')
-                    ->orWhere('description', 'like', '%' . $word . '%');
-                    */
-            }
 
             $narrow += ['search_text' => $search_word];
 
