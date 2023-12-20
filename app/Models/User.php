@@ -72,4 +72,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Notification::class);
     }
+
+
+    //フォローしている企業を一覧表示
+    public function followedCompanies()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'user_id', 'followed_user_id');
+    }
 }

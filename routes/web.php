@@ -9,6 +9,7 @@ use App\Http\Controllers\BookmarksController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\FollowsController;
 use App\Models\Post;
 use App\Models\Reply;
 
@@ -37,6 +38,9 @@ Route::get('/timeline',[PostsController::class,'post_timeline']);
 //一般ユーザ側　モデルコース一件表示
 Route::get('/posts/{id}', [PostsController::class,'show'])->name('post');
 
+//一般ユーザ側　検索
+Route::get('/search',[PostsController::class,'post_search_show'])->name('post_search_show');
+Route::get('/search/result',[PostsController::class,'post_search_result'])->name('post_search_result');
 // 一般ユーザー側から見た企業ページ
 Route::get('/userpage',[UsersController::class,'userside_comp_prof']);
 
@@ -84,7 +88,17 @@ Route::get('/bookmarks', [BookmarksController::class, 'bookmark_posts'])->name('
 
 Route::get('/notification',[NotificationsController::class,'index'])->name('notification');
 
+//一般ユーザの登録
 Auth::routes();
+// 企業ユーザー登録
+// Route::get('register/company', 'Auth\RegisterController@showCompanyRegistrationForm')->name('register.company');
+// Auth::routes(['register_company' => true]);
+Route::get('register/company',[App\Http\Controllers\Auth\RegisterController::class,'show'])->name('register.company');
+Route::post('register/info', [App\Http\Controllers\Auth\RegisterController::class,'showCompanyRegistrationForm'])->name('register.info.post');
+// Route::post('register/company', 'Auth\RegisterController@register')->name('register.company.post');
+
+
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -95,3 +109,12 @@ Route::get('posts',[PostsController::class,'index']);
 // Route::get('/logout', 'Auth\LoginController@logout');
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class,'logout']);
 
+
+//テスト:一般ユーザー ＞投稿画面＞アイコンクリック＞投稿した企業を表示
+Route::get('test_show/{user_id}',[FollowsController::class,'index'])->name('test_show');
+
+//テスト:企業＞フォローする
+Route::get('test_follow/{id}',[FollowsController::class,'follow'])->name('test_follow');
+
+//フォローリスト一覧
+Route::get('follow_list',[FollowsController::class,'showFollowedCompanies'])->name('follow_list');
