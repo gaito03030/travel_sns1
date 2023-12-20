@@ -8,6 +8,7 @@
 </head>
 
 <body>
+
     <h2>検索</h2>
     <form action="{{route('post_search_result')}}" method="get">
         <input type="text" name="search_text"><br>
@@ -27,6 +28,7 @@
         @endforeach
         
     </form>
+    <li><a href="{{ url('/logout') }}">ログアウト</a></li>
 </body>
 
 </html>

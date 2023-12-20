@@ -32,6 +32,7 @@
                 <li><a href="index.html">新規作成</a></li>
                 <li><a href="index.html">マイ企業情報管理</a></li>
                 <li><a href="index.html">通知</a></li>
+                <li><a href="{{ url('/logout') }}">ログアウト</a></li>
             </ul>
         </nav>
         <main class="main">
