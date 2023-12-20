@@ -10,6 +10,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\FollowsController;
+use App\Http\Controllers\LikesController;
 use App\Models\Post;
 use App\Models\Reply;
 
@@ -90,9 +91,9 @@ Route::get('/bookmarks', [BookmarksController::class, 'bookmark_posts'])->name('
 Route::get('/notification',[NotificationsController::class,'index'])->name('notification');
 
 // いいね機能
-Route::post('/posts/{post}/bookmark', [LikeController::class, 'store'])->name('like.store');
-Route::delete('/posts/{post}/unbookmark', [LikeController::class, 'destroy'])->name('like.destroy');
-Route::get('/bookmarks', [LikeController::class, 'like_posts'])->name('likes');
+Route::post('/posts/{post}/like', [LikesController::class, 'store'])->name('like.store');
+Route::delete('/posts/{post}/unlike', [LikesController::class, 'destroy'])->name('like.destroy');
+Route::get('/likes', [LikesController::class, 'like_posts'])->name('likes');
 
 //一般ユーザの登録
 Auth::routes();
