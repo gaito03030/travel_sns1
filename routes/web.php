@@ -93,7 +93,6 @@ Route::get('/notification',[NotificationsController::class,'index'])->name('noti
 // いいね機能
 Route::post('/posts/{post}/like', [LikesController::class, 'store'])->name('like.store');
 Route::delete('/posts/{post}/unlike', [LikesController::class, 'destroy'])->name('like.destroy');
-Route::get('/likes', [LikesController::class, 'like_posts'])->name('likes');
 
 //一般ユーザの登録
 Auth::routes();
