@@ -16,22 +16,21 @@
     </header>
     <div class="flex">
         <nav class="main_nav">
-            <div class="nav_myinfo">
+        <div class="nav_myinfo">
                 <div class="img_cover_circle">
-                    <img src="./image/icon_default.png" width="50px" height="50px">
                 </div>
                 <div class="myinfo_text">
-                    <p class="my_name">XXXXX旅館</p>
+                    {{-- <p class="my_name">XXXXX旅館</p> --}}
+                    <p class="my_name">XXXX</p>
                     <p class="followers">000</p>
                     <p class="followers_title">followers</p>
                 </div>
             </div>
             <ul class="nav">
-                <li><a href="index.html">ホーム</a></li>
-                <li><a href="index.html">新規作成</a></li>
-                <li><a href="index.html">マイ企業情報管理</a></li>
-                <li><a href="index.html">通知</a></li>
-                <li><a href="{{ url('/logout') }}">ログアウト</a></li>
+                <li><a href="{{ url('/timeline') }}">ホーム</a></li>
+                <li><a href="{{ url('/search') }}">検索</a></li>
+                <li><a href="#">マイページ</a></li>
+                <li><a href="{{ url('/notification') }}">通知</a></li>
             </ul>
         </nav>
         <main class="main">
@@ -57,6 +56,7 @@
             <div class="header_inner flex">
                     <div id="content_main">
                         @foreach($item as $items)
+                        <a href="{{ url('/posts/'.$items->id) }}">
                         <article class="article">
                             <figure>
 			                    <img src="{{asset($items->main_img_url)}}" >
@@ -68,6 +68,7 @@
                                 <p>{{$items->description}}</p>
                             </div>
                         </article>
+                        </a>
                         @endforeach
                     </div> 
                 </div>

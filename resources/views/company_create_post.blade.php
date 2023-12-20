@@ -28,8 +28,9 @@
             @endforeach
         </select>
         <br>
-        タイトル:<input type="text" name="title" placeholder="タイトル"><br>
-        概要：<textarea name="description" placeholder="概要"></textarea><br>
+        予算:<input type="text" name="price" inputmode="numeric" pattern="^[1-9][0-9]*$" title="自然数で入力してください" required>
+        タイトル:<input type="text" name="title" placeholder="タイトル" title="入力必須です" required><br>
+        概要：<textarea name="description" placeholder="概要" title="入力必須です" required></textarea><br>
         <h3>詳細</h3>
         <div class="js_items">
             <ul class="js_item_list" data-input="details">
@@ -66,8 +67,6 @@
             </ul>
             <button class="js_add_btn">日にちを追加</button><br>
         </div>
-
-
 
         <input type="submit" value="登録">
     </form>
