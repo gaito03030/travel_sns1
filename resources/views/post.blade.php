@@ -58,8 +58,20 @@
     <!--いいね-->
 
         <!-- いいね -->
-        <h3>いいね</h3>
-        <p>いいね数</p>
+    <h3>いいね</h3>
+    <p>いいね数:{{$data['likes']}}件</p>
+    @if (!Auth::user()->is_like($data['post']->id))
+    <form action="{{ route('like.store', $data['post']->id) }}" method="post">
+        @csrf
+        <button>いいね登録</button>
+    </form>
+    @else
+    <form action="{{ route('like.destroy', $data['post']->id) }}" method="post">
+        @csrf
+        @method('delete')
+        <button>いいね解除</button>
+    </form>
+    @endif
 
     <!-- コメント -->
     <h3>コメント</h3>

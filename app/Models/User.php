@@ -68,6 +68,22 @@ class User extends Authenticatable
         return $this->belongsToMany(Post::class, 'bookmarks', 'user_id', 'post_id');
     }
 
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    /** user が　like をしているか確認するメソッド */
+    public function is_like($postId)
+    {
+        return $this->likes()->where('post_id', $postId)->exists();
+    }
+
+    public function like_posts()
+    {
+        return $this->belongsToMany(Post::class, 'likes', 'user_id', 'post_id');
+    }
+
     public function notifications()
     {
         return $this->hasMany(Notification::class);

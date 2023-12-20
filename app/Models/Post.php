@@ -51,4 +51,10 @@ class Post extends Model
     {
         return $this->belongsToMany(User::class, 'bookmarks', 'post_id', 'user_id');
     }
+
+    public function like_users()
+    {
+        return $this->belongsToMany(User::class, 'likes', 'post_id', 'user_id');
+    }
+
 }
