@@ -90,9 +90,8 @@ Route::get('/bookmarks', [BookmarksController::class, 'bookmark_posts'])->name('
 Route::get('/notification',[NotificationsController::class,'index'])->name('notification');
 
 // いいね機能
-Route::post('/posts/{post}/bookmark', [LikeController::class, 'store'])->name('like.store');
-Route::delete('/posts/{post}/unbookmark', [LikeController::class, 'destroy'])->name('like.destroy');
-Route::get('/bookmarks', [LikeController::class, 'like_posts'])->name('likes');
+Route::post('/posts/{post}/like', [LikesController::class, 'store'])->name('like.store');
+Route::delete('/posts/{post}/like', [LikesController::class, 'destroy'])->name('like.destroy');
 
 //一般ユーザの登録
 Auth::routes();
