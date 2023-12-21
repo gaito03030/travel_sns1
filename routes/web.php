@@ -34,7 +34,7 @@ Route::get('management_company',[UsersController::class,'index'])->name('managem
 Route::get('/test', [PostsController::class,'test']);
 
 //timeline
-Route::get('/timeline',[PostsController::class,'post_timeline']);
+Route::get('/timeline',[PostsController::class,'post_timeline'])->name('timeline');
 
 //一般ユーザ側　モデルコース一件表示
 Route::get('/posts/{id}', [PostsController::class,'show'])->name('post');
@@ -111,10 +111,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('posts',[PostsController::class,'index']);
 
 
-//ログアウト機能
+//ログイン機能/ログアウト機能
 // Route::get('/logout', 'Auth\LoginController@logout');
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class,'logout']);
 
+Route::get('/login/branch',[UsersController::class,'branch'])->name('login.branch');
 
 //テスト:一般ユーザー ＞投稿画面＞アイコンクリック＞投稿した企業を表示
 Route::get('test_show/{user_id}',[FollowsController::class,'index'])->name('test_show');

@@ -31,6 +31,7 @@
                 <li><a href="{{ url('/search') }}">検索</a></li>
                 <li><a href="#">マイページ</a></li>
                 <li><a href="{{ url('/notification') }}">通知</a></li>
+                <li><a href="{{url('/logout')}}">ログアウト</a></li>
             </ul>
         </nav>
         <main class="main">
