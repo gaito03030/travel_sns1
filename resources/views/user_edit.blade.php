@@ -93,7 +93,7 @@
         <nav class="main_nav">
             <div class="nav_myinfo">
                 <div class="img_cover_circle">
-                    <img src="./img/icon_default.png" width="50px" height="50px">
+                    <img src="{{asset($user_info->icon_url) }}" width="50px" height="50px">
                 </div>
                 <div class="myinfo_text">
                     {{-- <p class="my_name">XXXXX旅館</p> --}}
@@ -128,13 +128,9 @@
             <div class="main_content">
                 <main class="py-4">
                     @yield('content')
-
-
                     <div>
-
-
-                        <img src=" {{asset('storage/'.$user_info->icon_url)}}
-                        "width="200px"
+                        <img src="{{asset($user_info->icon_url)}}"
+                            width="200px"
                             height="200px" alt="User Icon">
                     
                         <label class="open" for="pop-up">画像を変更</label>

@@ -19,7 +19,7 @@
         <nav class="main_nav">
             <div class="nav_myinfo">
                 <div class="img_cover_circle">
-                    <img src="./image/icon_default.png" width="50px" height="50px">
+                    <img src="{{ asset($user_info->icon_url) }}" width="50px" height="50px">
                 </div>
                 <div class="myinfo_text">
                     <p class="my_name">XXXXX旅館</p>

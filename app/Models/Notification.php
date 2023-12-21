@@ -9,11 +9,6 @@ class Notification extends Model
 {
     use HasFactory;
 
-    public function reads(){
-
-        return $this->hasMany(Read::class);
-        
-    }
     
     public function getDateAttribute() {
 

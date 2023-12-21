@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('type')->comment('通知タイプ「公開」「ブックマーク」「いいね」「コメント」「フォロー」');
             $table->text('body')->comment('通知本文');
             $table->text('url')->comment('ボタンのリンク先');
+            $table->boolean('read_flg')->default(0)->comment('既読未読フラグ');
             $table->timestamps();
         });
     }

@@ -19,20 +19,12 @@ class NotificationsController extends Controller
         $user = auth()->user();
 
         /** 既読済みの通知 */
-        $read_notice = Notification::whereHas('reads', function($query) use($user){
-
-            $query->where('user_id', $user->id)
-                ->where('read', true);
-
-        })
+        $read_notice = Notification::where('user_id',$user->id)->where('read_flg',1)
         ->orderBy('created_at', 'desc')
         ->get();
 
         /** 未読の通知 */
-        $new_notice = Notification::whereHas('reads', function($query) use($user){
-            $query->where('user_id', $user->id)
-                  ->where('read', false);
-        })
+        $new_notice = Notification::where('user_id',$user->id)->where('read_flg',0)
         ->orderBy('created_at','desc')
         ->get();
 

@@ -42,8 +42,9 @@ class PostsController extends Controller
 
         //ログインしているユーザー名
         $userName = User::find($id)->name;
+        $userIcon = User::find($id)->icon_url;
 
-        return view('company_mypage', compact(['myPosts'], 'userName'));
+        return view('company_mypage', compact(['myPosts'], 'userName','userIcon'));
     }
 
     /**
@@ -196,7 +197,7 @@ class PostsController extends Controller
             $path = 'storage/' . $dir . '/' . $file_name;
         } else {
             //画像が設定されていない場合はデフォルト画像
-            $path = 'storage/' . $dir . '/default.jpg';
+            $path = 'storage/default.jpg';
         }
         // ログインしているユーザーの情報を取得
         $user_id = auth()->user();
@@ -428,6 +429,7 @@ class PostsController extends Controller
 
 
         $userName = auth()->user()->name;
+        $userIcon = auth()->user()->icon_url;
 
         // 全角スペースを半角に変換
         //オプションsは	「全角」スペースを「半角」に変換
@@ -457,7 +459,7 @@ class PostsController extends Controller
             //     ->get();
 
 
-            return view('company_mypage', compact(['myPosts'], 'userName'));
+            return view('company_mypage', compact(['myPosts'], 'userName','userIcon'));
         }
     
     public function post_timeline()

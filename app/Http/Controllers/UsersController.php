@@ -61,7 +61,7 @@ class UsersController extends Controller
         $path = $up_img->store('img','public');
 
         $user->update([
-            'icon_url'=>$path,
+            'icon_url'=>'storage/'.$path,
         ]);
        
         return redirect()->route('user_edit');
