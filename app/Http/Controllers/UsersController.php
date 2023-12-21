@@ -78,4 +78,19 @@ class UsersController extends Controller
         // return $company;
         }
     }
+
+    public function branch(){
+
+        $id  =auth()->user()->id;
+        $user = User::find($id);
+    
+        if($user->company_flg == 0){
+            return  redirect()->route('company_mypage');
+        }
+        else{
+            return redirect()->route('timeline') ;
+        }
+
+        
+    }
 }

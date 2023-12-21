@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -41,13 +42,15 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    protected function loggedOut(\Illuminate\Http\Request $request) {
+    protected function loggedOut(\Illuminate\Http\Request $request)
+    {
         return redirect('login');
-      }
+    }
 
     public function redirectPath()
     {
-        return '/company_mypage';
+        return 'login/branch';
         //例）return 'costs/index';
     }
+
 }
