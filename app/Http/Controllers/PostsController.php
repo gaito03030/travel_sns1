@@ -287,7 +287,7 @@ class PostsController extends Controller
             'likes' => count($likes)
         ];
 
-        //return $data;
+        // return $data;
         return view('post', compact(['data']));
     }
 
