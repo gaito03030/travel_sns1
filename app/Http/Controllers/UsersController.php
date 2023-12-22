@@ -62,7 +62,7 @@ class UsersController extends Controller
         $path = $up_img->store('img', 'public');
 
         $user->update([
-            'icon_url'=>'storage/'.$path,
+            'icon_url' => 'storage/' . $path,
         ]);
 
         return redirect()->route('user_edit');
@@ -81,21 +81,18 @@ class UsersController extends Controller
         }
     }
 
-    public function branch(){
+    public function branch()
+    {
 
-        $id  =auth()->user()->id;
+        $id  = auth()->user()->id;
         $user = User::find($id);
-    
-        if($user->company_flg == 0){
-            return  redirect()->route('company_mypage');
-        }
-        else{
-            return redirect()->route('timeline') ;
-        }
 
-        
+        if ($user->company_flg == 0) {
+            return  redirect()->route('company_mypage');
+        } else {
+            return redirect()->route('timeline');
+        }
     }
-}
 
     public function user_info($id)
     {
