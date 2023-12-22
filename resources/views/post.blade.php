@@ -23,6 +23,9 @@
     <p>user_id:{{$data['post']->user->id}}</p>
     <p>user_id:{{$data['post']->user->name}}</p>
     <p>user_id:{{$data['post']->user->icon_url}}</p>
+
+    <a href="{{ url('/user_info/'.$data['post']->user->id) }}">ユーザ情報を表示</a>
+
     <h2>category</h2>
     <p>category:{{$data['post']->category->category}}</p>
     <h2>pref</h2>
@@ -57,7 +60,7 @@
 
     <!--いいね-->
 
-        <!-- いいね -->
+    <!-- いいね -->
     <h3>いいね</h3>
     <p>いいね数:{{$data['likes']}}件</p>
     @if (!Auth::user()->is_like($data['post']->id))
@@ -114,7 +117,7 @@
         </div>
     </form>
     </div>
-    
+
     <a href="{{ url('/logout') }}">ログアウト</a>
 
 </body>

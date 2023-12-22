@@ -38,7 +38,7 @@ class UsersController extends Controller
 
     public function store(Request $request, $id)
     {
-        
+
         $user = User::find($id);
 
         $user->update([
@@ -46,36 +46,53 @@ class UsersController extends Controller
             'bio' => $request->input('bio'),
             'web_url' => $request->input('web_url'),
         ]);
-       
-        
+
+
         return redirect()->route('management_company');
     }
 
-    public function uploadImg(Request $request,$id){
+    public function uploadImg(Request $request, $id)
+    {
 
         $user = User::find($id);
 
         // 画像フォームでリクエストした画像情報を取得
         $up_img = $request->file('img_path');
-         // storage > public > img配下に画像が保存される
-        $path = $up_img->store('img','public');
+        // storage > public > img配下に画像が保存される
+        $path = $up_img->store('img', 'public');
 
         $user->update([
-            'icon_url'=>$path,
+            'icon_url' => $path,
         ]);
-       
+
         return redirect()->route('user_edit');
     }
 
-    public function userside_comp_prof(){
+    public function userside_comp_prof()
+    {
         $user_id = auth()->user()->id;
         //$company = User::find($user_id)->where('company_flg', '=', '0')->get();
         $company = User::with('posts')->find($user_id);
 
         //return $company;
-        if($company->company_flg == 0){
-        return view('userside_comp_prof',compact('company'));
-        // return $company;
+        if ($company->company_flg == 0) {
+            return view('userside_comp_prof', compact('company'));
+            // return $company;
         }
+    }
+
+    public function user_info($id)
+    {
+        // $user_info = User::find($id);
+
+        //$posts = $user_info->posts()::where('status', 1)->get();
+
+
+        $posts = User::with(['posts' => function ($query) {
+            $query->where('status', 1);
+        }])->find($id);
+
+
+        return view('user_info', compact('posts'));
     }
 }

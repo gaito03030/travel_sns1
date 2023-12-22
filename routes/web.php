@@ -48,6 +48,8 @@ Route::get('/userpage', [UsersController::class, 'userside_comp_prof'])->name('u
 //一般ユーザーの編集画面
 Route::get('/general/mypage/edit', [UsersController::class, 'prof_edit'])->name('general.mypage.edit');
 
+// 投稿画面からユーザ情報
+Route::get('/user_info/{id}', [UsersController::class, 'user_info'])->name('user_info');
 
 //log出すようのページ
 Route::get('/log', [LogController::class, 'index'])->name('log');
