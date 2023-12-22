@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Notification;
 
 class LikesController extends Controller
 {
@@ -14,6 +15,7 @@ class LikesController extends Controller
         if (!$user->is_like($post_id)) {
             $user->like_posts()->attach($post_id);
         }
+
         return back();
     }
 

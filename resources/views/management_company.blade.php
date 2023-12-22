@@ -86,8 +86,7 @@
                     @yield('content')
 
                     <div>
-                        
-                        <img src=" {{asset('storage/'.$user_info->icon_url)}}
+                        <img src=" {{asset($user_info->icon_url)}}
                         "width="200px"
                             height="200px" alt="User Icon">
                         <?php

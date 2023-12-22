@@ -60,7 +60,6 @@
 
     <!--いいね-->
 
-    <!-- いいね -->
     <h3>いいね</h3>
     <p>いいね数:{{$data['likes']}}件</p>
     @if (!Auth::user()->is_like($data['post']->id))

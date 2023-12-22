@@ -91,7 +91,7 @@
         <nav class="main_nav">
             <div class="nav_myinfo">
                 <div class="img_cover_circle">
-                    <img src="" width="50px" height="50px">
+                    <img src="{{ asset($userIcon) }}" width="50px" height="50px">
                 </div>
                 <div class="myinfo_text">
                     {{-- <p class="my_name">XXXXX旅館</p> --}}
@@ -129,7 +129,7 @@
 
                     @foreach ($myPosts as $post)
                     <div class="mymodel">
-                        <p><img src="{{ asset('storage/' . $post->main_img_url) }}" width="300px" height="200px" alt="main_imag_url"></p>
+                        <p><img src="{{ asset( $post->main_img_url) }}" width="300px" height="200px" alt="main_imag_url"></p>
                         <p class="travel_title">{{ $post->title }}</p>
                         <p class="travel_status"><?php
                                                     if ($post->status !== 1) {

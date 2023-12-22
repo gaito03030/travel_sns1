@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Setting;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -65,11 +66,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
-
-        
-        return User::create([
-            'icon_url' => "default_icon.jpg",
+        $user =  User::create([
+            'icon_url' => "storage/default_icon.jpg",
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -77,6 +75,13 @@ class RegisterController extends Controller
             'bio' => null,
             'web_url' => null
         ]);
+
+        $setting = new Setting();
+        $setting->user_id = $user->id;
+
+        $setting->save();
+
+        return $user;
     }
 
     public function show(){
@@ -89,7 +94,7 @@ class RegisterController extends Controller
     {
 
         $user = new User;
-        $user->icon_url = "default_icon.jpg";
+        $user->icon_url = "storage/default_icon.jpg";
         $user->name = $request->input('name');
         $user->email= $request->input('email');
         $user->password= Hash::make($request->input('password'));
@@ -98,6 +103,12 @@ class RegisterController extends Controller
         $user->web_url = null;
 
         $user->save();
+
+        $setting = new Setting();
+        $setting->user_id = $user->id;
+
+        $setting->save();
+
         
         //  User::create([
         //     'icon_url' => "default_icon.jpg",
