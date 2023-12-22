@@ -43,8 +43,15 @@ Route::get('/posts/{id}', [PostsController::class,'show'])->name('post');
 Route::get('/search',[PostsController::class,'post_search_show'])->name('post_search_show');
 Route::get('/search/result',[PostsController::class,'post_search_result'])->name('post_search_result');
 
-// 一般ユーザー側から見た企業ページ
-Route::get('/userpage',[UsersController::class,'userside_comp_prof']);
+// 一般ユーザーのマイページ
+Route::get('/userpage',[UsersController::class,'userside_comp_prof'])->name('userpage');
+//一般ユーザーの編集画面
+Route::get('/general/mypage/edit',[UsersController::class,'prof_edit'])->name('general.mypage.edit');
+//一般ユーザーの画像の編集
+Route::put('/general_img/edit/{id}',[UsersController::class,'img_edit'])->name('general_img.edit');
+//一般ユーザ―のプロフィールの編集
+Route::put('/general/prof/edit/{id}',[UsersController::class,'prof_edit_comp'])->name('general.prof.edit');
+
 
 //log出すようのページ
 Route::get('/log',[LogController::class,'index'])->name('log');
@@ -71,14 +78,11 @@ Route::get('/company_mypage/posts', [PostsController::class, 'search'])->name('c
 //company_mypage.delete削除処理
 Route::delete('company_mypage/delete/{id}',[PostsController::class,'delete'])->name('company_mypage.delete');
 
-//user_editにルートを通す
+//企業の編集画面にルートを通す
 Route::get('/user_edit',[UsersController::class,'show'])->name('user_edit');  
-
-//user_editからputされる
-// Route::put('/user_edit/store',[UsersController::class,'store']);
+//企業から編集をputされる
 Route::put('/user_edit/store/{id}', [UsersController::class, 'store'])->name('user_edit.store');
-
-//user_eidtから画像のルート
+//企業の画像の編集ルート
 Route::put('/user_edit/img/{id}',[UsersController::class,'uploadImg'])->name('user_edit.img');
 
 Route::get('posts',[PostsController::class,'index']);

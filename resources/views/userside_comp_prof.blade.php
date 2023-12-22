@@ -56,7 +56,9 @@
                                 <a href="{{$company->web_url}}" class="user_url">{{$company->web_url}}</a>
                             </div>
                         </section>
-                        <button>followする</button>                                
+                        <button>followする</button> 
+                        <a href="{{route('general.mypage.edit',['user_info'=> $company])}}">
+                        編集する</a>                               
                     </article>
                     <article class="posts">
                         @foreach($company->posts as $companys)
