@@ -348,7 +348,7 @@ class PostsController extends Controller
             $post->category_id = $request['category'];
             $post->status = $request['status'];
             $post->main_img_url = "default.jpg";
-            $post->pref_id = '1';
+            $post->pref_id = $request['pref'];
 
             //details更新
             //もともとのdetails を取得しておく

@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Follow;
 use App\Models\User;
+use App\Models\Post;
+use App\Models\Setting;
+use App\Models\Notification;
 
 class FollowsController extends Controller
 {
@@ -24,7 +27,8 @@ class FollowsController extends Controller
     {
 
         //ログインしているユーザーを取得
-        $login_user_id = auth()->user()->id;
+        $login_user = auth()->user();
+        $login_user_id = $login_user->id;
 
         // すでにフォローしているか確認
         $isFollowing = Follow::where('user_id', $login_user_id)
@@ -37,6 +41,27 @@ class FollowsController extends Controller
                 'user_id' => $login_user_id,
                 'followed_user_id' => $id,
             ]);
+
+        /**通知*/
+
+        $setting = Setting::where('user_id', $id)->first();
+
+        $notice = new Notification();
+
+        if ($login_user_id != $id) {
+            //投稿主以外によるコメント
+            if ($setting->notice_comment_flg) {
+                //設定で許可している場合
+                $notice->user_id = $id;
+                $notice->type = 'コメント';
+                $notice->body = $login_user->name.'&nbsp;さんからフォローされました';
+                $notice->url = '/follower';
+                $notice->icon_url = $login_user->icon_url;
+
+                $notice->save();
+            }
+        }
+
         }
 
         return redirect()->name('test_follow');
