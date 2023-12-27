@@ -42,26 +42,25 @@ class FollowsController extends Controller
                 'followed_user_id' => $id,
             ]);
 
-        /**通知*/
+            /**通知*/
 
-        $setting = Setting::where('user_id', $id)->first();
+            $setting = Setting::where('user_id', $id)->first();
 
-        $notice = new Notification();
+            $notice = new Notification();
 
-        if ($login_user_id != $id) {
-            //投稿主以外によるコメント
-            if ($setting->notice_comment_flg) {
-                //設定で許可している場合
-                $notice->user_id = $id;
-                $notice->type = 'コメント';
-                $notice->body = $login_user->name.'&nbsp;さんからフォローされました';
-                $notice->url = '/follower';
-                $notice->icon_url = $login_user->icon_url;
+            if ($login_user_id != $id) {
+                //投稿主以外によるコメント
+                if ($setting->notice_comment_flg) {
+                    //設定で許可している場合
+                    $notice->user_id = $id;
+                    $notice->type = 'コメント';
+                    $notice->body = $login_user->name . '&nbsp;さんからフォローされました';
+                    $notice->url = '/follower';
+                    $notice->icon_url = $login_user->icon_url;
 
-                $notice->save();
+                    $notice->save();
+                }
             }
-        }
-
         }
 
         return redirect()->name('test_follow');
