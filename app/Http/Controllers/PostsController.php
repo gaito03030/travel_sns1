@@ -362,13 +362,28 @@ class PostsController extends Controller
         $user_id = auth()->user()->id;
         $post = Post::find($request['post_id']);
 
+        $dir = 'post';
+
+        if (isset($request['main_image'])) {
+
+            // アップロードされたファイル名を取得
+            $file_name = $request->file('main_image')->getClientOriginalName();
+
+            // 取得したファイル名で保存
+            $request->file('main_image')->storeAs('public/' . $dir, $file_name);
+
+            $path = 'storage/' . $dir . '/' . $file_name;
+            
+            $post->main_img_url = $path;
+        }
+
+
         if ($user_id == $post['user_id']) {
             $post->user_id = $user_id;
             $post->title = $request['title'];
             $post->description = $request['description'];
             $post->category_id = $request['category'];
             $post->status = $request['status'];
-            $post->main_img_url = "default.jpg";
             $post->pref_id = $request['pref'];
 
             //details更新
