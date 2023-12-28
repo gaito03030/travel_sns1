@@ -83,7 +83,7 @@ Route::get('/user_edit', [UsersController::class, 'show'])->name('user_edit');
 // Route::put('/user_edit/store',[UsersController::class,'store']);
 Route::put('/user_edit/store/{id}', [UsersController::class, 'store'])->name('user_edit.store');
 
-//user_eidtから画像のルート
+//user_editから画像のルート
 Route::put('/user_edit/img/{id}', [UsersController::class, 'uploadImg'])->name('user_edit.img');
 
 Route::get('posts', [PostsController::class, 'index']);

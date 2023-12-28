@@ -9,6 +9,10 @@
 
 <body>
     <p>{{$posts}}</p>
+    <h2>ブックマーク数</h2>
+    <p>{{$bookmarks}}</p>
+    <h2>フォロー数</h2>
+    <p>{{$follower}}</p>
 </body>
 
 </html>

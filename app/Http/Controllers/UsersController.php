@@ -106,6 +106,8 @@ class UsersController extends Controller
         }])->find($id);
 
 
+
+
         return view('user_info', compact('posts'));
     }
 }

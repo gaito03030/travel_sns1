@@ -48,7 +48,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function posts(){
+    public function posts()
+    {
         return $this->hasMany(Post::class);
     }
 
@@ -94,5 +95,10 @@ class User extends Authenticatable
     public function followedCompanies()
     {
         return $this->belongsToMany(User::class, 'follows', 'user_id', 'followed_user_id');
+    }
+
+    // ブックマークの総数表示
+    public function bookmark_total()
+    {
     }
 }
