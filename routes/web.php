@@ -81,8 +81,10 @@ Route::get('/company_mypage', [PostsController::class, 'index'])->name('company_
 //company_mypageの検査機能
 Route::get('/company_mypage/posts', [PostsController::class, 'search'])->name('company_mypage.posts');
 
-//company_mypage.delete削除処理
-Route::delete('company_mypage/delete/{id}', [PostsController::class, 'delete'])->name('company_mypage.delete');
+//POSTを削除をする画面
+Route::get('company_mypage/delete/{id}',[PostsController::class,'delete_page'])->name('company_mypage.delete');
+//POSTを削除する処理
+Route::get('company_mypage/delete/exe/{id}',[PostsController::class,'delete_exe'])->name('company_mypage.delete.exe');
 
 //user_editにルートを通す
 Route::get('/user_edit', [UsersController::class, 'show'])->name('user_edit');
