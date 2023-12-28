@@ -79,6 +79,20 @@ class UsersController extends Controller
         }
     }
 
+    public function general_mypage(){
+        $user = auth()->user();
+
+        if($user->company_flg == 0){
+            //企業ユーザの場合は404エラーを表示
+        }else{
+            $bookmarks = User::find($user->id)->bookmark_posts()->get();
+
+            $bookmarks_count = count($bookmarks);
+
+            return view('general_mypage',compact('user','bookmarks','bookmarks_count'));
+        }
+    }
+
     public function branch(){
 
         $id  =auth()->user()->id;

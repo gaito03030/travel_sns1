@@ -68,6 +68,9 @@ Route::get('/search/result', [PostsController::class, 'post_search_result'])->na
 // 一般ユーザー側から見た企業ページ
 Route::get('/userpage', [UsersController::class, 'userside_comp_prof']);
 
+// 一般ユーザのマイページ
+Route::get('general/mypage',[UsersController::class,'general_mypage']);
+
 //log出すようのページ
 Route::get('/log', [LogController::class, 'index'])->name('log');
 
