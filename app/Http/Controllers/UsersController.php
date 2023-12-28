@@ -81,6 +81,7 @@ class UsersController extends Controller
         }
     }
 
+    //ユーザーがログインしたときに、company_flgでリダイレクトをする画面を変える
     public function branch()
     {
 
