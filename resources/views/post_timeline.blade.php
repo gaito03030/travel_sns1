@@ -29,12 +29,17 @@
             <ul class="nav">
                 <li><a href="{{ url('/timeline') }}">ホーム</a></li>
                 <li><a href="{{ url('/search') }}">検索</a></li>
-                <li><a href="#">マイページ</a></li>
+                <li><a href="{{ url('general/mypage') }}">マイページ</a></li>
                 <li><a href="{{ url('/notification') }}">通知</a></li>
                 <li><a href="{{url('/logout')}}">ログアウト</a></li>
             </ul>
         </nav>
         <main class="main">
+            @if (Auth::user()->notifications_unread())
+            <p>新着通知があります</p>
+            @else
+            <p>新着通知はありません</p>
+            @endif
             <!-- ここからがページごとの表示部分 -->
             <div class="main_wrap">
             <section class="main_header flex">

@@ -90,6 +90,17 @@ class User extends Authenticatable
         return $this->hasMany(Notification::class);
     }
 
+    /** 未読の通知があるか確認 */
+    public function notifications_unread()
+    {
+        return $this->notifications()->where('read_flg', 0)->exists();
+    }
+
+    public function setting()
+    {
+        return $this->belongsTo(Setting::class);
+    }
+
 
     //フォローしている企業を一覧表示
     public function followedCompanies()

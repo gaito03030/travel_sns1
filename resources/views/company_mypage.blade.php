@@ -109,6 +109,12 @@
             </ul>
         </nav>
         <main class="main">
+            @if (Auth::user()->notifications_unread())
+            <p>新着通知があります</p>
+            @else
+            <p>新着通知はありません</p>
+            @endif
+
             <!-- ここからがページごとの表示部分 -->
             <section class="main_header flex">
                 <h2>マイモデルコース</h2>

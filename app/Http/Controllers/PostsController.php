@@ -11,6 +11,8 @@ use App\Models\Comment;
 use App\Models\Detail;
 use App\Models\Spot;
 use App\Models\Pref;
+use App\Models\Setting;
+use App\Models\Notification;
 
 class PostsController extends Controller
 {
@@ -44,7 +46,7 @@ class PostsController extends Controller
         $userName = User::find($id)->name;
         $userIcon = User::find($id)->icon_url;
 
-        return view('company_mypage', compact(['myPosts'], 'userName','userIcon'));
+        return view('company_mypage', compact(['myPosts'], 'userName', 'userIcon'));
     }
 
     /**
@@ -69,7 +71,7 @@ class PostsController extends Controller
         //県絞り込み
         if (isset($request['checked_pref'])) {
             $pref_id = $request['checked_pref'];
-            $query->where('pref_id',$pref_id);
+            $query->where('pref_id', $pref_id);
 
             $pref = Pref::find($pref_id);
 
@@ -79,31 +81,28 @@ class PostsController extends Controller
         //カテゴリー絞り込み
         if (isset($request['checked_category'])) {
             $category_id = $request['checked_category'];
-            $query->where('category_id',$category_id);
+            $query->where('category_id', $category_id);
 
             $category = Category::find($category_id);
 
             $narrow += ['category' => $category->category];
-
         }
 
         //予算
-        
-        if(!empty($request['price_min'])){
+
+        if (!empty($request['price_min'])) {
             $price_min = $request['price_min'];
-            $query->where('price','>=',$price_min);
+            $query->where('price', '>=', $price_min);
 
             $narrow += ['price_min' => $price_min];
-
         }
-        if(!empty($request['price_max'])){
+        if (!empty($request['price_max'])) {
             $price_max = $request['price_max'];
-            $query->where('price','<=',$price_max);
+            $query->where('price', '<=', $price_max);
 
             $narrow += ['price_max' => $price_max];
-
         }
-        
+
 
         //フリーワード検索
         if (isset($request['search_text'])) {
@@ -114,19 +113,18 @@ class PostsController extends Controller
             // 単語を半角スペースで区切り、配列にする（例："山田 翔" → ["山田", "翔"]）
             $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
 
-            $query->where(function($query) use($wordArraySearched){
-                    foreach ($wordArraySearched as $word) {
+            $query->where(function ($query) use ($wordArraySearched) {
+                foreach ($wordArraySearched as $word) {
                     $query->orwhere('title', 'like', '%' . $word . '%')
                         ->orwhere('description', 'like', '%' . $word . '%');
-                    }
-                });
+                }
+            });
 
             $narrow += ['search_text' => $search_word];
-
         }
 
         //dd($query->toSql(), $query->getBindings());
- 
+
         $posts = $query->get();
         $count = count($posts);
 
@@ -200,13 +198,13 @@ class PostsController extends Controller
             $path = 'storage/default.jpg';
         }
         // ログインしているユーザーの情報を取得
-        $user_id = auth()->user();
+        $user_id = auth()->user()->id;
 
         $post_data = new Post;
 
         $post_data->fill(
             [
-                'user_id' => $user_id->id,
+                'user_id' => $user_id,
                 'category_id' => $input_data['category'],
                 'title' => $input_data['title'],
                 'main_img_url' => $path,
@@ -257,6 +255,29 @@ class PostsController extends Controller
                 $post_spot->save();
             }
         }
+
+        if ($input_data['status'] == 1) {
+            /**通知*/
+            //フォロワーを取得
+            $followers = User::find($user_id)->follower_users()->get();
+
+            foreach ($followers as $follower) {
+                $setting = Setting::where('user_id', $follower->id)->first();
+
+                if ($setting->notice_posted_flg) {
+                    $notice = new Notification();
+                    //設定で許可している場合
+                    $notice->user_id = $follower->id;
+                    $notice->type = '投稿';
+                    $notice->body = auth()->user()->name . '&nbsp;さんが新しいモデルコースを公開しました';
+                    $notice->url = '/follower';
+                    $notice->icon_url = $follower->icon_url;
+
+                    $notice->save();
+                }
+            }
+        }
+
 
         return redirect('/log')->with('alert', '保存しました');
     }
@@ -341,14 +362,29 @@ class PostsController extends Controller
         $user_id = auth()->user()->id;
         $post = Post::find($request['post_id']);
 
+        $dir = 'post';
+
+        if (isset($request['main_image'])) {
+
+            // アップロードされたファイル名を取得
+            $file_name = $request->file('main_image')->getClientOriginalName();
+
+            // 取得したファイル名で保存
+            $request->file('main_image')->storeAs('public/' . $dir, $file_name);
+
+            $path = 'storage/' . $dir . '/' . $file_name;
+            
+            $post->main_img_url = $path;
+        }
+
+
         if ($user_id == $post['user_id']) {
             $post->user_id = $user_id;
             $post->title = $request['title'];
             $post->description = $request['description'];
             $post->category_id = $request['category'];
             $post->status = $request['status'];
-            $post->main_img_url = "default.jpg";
-            $post->pref_id = '1';
+            $post->pref_id = $request['pref'];
 
             //details更新
             //もともとのdetails を取得しておく
@@ -403,6 +439,28 @@ class PostsController extends Controller
             //保存
             $post->save();
 
+            if ($request['status'] == 1) {
+                /**通知*/
+                //フォロワーを取得
+                $followers = User::find($user_id)->follower_users()->get();
+
+                foreach ($followers as $follower) {
+                    $setting = Setting::where('user_id', $follower->id)->first();
+
+                    if ($setting->notice_posted_flg) {
+                        $notice = new Notification();
+                        //設定で許可している場合
+                        $notice->user_id = $follower->id;
+                        $notice->type = '投稿';
+                        $notice->body = auth()->user()->name . '&nbsp;さんが新しいモデルコースを公開しました';
+                        $notice->url = '/follower';
+                        $notice->icon_url = $follower->icon_url;
+
+                        $notice->save();
+                    }
+                }
+            }
+
             return redirect('/log')->with('alert', '更新しました');
         } else {
             return redirect('/log')->with('alert', '投稿したユーザ以外が更新することはできません');
@@ -441,30 +499,30 @@ class PostsController extends Controller
         $query = Post::where('user_id', $id);
 
         foreach ($wordArraySearched as $word) {
-                $query->where('title', 'like', '%' . $word . '%')
-                    ->orWhere('description', 'like', '%' . $word . '%');
-            };
+            $query->where('title', 'like', '%' . $word . '%')
+                ->orWhere('description', 'like', '%' . $word . '%');
+        };
 
-            $myPosts = $query->get();
-
-
-            // // 検索フォームから送信された検索語句を取得
-            // $searchTerm = $request->input('search');
-
-            // // ログインユーザーに関連する投稿を検索
-            // $myPosts = Post::query()
-            //     ->where('user_id', $id)
-            //     ->where('title', 'like', '%' . $searchTerm . '%')
-            //     ->orWhere('description', 'like', '%' . $searchTerm . '%')
-            //     ->get();
+        $myPosts = $query->get();
 
 
-            return view('company_mypage', compact(['myPosts'], 'userName','userIcon'));
-        }
-    
+        // // 検索フォームから送信された検索語句を取得
+        // $searchTerm = $request->input('search');
+
+        // // ログインユーザーに関連する投稿を検索
+        // $myPosts = Post::query()
+        //     ->where('user_id', $id)
+        //     ->where('title', 'like', '%' . $searchTerm . '%')
+        //     ->orWhere('description', 'like', '%' . $searchTerm . '%')
+        //     ->get();
+
+
+        return view('company_mypage', compact(['myPosts'], 'userName', 'userIcon'));
+    }
+
     public function post_timeline()
     {
-        $item = Post::where('status','=', '1')->get();
-        return view('post_timeline',compact('item'));
+        $item = Post::where('status', '=', '1')->get();
+        return view('post_timeline', compact('item'));
     }
 }

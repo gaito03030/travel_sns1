@@ -61,6 +61,14 @@ Route::post('/create/post', [PostsController::class, 'store'])->name('create.sto
 
 Route::get('/create/edit/{id}', [PostsController::class, 'edit'])->name('create.edit');
 Route::post('/create/update', [PostsController::class, 'update'])->name('create.update');
+// 一般ユーザー側から見た企業ページ
+Route::get('/userpage', [UsersController::class, 'userside_comp_prof']);
+
+// 一般ユーザのマイページ
+Route::get('general/mypage', [UsersController::class, 'general_mypage']);
+
+//log出すようのページ
+Route::get('/log', [LogController::class, 'index'])->name('log');
 
 //投稿コメント返信ページ
 Route::post('/comment/{postId}', [CommentsController::class, 'store'])->name('comment.store');
@@ -107,9 +115,6 @@ Auth::routes();
 Route::get('register/company', [App\Http\Controllers\Auth\RegisterController::class, 'show'])->name('register.company');
 Route::post('register/info', [App\Http\Controllers\Auth\RegisterController::class, 'showCompanyRegistrationForm'])->name('register.info.post');
 // Route::post('register/company', 'Auth\RegisterController@register')->name('register.company.post');
-
-
-
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

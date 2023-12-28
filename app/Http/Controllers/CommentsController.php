@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Notification;
 use App\Models\Post;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class CommentsController extends Controller
@@ -39,11 +41,37 @@ class CommentsController extends Controller
         //comment投稿
         $comment = new Comment();
 
+        $user = auth()->user();
+        $user_id = $user->id;
+
         $comment->post_id = $postId;
-        $comment->user_id = auth()->user()->id;
+        $comment->user_id = $user_id;
         $comment->detail = $request['detail'];
 
         $comment->save();
+
+        /**コメントを通知*/
+        //投稿のユーザを取得
+        $post = Post::find($postId);
+        $post_user_id = $post->user_id;
+        
+        $setting = Setting::where('user_id',$post_user_id)->first();
+
+        $notice = new Notification();
+
+        if ($user_id != $post_user_id) {
+            //投稿主以外によるコメント
+            if ($setting->notice_comment_flg) {
+                //設定で許可している場合
+                $notice->user_id = $post_user_id;
+                $notice->type = 'コメント';
+                $notice->body = 'モデルコースにコメントがつきました';
+                $notice->url = '/reply/'.$postId.'/'.$comment->id;
+                $notice->icon_url = $user->icon_url;
+
+                $notice->save();
+            }
+        } 
         
         return redirect('/posts/'.$postId);
     }
