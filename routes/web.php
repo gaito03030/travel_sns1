@@ -11,6 +11,7 @@ use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\FollowsController;
 use App\Http\Controllers\LikesController;
+use App\Models\Notification;
 use App\Models\Post;
 use App\Models\Reply;
 
@@ -96,7 +97,10 @@ Route::post('/posts/{post}/bookmark', [BookmarksController::class, 'store'])->na
 Route::delete('/posts/{post}/unbookmark', [BookmarksController::class, 'destroy'])->name('bookmark.destroy');
 Route::get('/bookmarks', [BookmarksController::class, 'bookmark_posts'])->name('bookmarks');
 
+//通知
 Route::get('/notification', [NotificationsController::class, 'index'])->name('notification');
+Route::get('/notification/setting',[NotificationsController::class,'edit']);
+Route::post('/notification/setting/update',[NotificationsController::class,'update'])->name('notification.update');
 
 // いいね機能
 Route::post('/posts/{post}/like', [LikesController::class, 'store'])->name('like.store');
