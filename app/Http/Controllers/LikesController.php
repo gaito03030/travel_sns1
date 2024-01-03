@@ -19,29 +19,6 @@ class LikesController extends Controller
             $user->like_posts()->attach($post_id);
         }
 
-        /**コメントを通知*/
-        //投稿のユーザを取得
-        $post = Post::find($post_id);
-        $post_user_id = $post->user_id;
-
-        $setting = Setting::where('user_id', $post_user_id)->first();
-
-        $notice = new Notification();
-
-        if ($user_id != $post_user_id) {
-            //投稿主以外によるコメント
-            if ($setting->notice_comment_flg) {
-                //設定で許可している場合
-                $notice->user_id = $post_user_id;
-                $notice->type = 'コメント';
-                $notice->body = 'モデルコースにいいねがつきました';
-                $notice->url = '/posts/' . $post_id;
-                $notice->icon_url = $user->icon_url;
-
-                $notice->save();
-            }
-        }
-
         return back();
     }
 

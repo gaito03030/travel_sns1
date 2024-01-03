@@ -147,20 +147,7 @@
                         <p>{{ $post->description }}</p>
                         <!-- 他の投稿情報を表示する -->
 
-                        <label class="open" for="pop-up">削除</label>
-                        <input type="checkbox" id="pop-up">
-                        <div class="overlay">
-                            <div class="window">
-                                <label class="close" for="pop-up">閉じる</label>
-                                <form method="POST" action="{{ route('company_mypage.delete', $post->id) }}">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit">はい</button>
-                                </form>
-
-                                <p><a href="company_mypage?">いいえ</a></p>
-                            </div>
-                        </div>
+                        <a href="{{url('/company_mypage/delete',['id' =>$post->id])}}">削除</a>
                         <a href="{{ url( '/create/edit/'.$post->id ) }}">編集</a>
                     </div>
 

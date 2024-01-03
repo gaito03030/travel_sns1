@@ -30,31 +30,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['middleware' => ['auth']], function () {
-    /** この中のルートにアクセスしたとき、
-     * ログインしてない場合はログイン画面にリダイレクトさせる */
-
-    //企業情報管理ページにルートを通す
-    Route::get('management_company', [UsersController::class, 'index'])->name('management_company');
-    Route::get('/test', [PostsController::class, 'test']);
-
-    //企業側　モデルコース作成画面
-    Route::get('/create/', [PostsController::class, 'create'])->name('company_create_post');
-
-    Route::post('/create/post', [PostsController::class, 'store'])->name('create.store');
-
-    Route::get('/create/edit/{id}', [PostsController::class, 'edit'])->name('create.edit');
-    Route::post('/create/update', [PostsController::class, 'update'])->name('create.update');
-
-    //company_mypageのためのルートを通す
-    Route::get('/company_mypage', [PostsController::class, 'index'])->name('company_mypage');
-
-    //company_mypageの検査機能
-    Route::get('/company_mypage/posts', [PostsController::class, 'search'])->name('company_mypage.posts');
-
-    //company_mypage.delete削除処理
-    Route::delete('company_mypage/delete/{id}', [PostsController::class, 'delete'])->name('company_mypage.delete');
-});
+//企業情報管理ページにルートを通す
+Route::get('management_company', [UsersController::class, 'index'])->name('management_company');
+Route::get('/test', [PostsController::class, 'test']);
 
 //timeline
 Route::get('/timeline', [PostsController::class, 'post_timeline'])->name('timeline');
@@ -66,11 +44,29 @@ Route::get('/posts/{id}', [PostsController::class, 'show'])->name('post');
 Route::get('/search', [PostsController::class, 'post_search_show'])->name('post_search_show');
 Route::get('/search/result', [PostsController::class, 'post_search_result'])->name('post_search_result');
 
+// 一般ユーザーのマイページ
+Route::get('/userpage', [UsersController::class, 'userside_comp_prof'])->name('userpage');
+//一般ユーザーの編集画面
+Route::get('/general/mypage/edit', [UsersController::class, 'prof_edit'])->name('general.mypage.edit');
+
+// 投稿画面からユーザ情報
+Route::get('/user_info/{id}', [UsersController::class, 'user_info'])->name('user_info');
+
+//log出すようのページ
+Route::get('/log', [LogController::class, 'index'])->name('log');
+
+//企業側　モデルコース作成画面
+Route::get('/create/', [PostsController::class, 'create'])->name('company_create_post');
+
+Route::post('/create/post', [PostsController::class, 'store'])->name('create.store');
+
+Route::get('/create/edit/{id}', [PostsController::class, 'edit'])->name('create.edit');
+Route::post('/create/update', [PostsController::class, 'update'])->name('create.update');
 // 一般ユーザー側から見た企業ページ
 Route::get('/userpage', [UsersController::class, 'userside_comp_prof']);
 
 // 一般ユーザのマイページ
-Route::get('general/mypage',[UsersController::class,'general_mypage']);
+Route::get('general/mypage', [UsersController::class, 'general_mypage']);
 
 //log出すようのページ
 Route::get('/log', [LogController::class, 'index'])->name('log');
@@ -80,6 +76,17 @@ Route::post('/comment/{postId}', [CommentsController::class, 'store'])->name('co
 Route::get('/reply/{postId}/{commentId}', [RepliesController::class, 'create'])->name('reply.create');
 Route::post('/reply/store', [RepliesController::class, 'store'])->name('reply.store');
 
+//company_mypageのためのルートを通す
+Route::get('/company_mypage', [PostsController::class, 'index'])->name('company_mypage');
+
+//company_mypageの検査機能
+Route::get('/company_mypage/posts', [PostsController::class, 'search'])->name('company_mypage.posts');
+
+//POSTを削除をする画面
+Route::get('company_mypage/delete/{id}',[PostsController::class,'delete_page'])->name('company_mypage.delete');
+//POSTを削除する処理
+Route::get('company_mypage/delete/exe/{id}',[PostsController::class,'delete_exe'])->name('company_mypage.delete.exe');
+
 //user_editにルートを通す
 Route::get('/user_edit', [UsersController::class, 'show'])->name('user_edit');
 
@@ -87,7 +94,7 @@ Route::get('/user_edit', [UsersController::class, 'show'])->name('user_edit');
 // Route::put('/user_edit/store',[UsersController::class,'store']);
 Route::put('/user_edit/store/{id}', [UsersController::class, 'store'])->name('user_edit.store');
 
-//user_eidtから画像のルート
+//user_editから画像のルート
 Route::put('/user_edit/img/{id}', [UsersController::class, 'uploadImg'])->name('user_edit.img');
 
 Route::get('posts', [PostsController::class, 'index']);
