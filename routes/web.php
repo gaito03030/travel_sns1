@@ -63,7 +63,7 @@ Route::get('/create/edit/{id}', [PostsController::class, 'edit'])->name('create.
 Route::post('/create/update', [PostsController::class, 'update'])->name('create.update');
 // 一般ユーザー側から見た企業ページ
 Route::get('/userpage', [UsersController::class, 'userside_comp_prof']);
-
+./dar
 // 一般ユーザのマイページ
 Route::get('general/mypage', [UsersController::class, 'general_mypage']);
 

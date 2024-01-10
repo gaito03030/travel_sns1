@@ -10,6 +10,8 @@ export default defineConfig({
                 "resources/css/post_timeline.css",
                 "resources/css/userside_comp_prof",
                 "resources/js/post.js",
+                "resources/css/login.js",
+
             ],
             refresh: true,
         }),
