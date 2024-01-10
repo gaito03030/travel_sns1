@@ -13,6 +13,7 @@ export default defineConfig({
                 "resources/js/post.js",
                 "resources/js/preview.js",
                 "resources/js/jquery-3.7.0.min.js",
+                "resources/css/login.js",
             ],
             refresh: true,
         }),
