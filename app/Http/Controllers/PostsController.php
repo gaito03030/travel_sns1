@@ -138,17 +138,25 @@ class PostsController extends Controller
         return $return;
     }
 
+    //投稿処理画面
+    public function delete_page($id)
+    {
+
+
+        return view('delete_page', compact('id'));
+    }
+
     //投稿削除処理
-    public function delete($id)
+    public function delete_exe($id)
     {
         $post = Post::find($id);
-        return $post;
+
 
 
         //行を削除
-        // $post->delete();
+        $post->delete();
 
-        // return redirect()->route('company_mypage');
+        return redirect()->route('company_mypage');
     }
     /**
      * Show the form for creating a new resource.
@@ -373,7 +381,7 @@ class PostsController extends Controller
             $request->file('main_image')->storeAs('public/' . $dir, $file_name);
 
             $path = 'storage/' . $dir . '/' . $file_name;
-            
+
             $post->main_img_url = $path;
         }
 
