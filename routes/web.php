@@ -87,7 +87,7 @@ Route::get('company_mypage/delete/{id}',[PostsController::class,'delete_page'])-
 //POSTを削除する処理
 Route::get('company_mypage/delete/exe/{id}',[PostsController::class,'delete_exe'])->name('company_mypage.delete.exe');
 
-//user_editにルートを通す
+//企業情報編集画面にルートを通す
 Route::get('/user_edit', [UsersController::class, 'show'])->name('user_edit');
 
 //user_editからputされる

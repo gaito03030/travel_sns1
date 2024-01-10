@@ -1,20 +1,6 @@
-<!DOCTYPE html>
-<html lang="ja">
+@extends('layouts.company')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    <ul class="nav">
-        <li><a href="{{ url('/timeline') }}">ホーム</a></li>
-        <li><a href="{{ url('/search') }}">検索</a></li>
-        <li><a href="{{ url('general/mypage') }}">マイページ</a></li>
-        <li><a href="{{ url('/notification') }}">通知</a></li>
-    </ul>
-
+@section('content')
     <h2>マイページ</h2>
     <p>{{$user->name}}</p>
     <img src="{{ asset($user->icon_url)}}" width="100px" height="100px">
@@ -30,7 +16,4 @@
     @else
     <P>ブックマークが登録されていません</P>
     @endif
-
-</body>
-
-</html>
+    @endsection
