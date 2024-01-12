@@ -119,6 +119,8 @@ class RegisterController extends Controller
         //     'bio' => '',
         //     'web_url' => ''
         // ]);
+
+        return $user;
              
     }
 

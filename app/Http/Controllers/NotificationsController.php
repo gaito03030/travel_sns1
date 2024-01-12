@@ -42,7 +42,7 @@ class NotificationsController extends Controller
             $update->save();
         }
 
-        return $data;
+        return view('company_notification',compact(['read_notifications','new_notifications']));
     }
 
 
