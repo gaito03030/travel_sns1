@@ -103,7 +103,7 @@ class RegisterController extends Controller
         $user->web_url = null;
 
         $user->save();
-
+        
         $setting = new Setting();
         $setting->user_id = $user->id;
 
@@ -120,7 +120,7 @@ class RegisterController extends Controller
         //     'web_url' => ''
         // ]);
 
-        return $user;
+        return redirect('login');
              
     }
 

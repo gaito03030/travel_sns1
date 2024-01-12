@@ -120,6 +120,7 @@ Auth::routes();
 // Auth::routes(['register_company' => true]);
 Route::get('register/company', [App\Http\Controllers\Auth\RegisterController::class, 'show'])->name('register.company');
 Route::post('register/info', [App\Http\Controllers\Auth\RegisterController::class, 'showCompanyRegistrationForm'])->name('register.info.post');
+Route::get('register/jojo',[App\Http\Controllers\Auth\RegisterController::class,'redirectPath'])->name('register.jojo');
 // Route::post('register/company', 'Auth\RegisterController@register')->name('register.company.post');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

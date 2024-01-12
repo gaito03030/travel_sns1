@@ -90,7 +90,7 @@
     <div class="border p-4">
       <h1 class="h4 mb-4 font-weight-bold">新規作成</h1>
   
-      <form action="{{ route('notification.update') }}"  method="POST" id="new">
+      <form action="{{ route('register.info.post') }}"  method="POST" id="new">
         @csrf
   
         <fieldset class="mb-4">
