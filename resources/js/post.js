@@ -1,8 +1,7 @@
+import { functionsIn } from "lodash";
+
 $(function () {
-
-    console.log("20231214");
     /**フォームの要素追加、削除 */
-
     /**
      * 要素が追加・削除された時にname属性をナンバリングしなおす
      * @param $list : js_itemクラスの親要素
@@ -12,8 +11,8 @@ $(function () {
         $list.children('.js_item').each(function (index) {
             console.log(index);
             //〇日目
-            if($(this).children('.js_date_text')){
-                $(this).children('.js_date_text').html((index+1) + "日目");
+            if ($(this).children('.js_date_text')) {
+                $(this).children('.js_date_text').html((index + 1) + "日目");
             }
             //.js_itemの中にjs_inputクラスの要素があるか探す
             $(this).children('.js_input').each(function () {
@@ -24,9 +23,9 @@ $(function () {
                 $(this).attr('name', replaceText);
             })
 
-            if ($list.is('[data-input="dates"]')){
+            if ($list.is('[data-input="dates"]')) {
                 $(this).find('.js_input').each(function () {
-                    var replaceText = $(this).attr('name').replace(/\d+\[/, (1+index) + '[');
+                    var replaceText = $(this).attr('name').replace(/\d+\[/, (1 + index) + '[');
                     $(this).attr('name', replaceText);
                 })
             }
@@ -51,10 +50,10 @@ $(function () {
             //リストのdate-input属性の値がdetailsの時
             if ($list.is('[data-input="details"]')) {
                 $list.append(
-                    '<li class="js_item">' +
-                    '<input type="text" name="detail_title[0]" class="js_input" placeholder="タイトル（例 持ち物リスト）"><br>' +
-                    '<textarea type="text" name="detail_content[0]" class="js_input" placeholder="内容"></textarea>' +
-                    '<button class="js_remove-btn">削除</button>' +
+                    '<li class="js_item form_box">' +
+                    '<input type="text" name="detail_title[0]" class="js_input form_child" placeholder="タイトル（例 持ち物リスト）">' +
+                    '<textarea type="text" name="detail_content[0]" class="js_input form_child" placeholder="内容" rows="3"></textarea>' +
+                    '<button class="js_remove_btn remove_button" title="削除">×</button>' +
                     '</li>'
                 );
             } else if ($list.is('[data-input="dates"]')) {
@@ -66,10 +65,10 @@ $(function () {
                     '<div class="js_items">' +
                     '<ul class="js_item_list" data-input="spots">' +
                     '<li class="js_item">' +
-                    '<input type="time" name="spot_time1[0]" class="js_input">' +
-                    '<input type="text" name="spot_title1[0]" class="js_input" placeholder="行程のタイトル">' +
-                    '<textarea name="spot_description1[0]" class="js_input" placeholder="詳細"></textarea>' +
-                    '<input type="text" name="spot_address1[0]" class="js_input" placeholder="住所"><br>' +
+                    '<input type="time" name="spot_time_1[0]" class="js_input">' +
+                    '<input type="text" name="spot_title_1[0]" class="js_input" placeholder="行程のタイトル">' +
+                    '<textarea name="spot_description_1[0]" class="js_input" placeholder="詳細"></textarea>' +
+                    '<input type="text" name="spot_address_1[0]" class="js_input" placeholder="住所"><br>' +
                     '<button class="js_remove_btn">削除</button>' +
                     '</li>' +
                     '</ul>' +
@@ -81,10 +80,10 @@ $(function () {
             } else if ($list.is('[data-input="spots"]')) {
                 $list.append(
                     '<li class="js_item">' +
-                    '<input type="time" name="spot_time1[0]" class="js_input">' +
-                    '<input type="text" name="spot_title1[0]" class="js_input" placeholder="行程のタイトル">' +
-                    '<textarea name="spot_description1[0]" class="js_input" placeholder="詳細"></textarea>' +
-                    '<input type="text" name="spot_address1[0]" class="js_input" placeholder="住所"><br>' +
+                    '<input type="time" name="spot_time_1[0]" class="js_input">' +
+                    '<input type="text" name="spot_title_1[0]" class="js_input" placeholder="行程のタイトル">' +
+                    '<textarea name="spot_description_1[0]" class="js_input" placeholder="詳細"></textarea>' +
+                    '<input type="text" name="spot_address_1[0]" class="js_input" placeholder="住所"><br>' +
                     '<button class="js_remove_btn">削除</button>' +
                     '</li>'
 
@@ -99,20 +98,26 @@ $(function () {
                 //data-input = dates
                 var $num = parseInt($(".js_date_length").val()) + 1;
                 $cloneItem =
-                    '<li class="js_item">' +
-                    '<p class="js_date_text">' + $num + '日目</p>' +
-                    '<div class="js_items">' +
+                    '<li class="js_item input_date course_bg">' +
+                    '<div class="form_group">'+
+                    '<p class="js_date_text date_text">' + $num + '日目</p>' +
+                    '<div class="js_items form_content">' +
                     '<ul class="js_item_list" data-input="spots">' +
-                    '<li class="js_item">' +
-                    '<input type="time" name="spot_time' + $num + '[0]" class="js_input">' +
-                    '<input type="text" name="spot_title' + $num + '[0]" class="js_input" placeholder="行程のタイトル">' +
-                    '<textarea name="spot_description' + $num + '[0]" class="js_input" placeholder="詳細"></textarea>' +
-                    '<input type="text" name="spot_address' + $num + '[0]" class="js_input" placeholder="住所"><br>' +
-                    '<button class="js_remove_btn">削除</button>' +
+                    '<li class="js_item flex form_box flex_form_box">' +
+                    '<div class="input_flex_left">' +
+                    '<input type="time" name="spot_time_' + $num + '[0]" class="js_input">' +
+                    '</div>' +
+                    '<div class="input_flex_right">'+
+                    '<input type="text" name="spot_title_' + $num + '[0]" class="js_input" placeholder="行程のタイトル">' +
+                    '<textarea name="spot_description_' + $num + '[0]" class="js_input" placeholder="詳細"></textarea>' +
+                    '<input type="text" name="spot_address_' + $num + '[0]" class="js_input" placeholder="住所">' +
+                    '</div>' +
+                    '<button class="js_remove_btn remove_button">×</button>' +
                     '</li>' +
                     '</ul>' +
-                    '<button class="js_add_btn">予定を追加</button><br>' +
-                    '<button class="js_remove_btn">日にちを削除</button>' +
+                    '<button class="js_add_btn add_btn button">予定を追加</button>' +
+                    '<button class="js_remove_btn remove_button remove_date">日にちを削除</button>' +
+                    '</div>'+
                     '</li>';
 
                 $(".js_date_length").val($num);
@@ -149,8 +154,23 @@ $(function () {
         return false;
     });
 
+    //確認画面の表示
+    $(document).on('click',".js_confirm_button",function(){
+        $('.js_modal_background').fadeIn();
+        $('.js_modal_widow').fadeIn();
+        return false;
+    });
 
+    $(document).on('click',".js_modal_close_button",function(){
+        $('.js_modal_background').fadeOut();
+        $('.js_modal_widow').fadeOut();
+        return false;
+    });
 
-
+    $(document).on('click',".js_modal_background",function(){
+        $('.js_modal_background').fadeOut();
+        $('.js_modal_widow').fadeOut();
+        return false;
+    });
 
 })
