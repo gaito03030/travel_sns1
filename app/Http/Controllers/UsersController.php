@@ -95,7 +95,7 @@ class UsersController extends Controller
         }
     }
 
-    public function user_info($id)
+    public function general_mypage($id)
     {
         // $user_info = User::find($id);
 
