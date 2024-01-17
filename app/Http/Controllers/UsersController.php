@@ -41,6 +41,20 @@ class UsersController extends Controller
 
         $user = User::find($id);
 
+
+
+        // 画像フォームでリクエストした画像情報を取得
+        $up_img = $request->file('img_path');
+        if(!empty($up_img)){
+
+            // storage > public > img配下に画像が保存される
+            $path = $up_img->store('img', 'public');
+    
+            $user->update([
+                'icon_url' => 'storage/' . $path,
+            ]);
+
+        }    
         $user->update([
             'name' => $request->input('name'),
             'bio' => $request->input('bio'),

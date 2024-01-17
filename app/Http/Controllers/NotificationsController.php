@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Notification;
 use App\Models\Read;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use PHPUnit\Framework\Error\Notice;
 
@@ -41,29 +42,9 @@ class NotificationsController extends Controller
             $update->save();
         }
 
-        return $data;
+        return view('company_notification',compact(['read_notifications','new_notifications']));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -82,21 +63,46 @@ class NotificationsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //
+        $user = auth()->user();
+        $setting = Setting::where('user_id',$user->id)->first();
+
+        return view('company_notification_setting',compact('user','setting'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $user_id = auth()->user()->id;
+        $setting = Setting::where('user_id',$user_id)->first();
+
+        if($request['notice_all'] == 1){
+            $setting->notice_all_flg = 1;
+            $setting->notice_reply_flg = 1;
+            $setting->notice_poster_reply_flg = 1;
+            $setting->notice_comment_flg = 1;
+            $setting->notice_like_flg = 1;
+            $setting->notice_follow_flg = 1;
+            $setting->notice_bookmark_flg = 1;
+            $setting->notice_posted_flg = 1;
+        }else{
+            $setting->notice_all_flg = 0;
+            $setting->notice_comment_flg = $request['comment'];
+            $setting->notice_like_flg = $request['like'];
+            $setting->notice_follow_flg = $request['follow'];
+            $setting->notice_bookmark_flg = $request['bookmark'];
+            $setting->notice_posted_flg = $request['posted'];
+        }
+
+        $setting->save();
+
+        return redirect('/notification');
     }
 
     /**

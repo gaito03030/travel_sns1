@@ -11,6 +11,7 @@ use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\FollowsController;
 use App\Http\Controllers\LikesController;
+use App\Models\Notification;
 use App\Models\Post;
 use App\Models\Reply;
 
@@ -82,11 +83,11 @@ Route::get('/company_mypage', [PostsController::class, 'index'])->name('company_
 Route::get('/company_mypage/posts', [PostsController::class, 'search'])->name('company_mypage.posts');
 
 //POSTを削除をする画面
-Route::get('company_mypage/delete/{id}',[PostsController::class,'delete_page'])->name('company_mypage.delete');
+Route::get('company_mypage/delete/{id}', [PostsController::class, 'delete_page'])->name('company_mypage.delete');
 //POSTを削除する処理
-Route::get('company_mypage/delete/exe/{id}',[PostsController::class,'delete_exe'])->name('company_mypage.delete.exe');
+Route::get('company_mypage/delete/exe/{id}', [PostsController::class, 'delete_exe'])->name('company_mypage.delete.exe');
 
-//user_editにルートを通す
+//企業情報編集画面にルートを通す
 Route::get('/user_edit', [UsersController::class, 'show'])->name('user_edit');
 
 //user_editからputされる
@@ -103,7 +104,10 @@ Route::post('/posts/{post}/bookmark', [BookmarksController::class, 'store'])->na
 Route::delete('/posts/{post}/unbookmark', [BookmarksController::class, 'destroy'])->name('bookmark.destroy');
 Route::get('/bookmarks', [BookmarksController::class, 'bookmark_posts'])->name('bookmarks');
 
+//通知
 Route::get('/notification', [NotificationsController::class, 'index'])->name('notification');
+Route::get('/notification/setting', [NotificationsController::class, 'edit']);
+Route::post('/notification/setting/update', [NotificationsController::class, 'update'])->name('notification.update');
 
 // いいね機能
 Route::post('/posts/{post}/like', [LikesController::class, 'store'])->name('like.store');
@@ -116,6 +120,7 @@ Auth::routes();
 // Auth::routes(['register_company' => true]);
 Route::get('register/company', [App\Http\Controllers\Auth\RegisterController::class, 'show'])->name('register.company');
 Route::post('register/info', [App\Http\Controllers\Auth\RegisterController::class, 'showCompanyRegistrationForm'])->name('register.info.post');
+Route::get('register/jojo',[App\Http\Controllers\Auth\RegisterController::class,'redirectPath'])->name('register.jojo');
 // Route::post('register/company', 'Auth\RegisterController@register')->name('register.company.post');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
