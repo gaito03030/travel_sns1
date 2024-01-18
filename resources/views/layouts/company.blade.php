@@ -46,7 +46,7 @@
                         <img src="img/alert.png" width="26px">
                         @endif
                         通知</a></li>
-                <li><a href="{{ url('/logout') }}"><img src="img/home.png" width="26px">ログアウト</a></li>
+                <li><a href="{{ url('/logout') }}"><img src="img/logout.png" width="26px">ログアウト</a></li>
             </ul>
         </nav>
         <main class="main">

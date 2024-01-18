@@ -766,7 +766,13 @@ input[type="file"] {
     align-items: center;
     margin-top: 10px;
 }
-
+.empty_box{
+    text-align: center;
+    position: absolute;
+    top: calc(50% + 60px);
+    left: 60%;
+    transform: translate(-50%,-50%);
+}
 /* 投稿フォーム */
 .post_form{
     padding-bottom: 40px;
