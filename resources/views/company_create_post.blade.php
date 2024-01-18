@@ -34,7 +34,7 @@
             <br>
             予算<br>
             <div class="confirm_content">
-                <input type="text" name="price" inputmode="numeric" placeholder="予算を入力" pattern="^[0[[1-9][0-9]*]]$" title="自然数で入力してください" required>
+                <input type="text" name="price" inputmode="numeric" placeholder="予算を入力" pattern="^[0[[1-9][0-9]]]*$" title="自然数で入力してください" required>
             </div>
             <div class="flex button_wrap">
                 <input type="button" class="button return_button js_modal_close_button" value="戻る">
