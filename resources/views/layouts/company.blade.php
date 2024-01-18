@@ -18,7 +18,7 @@
 
 <body>
     <header id="header">
-        <h1><a href="{{ url('/') }}"><img  src="{{asset('/img/logo.png') }}">とらべる～と</a></h1>
+        <h1><a href="{{ url('/company_mypage') }}"><img  src="{{asset('/img/logo.png') }}"><span>とらべる～と</span></a></h1>
     </header>
     <div class="flex">
         <nav class="main_nav">
@@ -49,7 +49,7 @@
                 <li><a href="{{ url('/logout') }}"><img src="img/logout.png" width="26px">ログアウト</a></li>
             </ul>
         </nav>
-        <main class="main">
+        <main class="main_wrap">
             @yield('content')
         </main>
     </div>

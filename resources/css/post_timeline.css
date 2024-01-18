@@ -1,127 +1,59 @@
 @charset "utf-8";
 
-body {
-    margin: 0;
-    background-color: #f6f6f6;
-    color: #a6a6a6;
-}
-
-header {
-    background-color: #fff;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    width: 100%;
-    padding: 0 1em;
-}
-
-img {
-    vertical-align: bottom;
-}
-
-h1 {
-    margin: 0;
-    width: 200px;
-}
-
-h1 a {
-    color: #333;
-}
-
-h2 {
-    color: #737373;
-    font-weight: 500;
-    font-size: 1.2em;
-}
-
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    background-color: #598f78;
-    height: 100vh;
-    width: 20%;
-    padding: 0;
-    margin: 0;
-}
-
-main {
-    width: 80%;
-    margin-left: 20%;
-    padding: 60px 0px;
-}
-.main_wrap {
-    margin: 10px 24px;
-}
-.flex {
-    display: flex;
-    flex: auto;
-    align-items: flex-start;
-}
-
-.button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    background-color: #5fbb94;
-    padding: 6px 16px;
-    border-radius: 6px;
-    color: #fff;
-    font-weight: bold;
-}
-
-.button:hover {
-    transition: all 0.3s;
-    background-color: #4f7967;
-}
-
-.nav {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
 .nav a {
     display: block;
     text-decoration: none;
     color: #fff;
     padding: 16px 20px;
-    font-size: 0.9em;
+    font-size: .9em;
     font-weight: bold;
 }
 
-.nav a:hover {
-    transition: all 0.3s;
-    background-color: #4f7967;
+.flex_center {
+    align-items: center;
 }
 
-.nav_myinfo {
-    padding: 60px 0px 30px 0px;
-    color: #fff;
-    background-color: #55997c;
-    text-align: center;
-    line-height: 0.8em;
+.general_header_inner {
+    justify-content: flex-end;
+    padding-right: 1em;
 }
 
-.img_cover_circle {
-    display: block;
-    width: 30%;
-    margin: 1em auto;
-    aspect-ratio: 1/1;
-    border-radius: 50%;
-    border: solid 1.5px #e6c155;
-    padding: 4px;
-}
-
-.img_cover_circle img {
+.general_user_icon {
+    width: 45px;
+    border: none;
     margin: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
+    margin-right: .5em;
 }
+
+.general_nav {
+    padding-top: 60px;
+}
+
+.nav_wrap {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav_wrap a {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    padding: 16px 20px;
+    font-size: .9em;
+    font-weight: bold;
+}
+
+.nav_wrap a img {
+    margin-left: .4em;
+    margin-right: 1em;
+}
+
+.nav_wrap a:hover {
+    transition: all .3s;
+    background-color: #4F7967;
+}
+
 
 /*メインコンテンツのヘッダー部分（h2周辺）*/
 .main_header {
@@ -137,52 +69,73 @@ main {
     display: flex;
     flex-direction: column;
     width: 100%;
+    margin-top: 20px;
 }
+
+.article_wrap a {
+    text-decoration: none;
+    color: #8b8b8b;
+    margin-top: 20px;
+    border-radius: 10px 6px;
+    background-color: #fefefe;
+
+}
+
+.article_wrap a:hover {
+    box-shadow: #c8cdcf 0px 1px 13px 1px;
+    transition: all .5s;
+    transform: scale(1.004);
+}
+
 /* 投稿のarticle */
 #content_main .article {
-    height: 200px;
-    width: 80%;
-    margin-top: 20px;
-    padding: 40px;
-    background-color: #fefefe;
+    width: 90%;
     display: flex;
+    padding: 16px;
 }
 
 /* 投稿のfigure */
 #content_main .article figure {
     float: left;
-    height: 200px;
-    width: 320px;
+    height: 160px;
+    width: 25%;
     margin: 0;
+    position: relative;
 }
 
 /* 投稿のimg */
 #content_main .article figure img {
     border-radius: 5px;
-    height: 200px;
-    width: 320px;
+    width: 100%;
+    height: 160px;
     object-fit: cover;
 }
 
 /* 記事一覧の詳細部分 */
 .article-info {
-    padding-left: 30px;
+    width: 73%;
     display: inline-block;
+    padding: 10px 0;
+    padding-left: 30px;
 }
 
 /* 記事一覧のタイトル */
 .article-info h1 {
     width: 100%;
-    margin-top: 0px;
-    margin-bottom: 1.2rem;
+    margin: 6px 0;
+    font-size: 1.2em;
 }
 
 /*　カテゴリータグ　*/
 #content_main .article-category {
-    background-color: #fff687;
-    border-radius: 15px;
-    color: #000000;
-    padding: 5px 8px 5px 8px;
+    background-color: #4F7967;
+    border-radius: 0px  0px 6px 0px;
+    color: #fff;
+    padding: 2px 16px;
+    font-size: .8em;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 /*　投稿日　*/
@@ -203,10 +156,30 @@ main {
     /*横幅94%で左右に余白を持たせて中央寄せ*/
     height: 94%;
     margin: 5px;
-    width: 80%;
+    width: 90%;
     display: flex;
     margin: 0 20px;
-    overflow-x: scroll;
+    overflow: auto;
+    /*IE(Internet Explorer)・Microsoft Edgeへの対応*/
+    -ms-overflow-style: none;
+    /*Firefoxへの対応*/
+    scrollbar-width: none;
+    padding-bottom: 10px;
+}
+
+
+.slider::-webkit-scrollbar {
+    height: 5px;
+}
+
+.slider::-webkit-scrollbar-track {
+    background-color: #dfdfdf;
+    border-radius: 5px;
+}
+
+.slider::-webkit-scrollbar-thumb {
+    background-color: #E6C155;
+    border-radius: 5px;
 }
 
 /* #slider_top img {
@@ -218,11 +191,26 @@ main {
 
 .slider_info {
     position: relative;
+    display: block;
+    width: 200px;
+    height: 180px;
+    margin-right: 10px;
+}
+.slider_info:hover img{
+    transform: scale(1.1);
+    transition: all .5s;
+}
+.img_overflow_fide{
+    overflow: hidden;
+    width: 200px;
+    height: 180px;
+    border-radius: 10px;
 }
 .slider_info img {
-    width: 320px;
-    height: 200px;
+    width: 200px;
     flex-shrink: 0;
+    height: 180px;
+    object-fit: cover;
 }
 
 .title {
@@ -231,12 +219,10 @@ main {
     position: absolute;
     bottom: 0;
     padding: 5px;
-
-    background-image: linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0),
-        rgba(106, 105, 105, 0.7)
-    );
+    background-image: linear-gradient(180deg,
+            rgba(255, 255, 255, 0),
+            rgba(106, 105, 105, 0.7));
+    border-radius: 0px 0px 10px 10px;
 }
 
 .slider_info p {
@@ -246,4 +232,5 @@ main {
     bottom: 0;
     /* width: 320px; */
     color: #f6f6f6;
+    padding: 4px 16px;
 }
