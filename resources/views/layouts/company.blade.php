@@ -11,17 +11,14 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,200,0,0" />
 
     <!-- css -->
-    @vite('resources/css/style.css')
+    <!-- @vite('resources/css/style.css') -->
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
-    <!-- Scripts -->
-    @vite( ['resources/js/jquery-3.7.0.min.js','resources/js/app.js','resources/js/preview.js'])
-
 <body>
     <header id="header">
-        <h1><a href="{{ url('/') }}">logo</a></h1>
+        <h1><a href="{{ url('/company_mypage') }}"><img  src="{{asset('/img/logo.png') }}"><span>とらべる～と</span></a></h1>
     </header>
     <div class="flex">
         <nav class="main_nav">
@@ -42,20 +39,23 @@
                 <li><a href="{{ url('/create') }}"><img src="img/create.png" width="26px">新規作成</a></li>
                 <li><a href="{{ url('/management_company') }}"><img src="img/mypage.png" width="26px">マイ企業情報管理</a></li>
                 <li><a href="{{ url('/notification') }}">
-                <!-- 未読通知があれば画像を変更 -->
-                @if (Auth::user()->notifications_unread())
-                <img src="img/alert_unread.png" width="26px">
-                @else
-                <img src="img/alert.png" width="26px">
-                @endif
-                通知</a></li>
-                <li><a href="{{ url('/logout') }}"><img src="img/home.png" width="26px">ログアウト</a></li>
+                        <!-- 未読通知があれば画像を変更 -->
+                        @if (Auth::user()->notifications_unread())
+                        <img src="img/alert_unread.png" width="26px">
+                        @else
+                        <img src="img/alert.png" width="26px">
+                        @endif
+                        通知</a></li>
+                <li><a href="{{ url('/logout') }}"><img src="img/logout.png" width="26px">ログアウト</a></li>
             </ul>
         </nav>
-        <main class="main">
+        <main class="main_wrap">
             @yield('content')
         </main>
     </div>
+    <!-- Scripts -->
+    @vite( ['resources/js/jquery-3.7.0.min.js','resources/js/app.js','resources/js/preview.js','resources/js/post.js'])
+
 </body>
 
 </html>

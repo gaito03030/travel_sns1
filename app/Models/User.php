@@ -108,6 +108,11 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'follows', 'user_id', 'followed_user_id');
     }
 
+    //企業をフォローしている人を表示
+    public function follower_users(){
+        return $this->belongsToMany(User::class,'follows','followed_user_id','user_id');
+    }
+
     // ブックマークの総数表示
     public function bookmark_total()
     {

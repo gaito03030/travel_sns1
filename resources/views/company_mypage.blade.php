@@ -16,6 +16,13 @@
 </section>
 <div class="main_content">
     @yield('content')
+    @if(count($myPosts) == 0)
+    <div class="empty_box">
+        <img src="{{asset('/img/empty.png')}}">
+        <p>モデルコースが登録されていません</p>
+        <a href="{{url('/create')}}" class="button">＋ 新規追加</a>
+    </div>
+    @endif
     @foreach ($myPosts as $post)
     <article class="post flex">
         <div class="thumbnail">

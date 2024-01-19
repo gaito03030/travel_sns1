@@ -8,24 +8,42 @@
 <div class="main_content">
     <form class="notice_form" action="{{ url('/notification/setting/update') }}" method="POST">
         <span class="input_title">通知の許可</span>
-        <label class="label"><input type="radio" name="notice_all" value="1">すべての通知を許可</label>
-        <label class="label">
-            <input type="radio" name="notice_all" value="0">通知ごとに設定
+        @csrf
+        <label><input type="radio" name="notice_all" value="1" @if($setting->notice_all_flg) checked @endif >
+            すべての通知を許可</label><br>
+        <label>
+            <input type="radio" name="notice_all" value="0" @if(!$setting->notice_all_flg) checked @endif>通知ごとに設定<br>
             <div class="input_group">
                 <div class="flex input_flex toggle_wrap">
-                    <span>お気に入り企業の投稿</span>
-                    <input type="hidden" name="post" value="0">
+                    <span>いいねの通知</span>
+                    <input type="hidden" name="like" value="0">
                     <div class="toggle_button">
-                        <input id="toggle" class="toggle_input" name="post" value="1" type='checkbox'>
+                        <input id="toggle" class="toggle_input" name="like" value="1" @if($setting->notice_like_flg) checked @endif type='checkbox'>
                         <label for="toggle" class="toggle_label"></label>
                     </div>
                 </div>
-                <div class="flex input_flex">
-                    <span class="input_title">コメントへの返信</span>
-                    <div class="input_group input_comment_group">
-                        <label class="label"><input type="radio" name="reply" value="2">すべて許可</label>
-                        <label class="label"><input type="radio" name="reply" value="1">投稿主による返信のみ許可</label>
-                        <label class="label"><input type="radio" name="reply" value="0">拒否</label>
+                <div class="flex input_flex toggle_wrap">
+                    <span>コメントの通知</span>
+                    <input type="hidden" name="comment" value="0">
+                    <div class="toggle_button">
+                        <input id="toggle" class="toggle_input" name="comment" value="1" @if($setting->notice_comment_flg) checked @endif type='checkbox'>
+                        <label for="toggle" class="toggle_label"></label>
+                    </div>
+                </div>
+                <div class="flex input_flex toggle_wrap">
+                    <span>ブックマーク通知</span>
+                    <input type="hidden" name="bookmark" value="0">
+                    <div class="toggle_button">
+                        <input id="toggle" class="toggle_input" name="bookmark" value="1" @if($setting->notice_bookmark_flg) checked @endif type='checkbox'>
+                        <label for="toggle" class="toggle_label"></label>
+                    </div>
+                </div>
+                <div class="flex input_flex toggle_wrap">
+                    <span>お気に入り登録通知</span>
+                    <input type="hidden" name="follow" value="0">
+                    <div class="toggle_button">
+                        <input id="toggle" class="toggle_input" name="follow" value="1" @if($setting->notice_follow_flg) checked @endif type='checkbox'>
+                        <label for="toggle" class="toggle_label"></label>
                     </div>
                 </div>
             </div>
@@ -34,7 +52,7 @@
         <input class="button notice_submit" type="submit" value="更新">
     </form>
 </div>
-
+<!--
 <form action="{{ url('/notification/setting/update') }}" method="POST">
     @csrf
     <label><input type="radio" name="notice_all" value="1" @if($setting->notice_all_flg) checked @endif >
@@ -52,6 +70,6 @@
     </label>
     <input type="submit" value="更新">
 </form>
-</body>
+-->
 
-</html>
+@endsection
