@@ -530,9 +530,9 @@ class PostsController extends Controller
 
     public function post_timeline()
     {
-        $post = Post::with('user:id,name,icon_url', 'category', 'pref', 'details', 'spots')->where('status', '=', '1')->get();
+        $items = Post::with('user:id,name,icon_url', 'category', 'pref', 'details', 'spots')->withCount('comments','bookmark_users','like_users')->where('status', '=', '1')->get();
 
-        return $post;
-        return view('post_timeline', compact('item'));
+        //return $items;
+        return view('post_timeline', compact('items'));
     }
 }

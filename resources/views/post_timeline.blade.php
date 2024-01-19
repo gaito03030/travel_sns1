@@ -7,13 +7,13 @@
  </section>
  <div id="slider_top">
      <div class="slider">
-         @foreach($item as $items)
-         <a href="{{ url('/posts/'.$items->id) }}" class="slider_info">
-            <div class="img_overflow_fide">
-             <img src="{{asset($items->main_img_url)}}" alt="">
-            </div>
+         @foreach($items as $item)
+         <a href="{{ url('/posts/'.$item->id) }}" class="slider_info">
+             <div class="img_overflow_fide">
+                 <img src="{{asset($item->main_img_url)}}" alt="">
+             </div>
              <div class="title">
-                 <p>{{$items->title}}</p>
+                 <p>{{$item->title}}</p>
              </div>
          </a>
          @endforeach
@@ -21,18 +21,44 @@
  </div>
  <div class="header_inner flex">
      <div id="content_main" class="article_wrap">
-         @foreach($item as $items)
-         <a href="{{ url('/posts/'.$items->id) }}">
+         @foreach($items as $item)
+         <a href="{{ url('/posts/'.$item->id) }}">
              <article class="article">
                  <figure>
-                     <img src="{{asset($items->main_img_url)}}">
-                     <span class="article-category">{{ $items->category->category }}</span>
+                     <img src="{{asset($item->main_img_url)}}">
+                     <span class="article-category">{{ $item->category->category }}</span>
                  </figure>
                  <div class="article-info">
-                     <h1>{{$items->title}}</h1>
-                     <div class=""></div>
-                     <time class="article-date">@if(!empty($items->created_at)){{ $items->created_at->format('Y/m/d') }}@endif</time>
-                     <p>{{$items->description}}</p>
+                     <h3>{{$item->title}}</h3>
+                     <div class="article_title_bottom flex flex_center">
+                         <div class="img_cover_circle general_user_icon">
+                             <img src="{{ $item->user->icon_url}}" width="50px" height="50px">
+                         </div>
+                         <p class="user_name">{{$item->user->name}}</p>
+                         <div class="flex flex_center location_wrap">
+                             <span class="material_fill material-symbols-outlined">
+                                 pin_drop
+                             </span>
+                             <p>{{ $item->pref->name}}</p>
+                         </div>
+                         @if(!empty($item->created_at))
+                         <time class="article-date">{{ $item->created_at->format('Y/m/d') }}</time>
+                         @endif
+                     </div>
+                     <div class="desc_wrap">
+                         <p>{{$item->description}}</p>
+                         <div class="article_counts flex">
+                             <p class="flex flex_center"><span class="material-symbols-outlined">
+                                     favorite
+                                 </span>{{$item->like_users_count}}</p>
+                             <p class="flex flex_center"><span class="material-symbols-outlined">
+                                     bookmark
+                                 </span>{{$item->bookmark_users_count}}</p>
+                             <p class="flex flex_center"><span class="material-symbols-outlined">
+                                     tooltip
+                                 </span>{{$item->comments_count}}</p>
+                         </div>
+                     </div>
                  </div>
              </article>
          </a>

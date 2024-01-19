@@ -99,7 +99,7 @@ $(function () {
                 var $num = parseInt($(".js_date_length").val()) + 1;
                 $cloneItem =
                     '<li class="js_item input_date course_bg">' +
-                    '<div class="form_group">'+
+                    '<div class="form_group">' +
                     '<p class="js_date_text date_text">' + $num + '日目</p>' +
                     '<div class="js_items form_content">' +
                     '<ul class="js_item_list" data-input="spots">' +
@@ -107,7 +107,7 @@ $(function () {
                     '<div class="input_flex_left">' +
                     '<input type="time" name="spot_time_' + $num + '[0]" class="js_input">' +
                     '</div>' +
-                    '<div class="input_flex_right">'+
+                    '<div class="input_flex_right">' +
                     '<input type="text" name="spot_title_' + $num + '[0]" class="js_input" placeholder="行程のタイトル">' +
                     '<textarea name="spot_description_' + $num + '[0]" class="js_input" placeholder="詳細"></textarea>' +
                     '<input type="text" name="spot_address_' + $num + '[0]" class="js_input" placeholder="住所">' +
@@ -117,7 +117,7 @@ $(function () {
                     '</ul>' +
                     '<button class="js_add_btn add_btn button">予定を追加</button>' +
                     '<button class="js_remove_btn remove_button remove_date">日にちを削除</button>' +
-                    '</div>'+
+                    '</div>' +
                     '</li>';
 
                 $(".js_date_length").val($num);
@@ -155,22 +155,59 @@ $(function () {
     });
 
     //確認画面の表示
-    $(document).on('click',".js_confirm_button",function(){
+    $(document).on('click', ".js_confirm_button", function () {
         $('.js_modal_background').fadeIn();
         $('.js_modal_widow').fadeIn();
         return false;
     });
 
-    $(document).on('click',".js_modal_close_button",function(){
+    $(document).on('click', ".js_modal_close_button", function () {
         $('.js_modal_background').fadeOut();
         $('.js_modal_widow').fadeOut();
         return false;
     });
 
-    $(document).on('click',".js_modal_background",function(){
+    $(document).on('click', ".js_modal_background", function () {
         $('.js_modal_background').fadeOut();
         $('.js_modal_widow').fadeOut();
         return false;
     });
 
+
+    /**slide */
+    $(document).on('click', ".js_slide_next_button", function () {
+
+        //ボタンを切り替え
+        $('.js_submit_button').css('display', 'block');
+        $('.js_slide_back_button').css('display', 'block');
+
+        $('.js_modal_close_button').css('display', 'none');
+        $('.js_slide_next_button').css('display', 'none');
+
+        //点々の色変更
+        $('.first_dotte').removeClass('selected');
+        $('.second_dotte').addClass('selected');
+
+        //slide
+        $('.js_slide').css('transform', 'translateX(-100%)');
+
+    });
+
+    $(document).on('click', ".js_slide_back_button", function () {
+        //ボタンを切り替え
+        $('.js_submit_button').css('display', 'none');
+        $('.js_slide_back_button').css('display', 'none');
+
+        $('.js_modal_close_button').css('display', 'block');
+        $('.js_slide_next_button').css('display', 'block');
+
+        //点々の色変更
+        $('.first_dotte').addClass('selected');
+        $('.second_dotte').removeClass('selected');
+
+
+        //slide
+        $('.js_slide').css('transform', 'translateX(0)');
+
+    });
 })

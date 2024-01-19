@@ -9,7 +9,6 @@
     <title>とらべる～と</title>
     <link href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,200,0,0" />
-
     <!-- css -->
     <!-- @vite('resources/css/style.css') -->
     <!-- Fonts -->
@@ -29,7 +28,7 @@
         @else
         <div class="flex general_header_inner flex_center">
             <div class="img_cover_circle general_user_icon">
-                <img src="{{Auth::user()->icon_url}}" width="50px" height="50px">
+                <img src="{{asset(Auth::user()->icon_url)}}" width="50px" height="50px">
             </div>
             <ul class="navbar-nav">
                 <li></li>
@@ -54,18 +53,18 @@
     <div class="flex">
         <nav class="main_nav general_nav">
             <ul class="nav_wrap">
-                <li><a href="{{ url('/company_mypage') }}"><img src="img/home.png" width="26px">ホーム</a></li>
-                <li><a href="{{ url('/create') }}"><img src="img/create.png" width="26px">検索</a></li>
-                <li><a href="{{ url('/management_company') }}"><img src="img/mypage.png" width="26px">マイページ</a></li>
+                <li><a href="{{ url('/timeline') }}"><img src="{{url('img/home.png')}}" width="26px">ホーム</a></li>
+                <li><a href="{{ url('/search') }}"><img src="{{url('img/create.png')}}" width="26px">検索</a></li>
+                <li><a href="{{ url('/management_company') }}"><img src="{{url('img/mypage.png')}}" width="26px">マイページ</a></li>
                 <li><a href="{{ url('/notification') }}">
                         <!-- 未読通知があれば画像を変更 -->
                         @guest
-                        <img src="img/alert.png" width="26px">
+                        <img src="{{url('img/alert.png')}}" width="26px">
                         @else
                         @if (Auth::user()->notifications_unread())
-                        <img src="img/alert_unread.png" width="26px">
+                        <img src="{{url('img/alert_unread.png')}}" width="26px">
                         @else
-                        <img src="img/alert.png" width="26px">
+                        <img src="{{url('img/alert.png')}}" width="26px">
                         @endif
                         @endguest
                         通知</a></li>

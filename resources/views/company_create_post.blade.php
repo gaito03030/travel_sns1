@@ -13,35 +13,60 @@
         <div class="js_modal_background modal_back"></div>
         <div class="js_modal_widow confirm_wrap">
             <h3>保存</h3>
-            公開状況の設定<br>
-            <div class="flex confirm_content status_wrap">
-                <label class="radio_label"><input type="radio" name="status" value="0">非公開</label>
-                <label class="radio_label"><input type="radio" name="status" value="1">公開</label>
-            </div>
-            <input type="file" name="main_image"><br>
-            カテゴリーを一つ選択<br>
-            <div class="flex confirm_content category_wrap">
-                @foreach($datas['category'] as $category)
-                <label class="radio_label"><input type="radio" name="category" value="{{$category->id}}">{{ $category->category }}</label>
-                @endforeach<br>
-            </div>
-            <label for="pref">県を選択</label><br>
-            <select name="pref" class="input_pref confirm_content" id="pref">
-                @foreach($datas['pref'] as $pref)
-                <option value="{{ $pref -> id }}">{{ $pref->name }}</option>
-                @endforeach
-            </select>
-            <br>
-            予算<br>
-            <div class="confirm_content">
-                <input type="text" name="price" inputmode="numeric" placeholder="予算を入力" pattern="^[0[[1-9][0-9]*]]$" title="自然数で入力してください" required>
-            </div>
-            <div class="flex button_wrap">
-                <input type="button" class="button return_button js_modal_close_button" value="戻る">
-                <input type="submit" class="button" value="登録">
+            <div class="slide_wrap">
+                <ul class="confirm_list">
+                    <li class="confirm js_slide">
+                        メイン画像を設定
+                        <div class="mainimg_post_wrap">
+                            <img id="img_prv" class="preview" src="{{asset('storage/default.jpg')}}">
+                            <label class="file_label">
+                                画像を設定
+                                <input id="img_upload" type="file" accept="image/*" name="main_image"><br>
+                            </label>
+                        </div>
+                    </li>
+                    <li class="confirm js_slide">
+                        公開状況の設定<br>
+                        <div class="flex confirm_content status_wrap">
+                            <label class="radio_label"><input type="radio" name="status" value="0">非公開</label>
+                            <label class="radio_label"><input type="radio" name="status" value="1">公開</label>
+                        </div>
+
+                        カテゴリーを一つ選択<br>
+                        <div class="flex confirm_content category_wrap">
+                            @foreach($datas['category'] as $category)
+                            <label class="radio_label"><input type="radio" name="category" value="{{$category->id}}">{{ $category->category }}</label>
+                            @endforeach<br>
+                        </div>
+                        <br>
+                        <label for="pref">県を選択</label>
+                        <select name="pref" class="input_pref confirm_content" id="pref">
+                            @foreach($datas['pref'] as $pref)
+                            <option value="{{ $pref -> id }}">{{ $pref->name }}</option>
+                            @endforeach
+                        </select>
+                        <br>予算
+                        <div class="confirm_content">
+                            <input type="text" name="price" inputmode="numeric" placeholder="予算を入力" pattern="^[0[[1-9][0-9]*]]$" title="自然数で入力してください" required>
+                        </div>
+                        <br>
+                    </li>
+
+                </ul>
+                <ul class="flex dotted_list">
+                    <li class="first_dotte dotted selected"></li>
+                    <li class="second_dotte dotted"></li>
+                </ul>
+                <div class="flex button_wrap">
+                    <input type="button" class="button return_button js_modal_close_button" value="閉じる">
+                    <input type="button" class="return_button button js_slide_back_button" value="戻る">
+                    <input type="button" class="button js_slide_next_button" value="次へ">
+                    <input type="submit" class="button js_submit_button" value="登録">
+                </div>
             </div>
         </div>
         <div class=" form_group">
+
             <div class="input_title_wrap">
                 <input type="text" class="input_title" name="title" placeholder="タイトル" title="入力必須です" required>
             </div>
@@ -71,7 +96,7 @@
             <ul class="js_item_list input_course" data-input="dates">
                 <li class="js_item input_date course_bg">
                     <div class="form_group date_wrap">
-                    <p class="js_date_text form_group date_text">1日目</p>
+                        <p class="js_date_text form_group date_text">1日目</p>
                         <div class="js_items form_content">
                             <ul class="js_item_list" data-input="spots">
                                 <li class="js_item flex form_box flex_form_box">
