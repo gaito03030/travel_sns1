@@ -116,5 +116,9 @@ class User extends Authenticatable
     // ブックマークの総数表示
     public function bookmark_total()
     {
+        $posts = $this->posts();
+        $post_bookmark = $posts->withCount('bookmark_users')->where('status','=','1')->pluck('bookmark_users_count')->all();
+        $return = array_sum($post_bookmark);
+        return $return;
     }
 }

@@ -1,76 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.general')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/css/userside_comp_prof.css') }}">
-    @vite('resources/css/userside_comp_prof.css')
-
-</head>
-
-<body>
-    <header id="header">
-        <h1><a href="index.html">logo</a></h1>
-    </header>
-    <div class="flex">
-        <nav class="main_nav">
-            <div class="nav_myinfo">
-                <div class="img_cover_circle">
-                    <img src="{{ asset($user_info->icon_url) }}" width="50px" height="50px">
+@section('content')
+<!-- ここからがページごとの表示部分 -->
+<section class="main_header flex">
+    <article class="article">
+        <article class="users">
+            <img src="{{asset($user_info->icon_url)}}">
+            <section class="user_info">
+                <h1>{{$user_info->name}}</h1>
+                <ul>
+                    <li class="follower_num">
+                        follwer:{{$user_info->follower_users_count}}
+                    </li>
+                    <li class="bookmarks_num">
+                        bookmarks:{{$user_bookmarks}}
+                    </li>
+                </ul>
+                <div class="article-info">
+                    <p>{{$user_info->bio}}</p>
+                    <a href="{{$user_info->web_url}}" class="user_url">{{$user_info->web_url}}</a>
                 </div>
-                <div class="myinfo_text">
-                    <p class="my_name">XXXXX旅館</p>
-                    <p class="followers">000</p>
-                    <p class="followers_title">followers</p>
-                </div>
-            </div>
-            <ul class="nav">
-                <li><a href="index.html">ホーム</a></li>
-                <li><a href="index.html">新規作成</a></li>
-                <li><a href="index.html">マイ企業情報管理</a></li>
-                <li><a href="index.html">通知</a></li>
-                <li><a href="{{ url('/logout') }}">ログアウト</a></li>
-            </ul>
-        </nav>
-        <main class="main">
-            <!-- ここからがページごとの表示部分 -->
-            <section class="main_header flex">
-                <article class="article">
-                    <article class="users">
-                        <img src="{{asset('storage/travel1.jpg')}}" >
-                        <section class="user_info">
-                            <h1>{{$company->name}}</h1>
-                            <ul>
-                                <li class="follower_num">
-                                    123
-                                </li>
-                                <li class="bookmarks_num">
-                                    9876
-                                </li>                                        
-                            </ul>
-                            <div class="article-info">   
-                                <p>{{$company->bio}}</p>                             
-                                <a href="{{$company->web_url}}" class="user_url">{{$company->web_url}}</a>
-                            </div>
-                        </section>
-                        <button>followする</button>                                
-                    </article>
-                    <article class="posts">
-                        @foreach($company->posts as $companys)
-                        <div class="slider">
-                            <img src=" {{asset($companys->main_img_url)}} ">
-                            <p>{{$companys->title}}</p>
-                        </div>
-                        @endforeach
-                    </article>
-                            
-                </article>
             </section>
-    </div>
+            <button>followする</button>
+        </article>
+        <article class="posts">
+            @foreach($posts as $post)
+            <div class="slider">
+                <img src=" {{asset($post->main_img_url)}} ">
+                <p>{{$post->title}}</p>
+            </div>
+            @endforeach
+        </article>
 
-</body>
+    </article>
+</section>
+</div>
 
-</html>
+@endsection
