@@ -1,6 +1,7 @@
 import { functionsIn } from "lodash";
 
 $(function () {
+
     /**フォームの要素追加、削除 */
     /**
      * 要素が追加・削除された時にname属性をナンバリングしなおす
@@ -12,7 +13,8 @@ $(function () {
             console.log(index);
             //〇日目
             if ($(this).children('.js_date_text')) {
-                $(this).children('.js_date_text').html((index + 1) + "日目");
+                console.log('test:'+$(this).find('.js_date_text').html());
+                $(this).find('.js_date_text').html((index + 1) + "日目");
             }
             //.js_itemの中にjs_inputクラスの要素があるか探す
             $(this).children('.js_input').each(function () {
@@ -58,34 +60,51 @@ $(function () {
                 );
             } else if ($list.is('[data-input="dates"]')) {
                 //data-input = dates
+                var $num = parseInt($(".js_date_length").val()) + 1;
+                $(".js_date_length").val($num);
+
                 $list.append(
-                    '<li class="js_item">' +
-                    '<input type="hidden" class="js_date_length" name="date_length" value="1">' +
-                    '<p class="js_date_text">1日目</p>' +
-                    '<div class="js_items">' +
+                    '<li class="js_item input_date course_bg">' +
+                    '<div class="form_group date_wrap">' +
+                    '<p class="js_date_text form_group date_text">1日目</p>' +
+                    '<div class="js_items form_content">' +
                     '<ul class="js_item_list" data-input="spots">' +
-                    '<li class="js_item">' +
+                    '<li class="js_item flex form_box flex_form_box">' +
+                    '<div class="input_flex_left">' +
                     '<input type="time" name="spot_time_1[0]" class="js_input">' +
+                    '</div>' +
+                    '<div class="input_flex_right">'+
                     '<input type="text" name="spot_title_1[0]" class="js_input" placeholder="行程のタイトル">' +
                     '<textarea name="spot_description_1[0]" class="js_input" placeholder="詳細"></textarea>' +
-                    '<input type="text" name="spot_address_1[0]" class="js_input" placeholder="住所"><br>' +
-                    '<button class="js_remove_btn">削除</button>' +
+                    '<input type="text" name="spot_address_1[0]" class="js_input" placeholder="住所">' +
+                    '</div>'+
+                    '<button class="js_remove_btn remove_button">×</button>' +
                     '</li>' +
                     '</ul>' +
-                    '<button class="js_add_btn">予定を追加</button><br>' +
-                    '<button class="js_remove_btn">日にちを削除</button>' +
+                    '<button class="js_add_btn add_btn button">予定を追加</button><br>' +
+                    '</div>' +
+                    '<button class="js_remove_btn remove_button remove_date" data-date="1">日にちを削除</button>' +
+                    '</div>' +
                     '</li>'
                 );
 
             } else if ($list.is('[data-input="spots"]')) {
+                var $num = parseInt($(".js_date_length").val());
+            
                 $list.append(
-                    '<li class="js_item">' +
+                    
+                    '<li class="js_item flex form_box flex_form_box">' +
+                    '<div class="input_flex_left">' +
                     '<input type="time" name="spot_time_1[0]" class="js_input">' +
+                    '</div>' +
+                    '<div class="input_flex_right">'+
                     '<input type="text" name="spot_title_1[0]" class="js_input" placeholder="行程のタイトル">' +
                     '<textarea name="spot_description_1[0]" class="js_input" placeholder="詳細"></textarea>' +
-                    '<input type="text" name="spot_address_1[0]" class="js_input" placeholder="住所"><br>' +
-                    '<button class="js_remove_btn">削除</button>' +
+                    '<input type="text" name="spot_address_1[0]" class="js_input" placeholder="住所">' +
+                    '</div>'+
+                    '<button class="js_remove_btn remove_button">×</button>' +
                     '</li>'
+
 
                 );
             }

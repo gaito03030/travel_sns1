@@ -1,5 +1,12 @@
 @charset "utf-8";
 
+ul.general_header_inner{
+  margin: auto;
+  list-style: none;
+}
+ul.general_header_inner li{
+  margin-left: 1em;
+}
 .nav a {
     display: block;
     text-decoration: none;
@@ -7,6 +14,14 @@
     padding: 16px 20px;
     font-size: .9em;
     font-weight: bold;
+}
+.login_buttons a{
+  text-decoration: none;
+  color: #7f8182;
+}
+.login_buttons a:hover{
+  opacity: .5;
+  transition: all .3s;
 }
 
 .flex_center {
@@ -440,3 +455,9 @@ main:has(.post_wrap){
     margin-top: 30px;
   }
 
+
+  .app_main{
+    padding: 0;
+    margin: 0;
+    padding-top: 60px;
+  }

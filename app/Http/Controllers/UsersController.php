@@ -16,11 +16,14 @@ class UsersController extends Controller
         //ログインしているユーザーを取得
         $id = auth()->user()->id;
         //user情報を取得
-        $user_info = User::find($id);
+        $user_info = User::withCount('follower_users')->find($id);
         //userの投稿の件数を取得
         $posts_number = Post::where('user_id', $id)->where('status', 1)->count();
+
+        $user_bookmarks = User::find($id)->bookmark_total();
+
         // dd($posts_number);
-        return view('management_company', compact(['user_info'], 'posts_number'));
+        return view('management_company', compact(['user_info', 'posts_number','user_bookmarks']));
     }
 
     public function show()

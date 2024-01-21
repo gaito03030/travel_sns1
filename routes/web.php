@@ -32,7 +32,7 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
     /**企業側 */
     //企業情報管理ページ
-    Route::get('management_company', [UsersController::class, 'index'])->name('management_company');
+    Route::get('company/mypage', [UsersController::class, 'index'])->name('management_company');
 
     //企業側のhome
     Route::get('/company', [PostsController::class, 'index'])->name('company_mypage');
@@ -45,11 +45,21 @@ Route::group(['middleware' => ['auth']], function () {
     //POSTを削除する処理
     Route::get('company/delete/exe/{id}', [PostsController::class, 'delete_exe'])->name('company_mypage.delete.exe');
 
+    //企業側　モデルコース作成画面
+    Route::get('company/create/', [PostsController::class, 'create'])->name('company_create_post');
+
+    Route::post('/create/post', [PostsController::class, 'store'])->name('create.store');
+
+    Route::get('company/create/edit/{id}', [PostsController::class, 'edit'])->name('create.edit');
+    Route::post('/create/update', [PostsController::class, 'update'])->name('create.update');
+
     //企業情報編集画面にルートを通す
-    Route::get('/company/mypage', [UsersController::class, 'show'])->name('user_edit');
+    Route::get('/company/mypage/edit', [UsersController::class, 'show'])->name('user_edit');
 
-
-
+    //通知
+    Route::get('company/notification', [NotificationsController::class, 'index'])->name('notification');
+    Route::get('company/notification/setting', [NotificationsController::class, 'edit']);
+    Route::post('/notification/setting/update', [NotificationsController::class, 'update'])->name('notification.update');
 
     /**一般側 */
     // 一般ユーザーのマイページ
@@ -67,17 +77,7 @@ Route::group(['middleware' => ['auth']], function () {
 //log出すようのページ
 Route::get('/log', [LogController::class, 'index'])->name('log');
 
-/**企業側 */
-
-//企業側　モデルコース作成画面
-Route::get('/create/', [PostsController::class, 'create'])->name('company_create_post');
-
-Route::post('/create/post', [PostsController::class, 'store'])->name('create.store');
-
-Route::get('/create/edit/{id}', [PostsController::class, 'edit'])->name('create.edit');
-Route::post('/create/update', [PostsController::class, 'update'])->name('create.update');
-
-/**一般側 */
+/**一般側(ログインなしで表示可能) */
 //timeline
 Route::get('/', [PostsController::class, 'post_timeline'])->name('timeline');
 
@@ -104,11 +104,6 @@ Route::put('/user_edit/img/{id}', [UsersController::class, 'uploadImg'])->name('
 Route::post('/posts/{post}/bookmark', [BookmarksController::class, 'store'])->name('bookmark.store');
 Route::delete('/posts/{post}/unbookmark', [BookmarksController::class, 'destroy'])->name('bookmark.destroy');
 Route::get('/bookmarks', [BookmarksController::class, 'bookmark_posts'])->name('bookmarks');
-
-//通知
-Route::get('/notification', [NotificationsController::class, 'index'])->name('notification');
-Route::get('/notification/setting', [NotificationsController::class, 'edit']);
-Route::post('/notification/setting/update', [NotificationsController::class, 'update'])->name('notification.update');
 
 // いいね機能
 Route::post('/posts/{post}/like', [LikesController::class, 'store'])->name('like.store');

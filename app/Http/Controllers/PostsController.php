@@ -333,7 +333,7 @@ class PostsController extends Controller
         $post = Post::with('user:id,name,icon_url', 'category', 'pref', 'details')->find($id);
 
         if ($post->user_id !== auth()->user()->id) {
-            //ステータスが公開中以外の場合はnot found を表示
+            //作成したユーザ以外のアクセスの場合はnot found を表示
             abort(404);
         }
 

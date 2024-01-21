@@ -52,6 +52,11 @@
     <div class="post_counts_wrap flex">
         <div class="count">
             <h3>ブックマーク</h3>
+            @guest
+            <button title="ログインしてください"><span class="material-symbols-outlined unchecked">
+                    bookmark
+                </span></button>
+            @else
             @if (!Auth::user()->is_bookmark($data['post']->id))
             <form action="{{ route('bookmark.store', $data['post']->id) }}" method="post">
                 @csrf
@@ -68,11 +73,19 @@
                     </span></button>
             </form>
             @endif
+            @endguest
             <p>{{$data['bookmarks']}}</p>
         </div>
         <!--いいね-->
         <div class="count">
             <h3>いいね</h3>
+            @guest
+            <button>
+                <span title="ログインしてください" class="material-symbols-outlined unchecked">
+                    favorite
+                </span>
+            </button>
+            @else
             @if (!Auth::user()->is_like($data['post']->id))
             <form action="{{ route('like.store', $data['post']->id) }}" method="post">
                 @csrf
@@ -93,6 +106,7 @@
                 </button>
             </form>
             @endif
+            @endguest
             <p>{{$data['likes']}}</p>
 
         </div>
@@ -104,7 +118,7 @@
                 <img src="{{asset($data['post']->user->icon_url)}}" alt="">
             </div>
             <p>{{$data['post']->user->name}}</p>
-            <a class="button" href="{{ url('/user_info/'.$data['post']->user->id) }}">ユーザ情報を表示</a>
+            <a class="button" href="{{ url('/general/user/'.$data['post']->user->id) }}">ユーザ情報を表示</a>
         </div>
     </div>
 

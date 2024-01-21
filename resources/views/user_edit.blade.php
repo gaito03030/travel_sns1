@@ -12,7 +12,7 @@
         @method('PUT')
         <div class="flex user_info_wrap">
             <div class="icon_wrap">
-                <img id="img_prv" src="{{$user_info->icon_url}}">
+                <img id="img_prv" src="{{asset($user_info->icon_url)}}">
                 <label class="file_label">
                     アイコン画像を変更
                     <input id="img_upload" type="file" accept="image/*" name="img_path">
