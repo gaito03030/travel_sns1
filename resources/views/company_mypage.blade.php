@@ -6,12 +6,12 @@
     <h2>マイモデルコース</h2>
     <div class="header_inner flex">
         <form class="search_wrap" action="{{ route('company_mypage.posts') }}" method="get">
-            <input class="input_search" type="search" placeholder="検索" name="search" value="{{ request('search') }}">
+            <input class="input_search" type="search" placeholder="検索" name="search" value="{{ request('company/search') }}">
             <button type="submit" class="search_button">
                 <i class="fas fa-search fa-fw"></i>
             </button>
         </form>
-        <a class="js_add_button create_button button" href="{{url('/create')}}">＋ 新規追加</a>
+        <a class="js_add_button create_button button" href="{{url('/company/create')}}">＋ 新規追加</a>
     </div>
 </section>
 <div class="main_content">
@@ -20,7 +20,7 @@
     <div class="empty_box">
         <img src="{{asset('/img/empty.png')}}">
         <p>モデルコースが登録されていません</p>
-        <a href="{{url('/create')}}" class="button">＋ 新規追加</a>
+        <a href="{{url('/company/create')}}" class="button">＋ 新規追加</a>
     </div>
     @endif
     @foreach ($myPosts as $post)
@@ -41,7 +41,7 @@
                 <p class="post_text"><?php echo mb_strimwidth(strip_tags($post->description), 0, 200, '…', 'UTF-8'); ?></p>
                 <div class="post_buttons flex">
                     <a href="{{url('/company_mypage/delete',['id' =>$post->id])}}" title="削除"><span class="material-symbols-outlined">delete</span></a>
-                    <a href="{{ url( '/create/edit/'.$post->id ) }}" title="編集"><span class="material-symbols-outlined">stylus</span></a>
+                    <a href="{{ url( '/company/create/edit/'.$post->id ) }}" title="編集"><span class="material-symbols-outlined">stylus</span></a>
                 </div>
             </div>
         </div>

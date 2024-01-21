@@ -13,15 +13,17 @@ class UsersController extends Controller
 
     public function index()
     {
-
         //ログインしているユーザーを取得
         $id = auth()->user()->id;
         //user情報を取得
-        $user_info = User::find($id);
+        $user_info = User::withCount('follower_users')->find($id);
         //userの投稿の件数を取得
         $posts_number = Post::where('user_id', $id)->where('status', 1)->count();
+
+        $user_bookmarks = User::find($id)->bookmark_total();
+
         // dd($posts_number);
-        return view('management_company', compact(['user_info'], 'posts_number'));
+        return view('management_company', compact(['user_info', 'posts_number','user_bookmarks']));
     }
 
     public function show()
@@ -45,16 +47,15 @@ class UsersController extends Controller
 
         // 画像フォームでリクエストした画像情報を取得
         $up_img = $request->file('img_path');
-        if(!empty($up_img)){
+        if (!empty($up_img)) {
 
             // storage > public > img配下に画像が保存される
             $path = $up_img->store('img', 'public');
-    
+
             $user->update([
                 'icon_url' => 'storage/' . $path,
             ]);
-
-        }    
+        }
         $user->update([
             'name' => $request->input('name'),
             'bio' => $request->input('bio'),
@@ -82,16 +83,22 @@ class UsersController extends Controller
         return redirect()->route('user_edit');
     }
 
-    public function userside_comp_prof()
+    public function userside_comp_prof($id)
     {
-        $user_id = auth()->user()->id;
+        //$user_id = auth()->user()->id;
         //$company = User::find($user_id)->where('company_flg', '=', '0')->get();
-        $company = User::with('posts')->find($user_id);
+        //$company = User::with('posts')->find($user_id);
 
+        $user_info = User::withCount('follower_users')->find($id);
+        $posts = $user_info->posts()->where('status', 1)->get();
+
+        $user_bookmarks = User::find($id)->bookmark_total();
         //return $company;
-        if ($company->company_flg == 0) {
-            return view('userside_comp_prof', compact('company'));
+        if ($user_info->company_flg == 0) {
+            return view('userside_comp_prof', compact('user_info','posts','user_bookmarks'));
             // return $company;
+        } else {
+            abort(404);
         }
     }
 
@@ -109,20 +116,12 @@ class UsersController extends Controller
         }
     }
 
-    public function general_mypage($id)
+    public function general_mypage()
     {
-        // $user_info = User::find($id);
+        $user_id = auth()->user()->id;
 
-        //$posts = $user_info->posts()::where('status', 1)->get();
+        $user_info = User::with('bookmark_posts','followedCompanies')->find($user_id);
 
-
-        $posts = User::with(['posts' => function ($query) {
-            $query->where('status', 1);
-        }])->find($id);
-
-
-
-
-        return view('user_info', compact('posts'));
+        return view('user_info', compact('user_info'));
     }
 }

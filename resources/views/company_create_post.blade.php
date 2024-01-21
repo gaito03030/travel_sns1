@@ -47,7 +47,7 @@
                         </select>
                         <br>予算
                         <div class="confirm_content">
-                            <input type="text" name="price" inputmode="numeric" placeholder="予算を入力" pattern="^[0[[1-9][0-9]*]]$" title="自然数で入力してください" required>
+                            <input type="text" name="price" inputmode="numeric" placeholder="予算を入力" pattern="^0|([1-9][0-9]*)$" title="自然数で入力してください" required>
                         </div>
                         <br>
                     </li>
@@ -112,7 +112,7 @@
                                     <button class="js_remove_btn remove_button">×</button>
                                 </li>
                             </ul>
-                            <button class="js_add_btn add_btn button ">予定を追加</button>
+                            <button class="js_add_btn add_btn button " data-date="1">予定を追加</button>
                         </div>
                         <button class="js_remove_btn remove_button remove_date">日にちを削除</button>
                     </div>

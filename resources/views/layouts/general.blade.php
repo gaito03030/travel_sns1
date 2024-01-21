@@ -19,11 +19,11 @@
 
 <body>
     <header id="header" class="flex flex_center">
-        <h1><a href="{{ url('/timeline') }}"><img src="{{asset('/img/logo.png') }}"><span>とらべる～と</span></a></h1>
+        <h1><a href="{{ url('/') }}"><img src="{{asset('/img/logo.png') }}"><span>とらべる～と</span></a></h1>
         @guest
-        <ul class="login_buttons">
-            <li><a class="login_button button">ログイン</a></li>
-            <li><a class="register_button button">新規登録</a></li>
+        <ul class="login_buttons flex general_header_inner">
+            <li><a class="login_button" href="{{url('/login')}}">ログイン</a></li>
+            <li><a class="register_button" href="{{url('/register')}}">新規登録</a></li>
         </ul>
         @else
         <div class="flex general_header_inner flex_center">
@@ -53,10 +53,10 @@
     <div class="flex">
         <nav class="main_nav general_nav">
             <ul class="nav_wrap">
-                <li><a href="{{ url('/timeline') }}"><img src="{{url('img/home.png')}}" width="26px">ホーム</a></li>
-                <li><a href="{{ url('/search') }}"><img src="{{url('img/create.png')}}" width="26px">検索</a></li>
-                <li><a href="{{ url('/management_company') }}"><img src="{{url('img/mypage.png')}}" width="26px">マイページ</a></li>
-                <li><a href="{{ url('/notification') }}">
+                <li><a href="{{ url('/') }}"><img src="{{url('img/home.png')}}" width="26px">ホーム</a></li>
+                <li><a href="{{ url('/general/search') }}"><img src="{{url('img/create.png')}}" width="26px">検索</a></li>
+                <li><a href="{{ url('/general/mypage') }}"><img src="{{url('img/mypage.png')}}" width="26px">マイページ</a></li>
+                <li><a href="{{ url('/general/notification') }}">
                         <!-- 未読通知があれば画像を変更 -->
                         @guest
                         <img src="{{url('img/alert.png')}}" width="26px">

@@ -18,7 +18,7 @@
                     <span>いいねの通知</span>
                     <input type="hidden" name="like" value="0">
                     <div class="toggle_button">
-                        <input id="toggle" class="toggle_input" name="like" value="1" @if($setting->notice_like_flg) checked @endif type='checkbox'>
+                        <input id="toggle" class="toggle_input js_disable" name="like" @if($setting->notice_all_flg) disabled @endif value="1" @if($setting->notice_like_flg) checked @endif type='checkbox'>
                         <label for="toggle" class="toggle_label"></label>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                     <span>コメントの通知</span>
                     <input type="hidden" name="comment" value="0">
                     <div class="toggle_button">
-                        <input id="toggle" class="toggle_input" name="comment" value="1" @if($setting->notice_comment_flg) checked @endif type='checkbox'>
+                        <input id="toggle" @if($setting->notice_all_flg) disabled @endif class="toggle_input js_disable" name="comment" value="1" @if($setting->notice_comment_flg) checked @endif type='checkbox'>
                         <label for="toggle" class="toggle_label"></label>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                     <span>ブックマーク通知</span>
                     <input type="hidden" name="bookmark" value="0">
                     <div class="toggle_button">
-                        <input id="toggle" class="toggle_input" name="bookmark" value="1" @if($setting->notice_bookmark_flg) checked @endif type='checkbox'>
+                        <input id="toggle" @if($setting->notice_all_flg) disabled @endif class="toggle_input js_disable" name="bookmark" value="1" @if($setting->notice_bookmark_flg) checked @endif type='checkbox'>
                         <label for="toggle" class="toggle_label"></label>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                     <span>お気に入り登録通知</span>
                     <input type="hidden" name="follow" value="0">
                     <div class="toggle_button">
-                        <input id="toggle" class="toggle_input" name="follow" value="1" @if($setting->notice_follow_flg) checked @endif type='checkbox'>
+                        <input id="toggle" @if($setting->notice_all_flg) disabled @endif class="toggle_input js_disable" name="follow" value="1" @if($setting->notice_follow_flg) checked @endif type='checkbox'>
                         <label for="toggle" class="toggle_label"></label>
                     </div>
                 </div>

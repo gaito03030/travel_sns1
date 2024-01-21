@@ -1,12 +1,12 @@
-.card-header{
-    text-align: center;
-    background: none;
-    border: none;
-    cursor: pointer;
-    background-color: #5fbb94;
-    padding: 6px 16px;
-    border-radius: 6px;
-    color: #fff;
+main.app_main{
+    width: 100%;
+}
+.card_header{
+    margin: 20px 5%;
+    margin-bottom: 0;
+}
+.container{
+    padding: 10px 0;
 }
 
 .col-md-8{
@@ -14,15 +14,36 @@
 }
 
 .logo_img{
-    height: 200px;
-    width: 200px;
+    width: 30%;
+    text-align: center;
+    margin: 20px auto;
+}
+.logo_img p{
+    font-weight: bold;
+    margin-top: 10px;
+}
+.logo_img img{
+    width: 100%;
+    max-width: 60px;
+}
+.login_label{
+    font-size: .8em;
+}
+.login_input{
+    background-color: #f6f6f6;
+}
+.login_input::placeholder{
+    color: #C3CECF;
+}
+.input_wrap{
+    width: 80%;
+    margin: auto;
 }
 
 /* ログインボタン */
 .login_btn{
     text-align: center;
 }
-
 
 .btn-primary {
     background: none;
@@ -33,7 +54,7 @@
     border-radius: 6px;
     color: #fff;
     display: block;
-    width: 30%;
+    width: 70%;
     height: 40px;
     margin: auto;
 }

@@ -8,7 +8,7 @@
  <div id="slider_top">
      <div class="slider">
          @foreach($items as $item)
-         <a href="{{ url('/posts/'.$item->id) }}" class="slider_info">
+         <a href="{{ url('/general/posts/'.$item->id) }}" class="slider_info">
              <div class="img_overflow_fide">
                  <img src="{{asset($item->main_img_url)}}" alt="">
              </div>
@@ -22,7 +22,7 @@
  <div class="header_inner flex">
      <div id="content_main" class="article_wrap">
          @foreach($items as $item)
-         <a href="{{ url('/posts/'.$item->id) }}">
+         <a href="{{ url('/general/posts/'.$item->id) }}">
              <article class="article">
                  <figure>
                      <img src="{{asset($item->main_img_url)}}">
