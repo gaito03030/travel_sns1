@@ -90,7 +90,7 @@ Route::get('/general/search/result', [PostsController::class, 'post_search_resul
 
 // 投稿画面からユーザ情報
 //Route::get('/general/user/{id}', [UsersController::class, 'user_info'])->name('user_info');
-Route::get('/general/user/{id}', [UsersController::class, 'userside_comp_prof']);
+Route::get('/general/user/{id}', [UsersController::class, 'userside_comp_prof'])->name('general.user');
 
 
 // 投稿の編集保存
