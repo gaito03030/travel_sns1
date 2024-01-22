@@ -14,12 +14,12 @@
             <div class="post_description">
                 <p>{{$data['post']->description}}</p>
             </div>
-            <div class="flex">
-                <div class="flex flex_center location_wrap">
+            <div class="flex st_flex">
+                <div class="flex st_flex flex_center location_wrap">
                     <span class="material_fill material-symbols-outlined">pin_drop</span>
                     <p>{{$data['post']->pref->name}}</p>
                 </div>
-                <div class="post_price flex flex_center location_wrap">
+                <div class="post_price flex st_flex flex_center location_wrap">
                     <span class="material-symbols-outlined">
                         currency_yen
                     </span>
@@ -42,14 +42,14 @@
         <div class="spot">
             <h4>{{$spot->title}}</h4>
             <p>{{$spot->description}}</p>
-            <div class="flex flex_center location_wrap">
+            <div class="flex st_flex flex_center location_wrap">
                 <span class="material_fill material-symbols-outlined">pin_drop</span>
                 <p>{{$spot->address}}</p>
             </div>
         </div>
         @endforeach
     </div>
-    <div class="post_counts_wrap flex">
+    <div class="post_counts_wrap st_flex flex">
         <div class="count">
             <h3>ブックマーク</h3>
             @guest
