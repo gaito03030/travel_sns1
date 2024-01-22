@@ -73,7 +73,7 @@ class CommentsController extends Controller
             }
         } 
         
-        return redirect('/posts/'.$postId);
+        return redirect('general/posts/'.$postId);
     }
 
     /**

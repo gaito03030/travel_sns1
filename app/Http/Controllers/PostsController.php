@@ -64,18 +64,23 @@ class PostsController extends Controller
     public function post_search_result(Request $request)
     {
 
+        $prefs = Pref::all();
+        $categorys = Category::all();
+
         $query = Post::with('user:id,name,icon_url', 'category', 'pref', 'details', 'spots')->where('status', '=', '1');
 
         $narrow = [];
 
         //県絞り込み
         if (isset($request['checked_pref'])) {
-            $pref_id = $request['checked_pref'];
-            $query->where('pref_id', $pref_id);
+            if ($request['checked_pref'] > 0) {
+                $pref_id = $request['checked_pref'];
+                $query->where('pref_id', $pref_id);
 
-            $pref = Pref::find($pref_id);
+                $pref = Pref::find($pref_id);
 
-            $narrow += ['pref' => $pref->name];
+                $narrow += ['pref' => $pref->name];
+            }
         }
 
         //カテゴリー絞り込み
@@ -134,8 +139,9 @@ class PostsController extends Controller
             'count' => $count,
             'posts' => $posts,
         ];
+        return view('general_search_result', compact(['prefs','categorys','return']));
 
-        return $return;
+        //return $return;
     }
 
     //投稿処理画面
@@ -354,7 +360,7 @@ class PostsController extends Controller
 
 
         //return $datas;
-        return view('post_edit', compact(['post','spots','category','pref']));
+        return view('post_edit', compact(['post', 'spots', 'category', 'pref']));
     }
 
     /**
@@ -531,7 +537,7 @@ class PostsController extends Controller
 
     public function post_timeline()
     {
-        $items = Post::with('user:id,name,icon_url', 'category', 'pref', 'details', 'spots')->withCount('comments','bookmark_users','like_users')->where('status', '=', '1')->get();
+        $items = Post::with('user:id,name,icon_url', 'category', 'pref', 'details', 'spots')->withCount('comments', 'bookmark_users', 'like_users')->where('status', '=', '1')->get();
 
         //return $items;
         return view('post_timeline', compact('items'));
