@@ -1,20 +1,6 @@
-<!DOCTYPE html>
-<html lang="ja">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    <ul class="nav">
-        <li><a href="{{ url('/timeline') }}">ホーム</a></li>
-        <li><a href="{{ url('/search') }}">検索</a></li>
-        <li><a href="{{ url('general/mypage') }}">マイページ</a></li>
-        <li><a href="{{ url('/notification') }}">通知</a></li>
-    </ul>
-    <h2>検索</h2>
+@extends('layouts.general')
+@section('content')
+<h2>検索</h2>
     <form action="{{route('post_search_result')}}" method="get">
         <input type="text" name="search_text" placeholder="フリーワード検索"><br>
         絞り込み条件<br>
@@ -38,7 +24,4 @@
         <br>
         <input type="submit" value="検索">
     </form>
-    <li><a href="{{ url('/logout') }}">ログアウト</a></li>
-</body>
-
-</html>
+@endsection

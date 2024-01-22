@@ -19,6 +19,7 @@ class NotificationsController extends Controller
     {
         $user = auth()->user();
 
+
         /** 既読済みの通知 */
         $read_notifications = Notification::where('user_id', $user->id)->where('read_flg', 1)
             ->orderBy('created_at', 'desc')
@@ -41,8 +42,12 @@ class NotificationsController extends Controller
 
             $update->save();
         }
+        if($user->company_flg == 0){
+            return view('company_notification', compact(['read_notifications', 'new_notifications']));
+        }else{
+            return view('general_notification', compact(['read_notifications', 'new_notifications']));
+        }
 
-        return view('company_notification', compact(['read_notifications', 'new_notifications']));
     }
 
 
@@ -68,7 +73,12 @@ class NotificationsController extends Controller
         $user = auth()->user();
         $setting = Setting::where('user_id', $user->id)->first();
 
-        return view('company_notification_setting', compact('user', 'setting'));
+        if($user->company_flg == 0){
+            return view('company_notification_setting', compact('user', 'setting'));
+        }
+        else{
+            return view('general_notification_setting', compact('user', 'setting'));
+        }
     }
 
     /**
@@ -116,15 +126,14 @@ class NotificationsController extends Controller
                 $setting->notice_posted_flg = 1;
             } else {
                 $setting->notice_all_flg = 0;
-                $setting->notice_comment_flg = $request['comment'];
-                $setting->notice_like_flg = $request['like'];
-                $setting->notice_follow_flg = $request['follow'];
-                $setting->notice_bookmark_flg = $request['bookmark'];
+                $setting->notice_reply_flg = $request['comment'];
+                $setting->notice_poster_reply_flg = $request['comment'];
+                $setting->notice_posted_flg = $request['posted'];
             }
 
             $setting->save();
 
-            return redirect('/notification');
+            return redirect('general/notification');
     
         }
 

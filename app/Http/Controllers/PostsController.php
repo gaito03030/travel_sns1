@@ -287,7 +287,7 @@ class PostsController extends Controller
         }
 
 
-        return redirect('/log')->with('alert', '保存しました');
+        return redirect('/company');
     }
 
     /**
@@ -317,7 +317,7 @@ class PostsController extends Controller
             'likes' => count($likes)
         ];
 
-        // return $data;
+        //return $data;
         return view('post', compact(['data']));
     }
 
@@ -354,7 +354,7 @@ class PostsController extends Controller
 
 
         //return $datas;
-        return view('post_edit', compact('datas'));
+        return view('post_edit', compact(['post','spots','category','pref']));
     }
 
     /**
@@ -392,6 +392,7 @@ class PostsController extends Controller
             $post->description = $request['description'];
             $post->category_id = $request['category'];
             $post->status = $request['status'];
+            $post->price = $request['price'];
             $post->pref_id = $request['pref'];
 
             //details更新
@@ -469,7 +470,7 @@ class PostsController extends Controller
                 }
             }
 
-            return redirect('/log')->with('alert', '更新しました');
+            return redirect('/company');
         } else {
             return redirect('/log')->with('alert', '投稿したユーザ以外が更新することはできません');
         }

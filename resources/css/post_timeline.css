@@ -461,3 +461,6 @@ main:has(.post_wrap){
     margin: 0;
     padding-top: 60px;
   }
+  .toggle_wrap{
+    justify-content: space-between;
+  }

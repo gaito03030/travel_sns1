@@ -55,6 +55,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     //企業情報編集画面にルートを通す
     Route::get('/company/mypage/edit', [UsersController::class, 'show'])->name('user_edit');
+    Route::put('/user_edit/store/{id}', [UsersController::class, 'store'])->name('user_edit.store');
 
     //通知
     Route::get('company/notification', [NotificationsController::class, 'index'])->name('notification');
@@ -65,7 +66,14 @@ Route::group(['middleware' => ['auth']], function () {
     // 一般ユーザーのマイページ
     Route::get('/general/mypage', [UsersController::class, 'general_mypage'])->name('userpage');
     //一般ユーザーの編集画面
-    Route::get('/general/mypage/edit', [UsersController::class, 'prof_edit'])->name('general.mypage.edit');
+    Route::get('/general/mypage/edit', [UsersController::class, 'general_mypage_show'])->name('general.mypage.edit');
+    Route::put('/general/mypage/store/', [UsersController::class, 'general_mypage_edit'])->name('general_edit.store');
+
+    //通知
+    Route::get('general/notification', [NotificationsController::class, 'index'])->name('notification');
+    Route::get('general/notification/setting', [NotificationsController::class, 'edit']);
+    Route::post('general/notification/setting/update', [NotificationsController::class, 'update'])->name('notification.update');
+
 
     //投稿コメント返信ページ
     Route::post('/comment/{postId}', [CommentsController::class, 'store'])->name('comment.store');
