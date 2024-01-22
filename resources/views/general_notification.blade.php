@@ -1,11 +1,11 @@
-@extends('layouts.company')
+@extends('layouts.general')
 
 @section('content')
 <!-- ここからがページごとの表示部分 -->
 <section class="main_header flex">
     <h2>通知</h2>
     <div class="header_inner flex">
-        <a class="button create_button" href="{{url('company/notification/setting')}}">通知設定</a>
+        <a class="button create_button" href="{{url('general/notification/setting')}}">通知設定</a>
     </div>
 </section>
 <div class="main_content">

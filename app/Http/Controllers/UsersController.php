@@ -43,8 +43,6 @@ class UsersController extends Controller
 
         $user = User::find($id);
 
-
-
         // 画像フォームでリクエストした画像情報を取得
         $up_img = $request->file('img_path');
         if (!empty($up_img)) {
@@ -122,6 +120,39 @@ class UsersController extends Controller
 
         $user_info = User::with('bookmark_posts','followedCompanies')->find($user_id);
 
+        //return $user_info;
         return view('user_info', compact('user_info'));
+    }
+    public function general_mypage_show(){
+        //ログインしているユーザーを取得
+        $id = auth()->user()->id;
+        //user情報を取得
+        $user_info = User::find($id);
+
+        return view('general_user_edit', compact(['user_info']));
+
+    }
+    public function general_mypage_edit(Request $request,){
+
+        $user = User::find(auth()->user()->id);
+
+        // 画像フォームでリクエストした画像情報を取得
+        $up_img = $request->file('img_path');
+        if (!empty($up_img)) {
+
+            // storage > public > img配下に画像が保存される
+            $path = $up_img->store('img', 'public');
+
+            $user->update([
+                'icon_url' => 'storage/' . $path,
+            ]);
+        }
+        $user->update([
+            'name' => $request->input('name'),
+            'bio' => $request->input('bio'),
+        ]);
+
+        return redirect()->route('userpage');
+
     }
 }

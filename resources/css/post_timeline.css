@@ -461,3 +461,43 @@ main:has(.post_wrap){
     margin: 0;
     padding-top: 60px;
   }
+  .toggle_wrap{
+    justify-content: space-between;
+  }
+
+  .search_submit{
+    margin-left: 1em;
+  }
+  .popup{
+    display: none;
+    z-index: 10;
+    width: 60%;
+  }
+  .popup_buttons{
+    margin-top: 10px;
+    float: right;
+  }
+  .popup_buttons input{
+    margin-left: 1em;
+  }
+  .post_buttons .narrow_button{
+    width: 45px;
+    height: 45px;
+    text-decoration: none;
+    color: #4F7967;
+  }
+  .post_buttons span{
+    margin-top: -5px;
+  }
+  .narrow_button:hover{
+    color: #fff;
+  }
+
+  .post_buttons .narrow_button::after{
+    content: "Filter";
+    margin-top: -5px;
+    font-size: .6em;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+  }

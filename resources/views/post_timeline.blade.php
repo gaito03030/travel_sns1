@@ -22,7 +22,7 @@
  <div class="header_inner flex">
      <div id="content_main" class="article_wrap">
          @foreach($items as $item)
-         <a href="{{ url('/general/posts/'.$item->id) }}">
+         <a href="{{ url('general/posts/'.$item->id) }}">
              <article class="article">
                  <figure>
                      <img src="{{asset($item->main_img_url)}}">
