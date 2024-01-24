@@ -22,8 +22,8 @@
                 </div>
             </section>
             <button>followする</button>
-            <p><a href="{{ route('test_follow',['id' => $user_info->id]) }}">フォローをする</a></p>
-            {{-- <p><a href="{{ url('test_follow', ['id' => $user_info->id]) }}">フォローをする</a></p> --}}
+            <button><a href="{{ route('test_follow',['id' => $user_info->id]) }}">フォローをする</a></button>
+            
         </article>
         <article class="posts">
             @foreach($posts as $post)
