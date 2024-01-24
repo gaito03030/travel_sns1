@@ -63,7 +63,7 @@ class FollowsController extends Controller
             }
         }
 
-        return redirect()->name('test_follow');
+        return redirect()->route('general.user',['id' => $id]);
     }
 
     //フォローしている企業一覧表

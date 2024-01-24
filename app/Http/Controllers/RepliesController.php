@@ -88,7 +88,7 @@ class RepliesController extends Controller
         }
 
 
-        return redirect('/posts/' . $post_id);
+        return redirect('general/posts/' . $post_id);
     }
 
     /**

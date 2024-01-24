@@ -1,13 +1,13 @@
-@extends('layouts.company')
+@extends('layouts.general')
 
 @section('content')
 <!-- ここからがページごとの表示部分 -->
 <section class="main_header flex">
-    <h2>マイ企業情報管理編集</h2>
+    <h2>プロフィール編集</h2>
 </section>
 @yield('content')
 <div class="main_content">
-    <form class="user_info_edit_form" action="{{ route('user_edit.store', $user_info->id) }}" method="POST" enctype="multipart/form-data">
+    <form class="user_info_edit_form" action="{{ route('general_edit.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="flex user_info_wrap">
@@ -24,8 +24,6 @@
                 <br>
                 <label class="label" for="bio">ひとこと</label>
                 <textarea rows="4" name="bio" @if(strlen($user_info->bio) > 0)value="{{ $user_info->bio }}"@endif placeholder="自己紹介を入力してください"></textarea>
-                <label class="label" for="url">公式ホームページURL</label>
-                <input type="text" class="input_url" name="url" @if(strlen($user_info->web_url)>0)value="{{ $user_info->web_url }}"@endif placeholder="あなたのホームページのURLを入力">
                 <input type="submit" class="button" value="変更を保存">
             </div>
         </div>

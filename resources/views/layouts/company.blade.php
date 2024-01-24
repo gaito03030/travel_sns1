@@ -18,43 +18,43 @@
 
 <body>
     <header id="header">
-        <h1><a href="{{ url('/') }}"><img  src="{{asset('/img/logo.png') }}">とらべる～と</a></h1>
+        <h1><a href="{{ url('/company_mypage') }}"><img  src="{{asset('/img/logo.png') }}"><span>とらべる～と</span></a></h1>
     </header>
-    <div class="flex">
+    <div class="flex st_flex">
         <nav class="main_nav">
             @auth
             <div class="nav_myinfo">
                 <div class="img_cover_circle">
-                    <img src="{{Auth::user()->icon_url}}" width="50px" height="50px">
+                    <img src="{{asset(Auth::user()->icon_url)}}" width="45px" height="45px">
                 </div>
                 <div class="myinfo_text">
                     <p class="my_name">{{Auth::user()->name}}</p>
-                    <p class="followers">000</p>
+                    <p class="followers">{{count(Auth::user()->follower_users)}}</p>
                     <p class="followers_title">followers</p>
                 </div>
             </div>
             @endauth
             <ul class="nav">
-                <li><a href="{{ url('/company_mypage') }}"><img src="img/home.png" width="26px">ホーム</a></li>
-                <li><a href="{{ url('/create') }}"><img src="img/create.png" width="26px">新規作成</a></li>
-                <li><a href="{{ url('/management_company') }}"><img src="img/mypage.png" width="26px">マイ企業情報管理</a></li>
-                <li><a href="{{ url('/notification') }}">
+                <li><a href="{{ url('/company/') }}"><img src="{{url('img/home.png')}}" width="26px">ホーム</a></li>
+                <li><a href="{{ url('/company/create') }}"><img src="{{url('img/create.png')}}" width="26px">新規作成</a></li>
+                <li><a href="{{ url('/company/mypage') }}"><img src="{{url('img/mypage.png')}}" width="26px">マイ企業情報管理</a></li>
+                <li><a href="{{ url('/company/notification') }}">
                         <!-- 未読通知があれば画像を変更 -->
                         @if (Auth::user()->notifications_unread())
-                        <img src="img/alert_unread.png" width="26px">
+                        <img src="{{url('img/alert_unread.png')}}" width="26px">
                         @else
-                        <img src="img/alert.png" width="26px">
+                        <img src="{{url('img/alert.png')}}" width="26px">
                         @endif
                         通知</a></li>
-                <li><a href="{{ url('/logout') }}"><img src="img/logout.png" width="26px">ログアウト</a></li>
+                <li><a href="{{ url('/logout') }}"><img src="{{url('img/logout.png')}}" width="26px">ログアウト</a></li>
             </ul>
         </nav>
-        <main class="main">
+        <main class="main_wrap">
             @yield('content')
         </main>
     </div>
     <!-- Scripts -->
-    @vite( ['resources/js/jquery-3.7.0.min.js','resources/js/app.js','resources/js/preview.js','resources/js/post.js'])
+    @vite( ['resources/js/jquery-3.7.0.min.js','resources/js/app.js','resources/js/preview.js','resources/js/post.js','resources/js/setting.js','resources/js/popup.js'])
 
 </body>
 

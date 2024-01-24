@@ -128,9 +128,9 @@ class RegisterController extends Controller
     {
         $user = auth()->user()->company_flg;
         if($user == 0){
-            return 'company_mypage';
+            return '/company';
         }else{
-            return 'timeline';
+            return '/';
         }
         //例）return 'costs/index';
     }

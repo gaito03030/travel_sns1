@@ -19,15 +19,16 @@ class NotificationsController extends Controller
     {
         $user = auth()->user();
 
+
         /** 既読済みの通知 */
-        $read_notifications = Notification::where('user_id',$user->id)->where('read_flg',1)
-        ->orderBy('created_at', 'desc')
-        ->get();
+        $read_notifications = Notification::where('user_id', $user->id)->where('read_flg', 1)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         /** 未読の通知 */
-        $new_notifications = Notification::where('user_id',$user->id)->where('read_flg',0)
-        ->orderBy('created_at','desc')
-        ->get();
+        $new_notifications = Notification::where('user_id', $user->id)->where('read_flg', 0)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         $data = [
             'read_notification' => $read_notifications,
@@ -35,14 +36,18 @@ class NotificationsController extends Controller
         ];
 
         /**未読の通知を既読に変更 */
-        foreach($new_notifications as $notification){
+        foreach ($new_notifications as $notification) {
             $update = Notification::find($notification->id);
             $update->read_flg = 1;
 
             $update->save();
         }
+        if($user->company_flg == 0){
+            return view('company_notification', compact(['read_notifications', 'new_notifications']));
+        }else{
+            return view('general_notification', compact(['read_notifications', 'new_notifications']));
+        }
 
-        return view('company_notification',compact(['read_notifications','new_notifications']));
     }
 
 
@@ -66,9 +71,14 @@ class NotificationsController extends Controller
     public function edit()
     {
         $user = auth()->user();
-        $setting = Setting::where('user_id',$user->id)->first();
+        $setting = Setting::where('user_id', $user->id)->first();
 
-        return view('company_notification_setting',compact('user','setting'));
+        if($user->company_flg == 0){
+            return view('company_notification_setting', compact('user', 'setting'));
+        }
+        else{
+            return view('general_notification_setting', compact('user', 'setting'));
+        }
     }
 
     /**
@@ -79,30 +89,54 @@ class NotificationsController extends Controller
      */
     public function update(Request $request)
     {
-        $user_id = auth()->user()->id;
-        $setting = Setting::where('user_id',$user_id)->first();
+        $user = auth()->user();
+        $setting = Setting::where('user_id', $user->id)->first();
 
-        if($request['notice_all'] == 1){
-            $setting->notice_all_flg = 1;
-            $setting->notice_reply_flg = 1;
-            $setting->notice_poster_reply_flg = 1;
-            $setting->notice_comment_flg = 1;
-            $setting->notice_like_flg = 1;
-            $setting->notice_follow_flg = 1;
-            $setting->notice_bookmark_flg = 1;
-            $setting->notice_posted_flg = 1;
-        }else{
-            $setting->notice_all_flg = 0;
-            $setting->notice_comment_flg = $request['comment'];
-            $setting->notice_like_flg = $request['like'];
-            $setting->notice_follow_flg = $request['follow'];
-            $setting->notice_bookmark_flg = $request['bookmark'];
-            $setting->notice_posted_flg = $request['posted'];
+        if ($user->company_flg == 0) {
+            if ($request['notice_all'] == 1) {
+                $setting->notice_all_flg = 1;
+                $setting->notice_reply_flg = 1;
+                $setting->notice_poster_reply_flg = 1;
+                $setting->notice_comment_flg = 1;
+                $setting->notice_like_flg = 1;
+                $setting->notice_follow_flg = 1;
+                $setting->notice_bookmark_flg = 1;
+                $setting->notice_posted_flg = 1;
+            } else {
+                $setting->notice_all_flg = 0;
+                $setting->notice_comment_flg = $request['comment'];
+                $setting->notice_like_flg = $request['like'];
+                $setting->notice_follow_flg = $request['follow'];
+                $setting->notice_bookmark_flg = $request['bookmark'];
+            }
+
+            $setting->save();
+
+            return redirect('/company/notification');
+    
+        } else {
+            if ($request['notice_all'] == 1) {
+                $setting->notice_all_flg = 1;
+                $setting->notice_reply_flg = 1;
+                $setting->notice_poster_reply_flg = 1;
+                $setting->notice_comment_flg = 1;
+                $setting->notice_like_flg = 1;
+                $setting->notice_follow_flg = 1;
+                $setting->notice_bookmark_flg = 1;
+                $setting->notice_posted_flg = 1;
+            } else {
+                $setting->notice_all_flg = 0;
+                $setting->notice_reply_flg = $request['comment'];
+                $setting->notice_poster_reply_flg = $request['comment'];
+                $setting->notice_posted_flg = $request['posted'];
+            }
+
+            $setting->save();
+
+            return redirect('general/notification');
+    
         }
 
-        $setting->save();
-
-        return redirect('/notification');
     }
 
     /**
