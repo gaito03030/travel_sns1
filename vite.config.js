@@ -15,7 +15,8 @@ export default defineConfig({
                 "resources/js/preview.js",
                 "resources/js/jquery-3.7.0.min.js",
                 "resources/js/setting.js",
-                "resources/js/popup.js"
+                "resources/js/popup.js",
+                "resources/js/script.js"
             ],
             refresh: true,
         }),

@@ -20,7 +20,7 @@
     <header id="header">
         <h1><a href="{{ url('/company_mypage') }}"><img  src="{{asset('/img/logo.png') }}"><span>とらべる～と</span></a></h1>
     </header>
-    <div class="flex">
+    <div class="flex st_flex">
         <nav class="main_nav">
             @auth
             <div class="nav_myinfo">

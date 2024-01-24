@@ -15,18 +15,18 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <!-- Scripts -->
-    @vite( ['resources/sass/app.scss','resources/js/jquery-3.7.0.min.js','resources/js/app.js','resources/js/preview.js','resources/js/post.js','resources/js/setting.js','resources/js/popup.js'])
+    @vite( ['resources/sass/app.scss','resources/js/jquery-3.7.0.min.js','resources/js/app.js','resources/js/preview.js','resources/js/post.js','resources/js/setting.js','resources/js/popup.js','resources/js/script.js'])
 
 <body>
-    <header id="header" class="flex flex_center">
+    <header id="header" class="flex st_flex st_header flex_center">
         <h1><a href="{{ url('/') }}"><img src="{{asset('/img/logo.png') }}"><span>とらべる～と</span></a></h1>
         @guest
-        <ul class="login_buttons flex general_header_inner">
+        <ul class="login_buttons st_flex flex general_header_inner">
             <li><a class="login_button" href="{{url('/login')}}">ログイン</a></li>
             <li><a class="register_button" href="{{url('/register')}}">新規登録</a></li>
         </ul>
         @else
-        <div class="flex general_header_inner flex_center">
+        <div class="flex st_flex general_header_inner flex_center">
             <div class="img_cover_circle general_user_icon">
                 <img src="{{asset(Auth::user()->icon_url)}}" width="50px" height="50px">
             </div>
@@ -50,6 +50,9 @@
         </div>
         @endguest
     </header>
+    <div class="nav_bg"></div>
+    <div class="nav_openbtn st_block"><span></span><span></span><span></span></div>
+
     <div class="flex">
         <nav class="main_nav general_nav">
             <ul class="nav_wrap">

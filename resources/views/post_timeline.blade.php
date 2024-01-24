@@ -30,12 +30,12 @@
                  </figure>
                  <div class="article-info">
                      <h3>{{$item->title}}</h3>
-                     <div class="article_title_bottom flex flex_center">
+                     <div class="article_title_bottom st_flex flex flex_center">
                          <div class="img_cover_circle general_user_icon">
                              <img src="{{ $item->user->icon_url}}" width="50px" height="50px">
                          </div>
                          <p class="user_name">{{$item->user->name}}</p>
-                         <div class="flex flex_center location_wrap">
+                         <div class="flex st_flex flex_center location_wrap">
                              <span class="material_fill material-symbols-outlined">
                                  pin_drop
                              </span>
@@ -47,14 +47,14 @@
                      </div>
                      <div class="desc_wrap">
                          <p>{{$item->description}}</p>
-                         <div class="article_counts flex">
-                             <p class="flex flex_center"><span class="material-symbols-outlined">
+                         <div class="article_counts st_flex flex">
+                             <p class="flex st_flex flex_center"><span class="material-symbols-outlined">
                                      favorite
                                  </span>{{$item->like_users_count}}</p>
-                             <p class="flex flex_center"><span class="material-symbols-outlined">
+                             <p class="flex st_flex flex_center"><span class="material-symbols-outlined">
                                      bookmark
                                  </span>{{$item->bookmark_users_count}}</p>
-                             <p class="flex flex_center"><span class="material-symbols-outlined">
+                             <p class="flex st_flex flex_center"><span class="material-symbols-outlined">
                                      tooltip
                                  </span>{{$item->comments_count}}</p>
                          </div>
