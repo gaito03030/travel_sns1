@@ -79,6 +79,23 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/comment/{postId}', [CommentsController::class, 'store'])->name('comment.store');
     Route::get('/reply/{postId}/{commentId}', [RepliesController::class, 'create'])->name('reply.create');
     Route::post('/reply/store', [RepliesController::class, 'store'])->name('reply.store');
+
+    //テスト:企業＞フォローする
+    Route::get('test_follow/{id}', [FollowsController::class, 'follow'])->name('test_follow');
+    //フォローを外す
+    Route::get('follow_remove/{id}', [FollowsController::class, 'follow_remove'])->name('follow_remove');
+    //フォローリスト一覧
+    Route::get('follow_list', [FollowsController::class, 'showFollowedCompanies'])->name('follow_list');
+
+
+    //ブックマーク機能
+    Route::post('/posts/{post}/bookmark', [BookmarksController::class, 'store'])->name('bookmark.store');
+    Route::delete('/posts/{post}/unbookmark', [BookmarksController::class, 'destroy'])->name('bookmark.destroy');
+    Route::get('/bookmarks', [BookmarksController::class, 'bookmark_posts'])->name('bookmarks');
+
+    // いいね機能
+    Route::post('/posts/{post}/like', [LikesController::class, 'store'])->name('like.store');
+    Route::delete('/posts/{post}/unlike', [LikesController::class, 'destroy'])->name('like.destroy');
 });
 
 /**兼用 */
@@ -108,14 +125,6 @@ Route::put('/user_edit/store/{id}', [UsersController::class, 'store'])->name('us
 //画像アップロード
 Route::put('/user_edit/img/{id}', [UsersController::class, 'uploadImg'])->name('user_edit.img');
 
-//ブックマーク機能
-Route::post('/posts/{post}/bookmark', [BookmarksController::class, 'store'])->name('bookmark.store');
-Route::delete('/posts/{post}/unbookmark', [BookmarksController::class, 'destroy'])->name('bookmark.destroy');
-Route::get('/bookmarks', [BookmarksController::class, 'bookmark_posts'])->name('bookmarks');
-
-// いいね機能
-Route::post('/posts/{post}/like', [LikesController::class, 'store'])->name('like.store');
-Route::delete('/posts/{post}/unlike', [LikesController::class, 'destroy'])->name('like.destroy');
 
 //一般ユーザの登録
 // 企業ユーザー登録
@@ -139,10 +148,3 @@ Route::get('/login/branch', [UsersController::class, 'branch'])->name('login.bra
 
 //テスト:一般ユーザー ＞投稿画面＞アイコンクリック＞投稿した企業を表示
 Route::get('test_show/{user_id}', [FollowsController::class, 'index'])->name('test_show');
-
-//テスト:企業＞フォローする
-Route::get('test_follow/{id}', [FollowsController::class, 'follow'])->name('test_follow');
-//フォローを外す
-Route::get('follow_remove/{id}',[FollowsController::class,'follow_remove'])->name('follow_remove');
-//フォローリスト一覧
-Route::get('follow_list', [FollowsController::class, 'showFollowedCompanies'])->name('follow_list');

@@ -67,7 +67,7 @@ class PostsController extends Controller
         $prefs = Pref::all();
         $categorys = Category::all();
 
-        $query = Post::with('user:id,name,icon_url', 'category', 'pref', 'details', 'spots')->where('status', '=', '1');
+        $query = Post::with('user:id,name,icon_url', 'category', 'pref', 'details', 'spots')->withCount('comments', 'bookmark_users', 'like_users')->where('status', '=', '1');
 
         $narrow = [];
 

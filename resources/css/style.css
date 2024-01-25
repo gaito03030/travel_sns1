@@ -1179,6 +1179,7 @@ main:has(>.main_bg) {
 }
 
 .js_popup {
+    display: none;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1223,6 +1224,9 @@ main:has(>.main_bg) {
 }
 
 @media screen and (max-width:780px) {
+    .st_none{
+        display: none;
+    }
     nav {
         width: 60%;
         right: -60%;

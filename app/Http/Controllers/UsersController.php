@@ -24,7 +24,7 @@ class UsersController extends Controller
         $user_bookmarks = User::find($id)->bookmark_total();
 
         // dd($posts_number);
-        return view('management_company', compact(['user_info', 'posts_number','user_bookmarks']));
+        return view('management_company', compact(['user_info', 'posts_number', 'user_bookmarks']));
     }
 
     public function show()
@@ -94,22 +94,26 @@ class UsersController extends Controller
 
         $user_bookmarks = User::find($id)->bookmark_total();
 
-        //ログインしているユーザIDの取得
-        $user_id = auth()->user()->id;
-        //その企業をフォローしているか確認
-        $isFollowing = Follow::where('user_id', $user_id)
-            ->where('followed_user_id', $id)
-            ->exists();
-        $follow_action='';
-        //followしていなけらば    
-        if (!$isFollowing){
-            $follow_action = "フォローする";
-        }else {
-            $follow_action = 'フォロー済み';
+        if (auth()->user()) {
+            //ログインしているユーザIDの取得
+            $user_id = auth()->user()->id;
+            //その企業をフォローしているか確認
+            $isFollowing = Follow::where('user_id', $user_id)
+                ->where('followed_user_id', $id)
+                ->exists();
+            $follow_action = '';
+            //followしていなけらば    
+            if (!$isFollowing) {
+                $follow_action = "フォローする";
+            } else {
+                $follow_action = 'フォロー済み';
+            }
+        }else{
+            $follow_action = 'フォローする';
         }
         //return $company;
         if ($user_info->company_flg == 0) {
-            return view('userside_comp_prof', compact('user_info','posts','user_bookmarks','follow_action'));
+            return view('userside_comp_prof', compact('user_info', 'posts', 'user_bookmarks', 'follow_action'));
             // return $company;
         } else {
             abort(404);
@@ -134,21 +138,22 @@ class UsersController extends Controller
     {
         $user_id = auth()->user()->id;
 
-        $user_info = User::with('bookmark_posts','followedCompanies')->find($user_id);
+        $user_info = User::with('bookmark_posts', 'followedCompanies')->withCount('bookmark_posts')->find($user_id);
 
         //return $user_info;
         return view('user_info', compact('user_info'));
     }
-    public function general_mypage_show(){
+    public function general_mypage_show()
+    {
         //ログインしているユーザーを取得
         $id = auth()->user()->id;
         //user情報を取得
         $user_info = User::find($id);
 
         return view('general_user_edit', compact(['user_info']));
-
     }
-    public function general_mypage_edit(Request $request,){
+    public function general_mypage_edit(Request $request,)
+    {
 
         $user = User::find(auth()->user()->id);
 
@@ -169,6 +174,5 @@ class UsersController extends Controller
         ]);
 
         return redirect()->route('userpage');
-
     }
 }
