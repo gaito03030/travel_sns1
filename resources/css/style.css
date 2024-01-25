@@ -1222,7 +1222,10 @@ main:has(>.main_bg) {
 .st_block {
     display: none;
 }
-
+.post_comment_wrap .time{
+    margin-left: 1em;
+    color: #9d9c9c;
+}
 @media screen and (max-width:780px) {
     .st_none{
         display: none;

@@ -137,14 +137,20 @@
                         <img src="{{ asset($comment->user->icon_url) }}" width="50px">
                     </div>
                     {{ $comment->user->name}}
+                    <span class="time">{{$comment->created_at->diffForHumans()}}</span>
                 </div>
                 <div class="comment_detail">
                     <p>{{$comment->detail}}</p>
                     @foreach($comment->replies as $reply)
                     <div class="card">
                         <dic class="card-body">
-                            <img src="{{ asset($reply->user->icon_image_url) }}" width="50px">
-                            {{ $reply->user->name}}
+                            <div class="flex flex_center st_flex">
+                                <div class="img_cover_circle general_user_icon">
+                                    <img src="{{ asset($reply->user->icon_image_url) }}" width="50px">
+                                </div>
+                                {{ $reply->user->name}}
+                                <span class="time">{{$reply->created_at->diffForHumans()}}</span>
+                            </div>
                             <p>{{$reply->detail}}</p>
                         </dic>
                     </div>

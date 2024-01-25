@@ -43,7 +43,7 @@
                     @endif
                 </td>
                 <td>{!! $notification->body !!}</td>
-                <td>XX分前</td>
+                <td>{{$notification->created_at->diffForHumans()}}</td>
                 <td><a class="button" href="{{url($notification->url)}}">投稿を確認</a></td>
             </tr>
             @endforeach

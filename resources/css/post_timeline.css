@@ -561,6 +561,19 @@ main:has(.post_wrap) {
   justify-content: space-between;
   flex-wrap: wrap;
 }
+.bookmarks::after{
+  content:"";
+  display: block;
+  height: 0;
+  width: calc(100% / 4 - 10px);
+}
+.bookmarks::before{
+  content:"";
+  display: block;
+  width: calc(100% / 4 - 10px);
+  height: 0;
+  order: 1;
+}
 
 .bookmarks {
   width: 95%;

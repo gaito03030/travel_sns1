@@ -537,9 +537,10 @@ class PostsController extends Controller
 
     public function post_timeline()
     {
-        $items = Post::with('user:id,name,icon_url', 'category', 'pref', 'details', 'spots')->withCount('comments', 'bookmark_users', 'like_users')->where('status', '=', '1')->get();
+        $items = Post::with('user:id,name,icon_url', 'category', 'pref', 'details', 'spots')->withCount('comments', 'bookmark_users', 'like_users')->where('status', '=', '1')->orderBy('created_at','desc')->get();
 
-        //return $items;
-        return view('post_timeline', compact('items'));
+        $popular = Post::with('user:id,name,icon_url', 'category', 'pref', 'details', 'spots')->withCount('comments', 'bookmark_users', 'like_users')->where('status', '=', '1')->orderBy('like_users_count','desc')->orderBy('created_at','desc')->take(5)->get();
+        //return $popular;
+        return view('post_timeline', compact(['items','popular']));
     }
 }
