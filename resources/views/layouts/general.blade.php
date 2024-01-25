@@ -17,6 +17,13 @@
     <!-- Scripts -->
     @vite( ['resources/sass/app.scss','resources/js/jquery-3.7.0.min.js','resources/js/app.js','resources/js/preview.js','resources/js/post.js','resources/js/setting.js','resources/js/popup.js','resources/js/script.js'])
     <link rel="manifest" href="/manifest.json">
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/serviceworker.js').then(function() {
+                console.log("Service Worker is registered!!");
+            });
+        }
+    </script>
 <body>
     <header id="header" class="flex st_flex st_header flex_center">
         <h1><a href="{{ url('/') }}"><img src="{{asset('/img/logo.png') }}"><span>とらべる～と</span></a></h1>

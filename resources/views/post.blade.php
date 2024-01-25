@@ -1,6 +1,13 @@
 <head>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
     <link rel="manifest" href="/manifest.json">
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/serviceworker.js').then(function() {
+                console.log("Service Worker is registered!!");
+            });
+        }
+    </script>
 </head>
 @extends('layouts.general')
 @section('content')
