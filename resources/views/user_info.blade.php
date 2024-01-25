@@ -4,6 +4,7 @@
     <h2>マイページ</h2>
     <div class="header_inner st_flex flex">
         <a class="js_add_button button create_button" href="{{url('/general/mypage/edit')}}">プロフィール編集</a>
+        <a class="js_add_button button create_button" href="{{route('follow_list')}}">フォロー一覧</a>
     </div>
 </section>
 <div class="main_content">

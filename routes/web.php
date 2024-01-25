@@ -142,6 +142,7 @@ Route::get('test_show/{user_id}', [FollowsController::class, 'index'])->name('te
 
 //テスト:企業＞フォローする
 Route::get('test_follow/{id}', [FollowsController::class, 'follow'])->name('test_follow');
-
+//フォローを外す
+Route::get('follow_remove/{id}',[FollowsController::class,'follow_remove'])->name('follow_remove');
 //フォローリスト一覧
 Route::get('follow_list', [FollowsController::class, 'showFollowedCompanies'])->name('follow_list');
