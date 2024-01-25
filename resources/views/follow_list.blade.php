@@ -22,7 +22,7 @@
         @foreach ($followedCompanies as $company)
         <p class="follow_contents">
             <div class="img_overflow_fide">
-                <img src="{{ asset($company->main_img_url) }}" alt="">
+                <img src="{{ asset($company->icon_url) }}" alt="">
             </div>
             <p >{{ $company->name }}</p>
         </p>

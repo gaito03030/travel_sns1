@@ -21,8 +21,8 @@
                     <a href="{{$user_info->web_url}}" class="user_url">{{$user_info->web_url}}</a>
                 </div>
             </section>
-            <button>followする</button>
-            <button><a href="{{ route('test_follow',['id' => $user_info->id]) }}">フォローをする</a></button>
+            
+            <button><a href="{{ route('test_follow',['id' => $user_info->id]) }}">{{$follow_action}}</a></button>
             
         </article>
         <article class="posts">

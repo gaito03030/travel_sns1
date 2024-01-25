@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Post;
+use App\Models\Follow;
 
 class UsersController extends Controller
 {
@@ -81,6 +82,7 @@ class UsersController extends Controller
         return redirect()->route('user_edit');
     }
 
+    //一般ユーザ側：企業のホームページの閲覧
     public function userside_comp_prof($id)
     {
         //$user_id = auth()->user()->id;
@@ -91,9 +93,23 @@ class UsersController extends Controller
         $posts = $user_info->posts()->where('status', 1)->get();
 
         $user_bookmarks = User::find($id)->bookmark_total();
+
+        //ログインしているユーザIDの取得
+        $user_id = auth()->user()->id;
+        //その企業をフォローしているか確認
+        $isFollowing = Follow::where('user_id', $user_id)
+            ->where('followed_user_id', $id)
+            ->exists();
+        $follow_action='';
+        //followしていなけらば    
+        if (!$isFollowing){
+            $follow_action = "フォローする";
+        }else {
+            $follow_action = 'フォロー済み';
+        }
         //return $company;
         if ($user_info->company_flg == 0) {
-            return view('userside_comp_prof', compact('user_info','posts','user_bookmarks'));
+            return view('userside_comp_prof', compact('user_info','posts','user_bookmarks','follow_action'));
             // return $company;
         } else {
             abort(404);
