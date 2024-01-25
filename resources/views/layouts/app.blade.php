@@ -24,13 +24,13 @@
         }
     </script>
 
-    @vite( ['resources/sass/app.scss','resources/js/jquery-3.7.0.min.js','resources/js/app.js','resources/js/preview.js','resources/js/post.js'])
+    @vite( ['resources/sass/app.scss'])
 
 <body>
     <header id="header" class="flex st_flex flex_center">
         <h1><a href="{{ url('/') }}"><img src="{{asset('/img/logo.png') }}"><span>とらべる～と</span></a></h1>
         @guest
-        <ul class="login_buttons flex general_header_inner">
+        <ul class="login_buttons st_flex flex general_header_inner">
             <li><a class="login_button" href="{{url('/login')}}">ログイン</a></li>
             <li><a class="register_button" href="{{url('/register')}}">新規登録</a></li>
         </ul>

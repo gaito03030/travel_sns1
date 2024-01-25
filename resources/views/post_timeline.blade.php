@@ -57,7 +57,7 @@
                          @endif
                      </div>
                      <div class="desc_wrap">
-                         <p>{{$item->description}}</p>
+                         <p><?php echo mb_strimwidth(strip_tags($item->description), 0, 140, ' …', 'UTF-8'); ?></p>
                          <div class="article_counts st_flex flex">
                              <p class="flex st_flex flex_center"><span class="material-symbols-outlined">
                                      favorite

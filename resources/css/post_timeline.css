@@ -226,7 +226,6 @@ ul.general_header_inner li {
 ===================================*/
 #slider_top .slider {
   /*横幅94%で左右に余白を持たせて中央寄せ*/
-  height: 94%;
   margin: 5px;
   width: 90%;
   display: flex;
@@ -561,13 +560,13 @@ main:has(.post_wrap) {
   justify-content: space-between;
   flex-wrap: wrap;
 }
-.bookmarks::after{
+.bookmarks .flex::after{
   content:"";
   display: block;
   height: 0;
   width: calc(100% / 4 - 10px);
 }
-.bookmarks::before{
+.bookmarks .flex::before{
   content:"";
   display: block;
   width: calc(100% / 4 - 10px);
@@ -597,7 +596,12 @@ main:has(.post_wrap) {
 .bookmarks .slider_info img {
   width: 240px;
 }
-
+.follow_wrap{
+  margin-top: 10px;
+}
+.follow_wrap .numbers{
+ margin: 0;
+}
 .comment_btn_wrap {
   margin: 20px auto;
 }
@@ -611,9 +615,64 @@ main:has(.post_wrap) {
   justify-content: space-between;
   width: 100%;
 }
+.follow_list{
+  margin-top: 10px;
+}
+.follow_list .follow_list_item:nth-child(odd){
+  background-color: #fff;
+}
+.follow_list_item{
+  width: 100%;
+  padding: 4px 10px;
+  border-top: 1px solid #dfdfdf;
+  justify-content: space-between;
+}
+.follow_list_item p{
+  margin: 0;
+}
+.follow_list_item .button{
+  margin-left: 1em;
+}
+.other_btn{
+  background-color: #a2a2a2;
+ 
+}
+.other_btn:hover{
+  background-color: #8a8a8a;
+ 
+}
+.delete_btn {
+  background-color: #e85454;
+}
 
+.delete_btn:hover {
+  background-color: #a72f2f;
+}
+.post_schedule .date_wrap{
+  margin-bottom: 40px;
+  margin-top: 20px;
+}
+
+.post_schedule .date{
+  width: 5em;
+  text-align: center;
+  background-color: #E6C155;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: bold;
+  padding: 4px 1em;
+}
+.company_home .post_buttons span {
+  margin-top: 0;
+}
 @media screen and (max-width:780px) {
 
+  a.button{
+    padding: 8px 2em;
+  }
+  .main_header{
+    padding-bottom: 6px;
+  }
   /* 投稿のarticle */
   #content_main .article {
     width: 100%;
@@ -648,6 +707,9 @@ main:has(.post_wrap) {
     width: 90%;
     padding: 10px 20px
   }
+  .post_counts_wrap{
+    width: 70%;
+  }
 
   .comment_btn_wrap button {
     width: 100%;
@@ -676,11 +738,50 @@ main:has(.post_wrap) {
     width: calc(100% - 10px - 1em);
   }
   .user_info_wrap{
+    padding: 30px 0;
     padding-bottom: 10px;
+  }
+  .create_button{
+    margin-right: 0;
   }
   .numbers_wrap{
     justify-content: space-between;
     width: 80%;
     margin-top: 10px;
   }
+  .follow_wrap{
+    margin-top: 10px;
+    justify-content: space-between;
+  }
+  .follow_wrap .strong{
+    display: inline;
+  }
+  .bookmarks .flex::after{
+    display: none;
+  }
+  .bookmarks .flex::before{
+    display: block;
+  }
+
+  .follow_list .follow_list_item:nth-child(even){
+    background-color: #fff;
+  }
+  .follow_list .follow_list_item:nth-child(odd){
+    background: none;
+  }
+
+  .follow_list_item .follow_link{
+    padding: 10px 4px;
+    color: #7f8182;   
+    text-decoration: none;
+  }
+  .follow_list_button{
+    margin-right: 0;
+    padding: 4px 1em;
+  }
+
+  .spot{
+    margin-left: .6em;
+  }
+
 }

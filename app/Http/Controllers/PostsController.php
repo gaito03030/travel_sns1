@@ -139,7 +139,7 @@ class PostsController extends Controller
             'count' => $count,
             'posts' => $posts,
         ];
-        return view('general_search_result', compact(['prefs','categorys','return']));
+        return view('general_search_result', compact(['prefs', 'categorys', 'return']));
 
         //return $return;
     }
@@ -306,10 +306,14 @@ class PostsController extends Controller
     {
         //モデルコース一件取得
 
-        $post = Post::with('user:id,name,icon_url', 'category', 'pref', 'details', 'spots')->find($id);
+        $post = Post::with('user:id,name,icon_url', 'category', 'pref', 'details')->find($id);
         $comments = Comment::with('user:id,name,icon_url', 'replies')->where('post_id', $id)->get();
         $bookmarks = Post::find($id)->bookmark_users()->get();
         $likes = Post::find($id)->like_users()->get();
+
+        //spotをdateごとにグループ化
+        $spots = Spot::orderBy('date', 'asc')->where('post_id', $id)->get();
+        $spots = $spots->groupBy('date')->toArray();
 
         if ($post->status !== 1) {
             //ステータスが公開中以外の場合はnot found を表示
@@ -318,6 +322,7 @@ class PostsController extends Controller
 
         $data = [
             'post' => $post,
+            'spots' => $spots,
             'comments' => $comments,
             'bookmarks' => count($bookmarks),
             'likes' => count($likes)
@@ -537,10 +542,10 @@ class PostsController extends Controller
 
     public function post_timeline()
     {
-        $items = Post::with('user:id,name,icon_url', 'category', 'pref', 'details', 'spots')->withCount('comments', 'bookmark_users', 'like_users')->where('status', '=', '1')->orderBy('created_at','desc')->get();
+        $items = Post::with('user:id,name,icon_url', 'category', 'pref', 'details', 'spots')->withCount('comments', 'bookmark_users', 'like_users')->where('status', '=', '1')->orderBy('created_at', 'desc')->get();
 
-        $popular = Post::with('user:id,name,icon_url', 'category', 'pref', 'details', 'spots')->withCount('comments', 'bookmark_users', 'like_users')->where('status', '=', '1')->orderBy('like_users_count','desc')->orderBy('created_at','desc')->take(5)->get();
+        $popular = Post::with('user:id,name,icon_url', 'category', 'pref', 'details', 'spots')->withCount('comments', 'bookmark_users', 'like_users')->where('status', '=', '1')->orderBy('like_users_count', 'desc')->orderBy('created_at', 'desc')->take(5)->get();
         //return $popular;
-        return view('post_timeline', compact(['items','popular']));
+        return view('post_timeline', compact(['items', 'popular']));
     }
 }

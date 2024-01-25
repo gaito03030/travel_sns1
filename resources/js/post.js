@@ -66,7 +66,7 @@ $(function () {
                 $list.append(
                     '<li class="js_item input_date course_bg">' +
                     '<div class="form_group date_wrap">' +
-                    '<p class="js_date_text form_group date_text">1日目</p>' +
+                    '<p class="js_date_text date_text">1日目</p>' +
                     '<div class="js_items form_content">' +
                     '<ul class="js_item_list" data-input="spots">' +
                     '<li class="js_item flex form_box flex_form_box">' +

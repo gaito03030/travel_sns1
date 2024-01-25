@@ -46,14 +46,22 @@
     </div>
     <div class="post_schedule">
         <h2>Schedule</h2>
-        @foreach($data['post']->spots as $spot)
-        <div class="spot">
-            <h4>{{$spot->title}}</h4>
-            <p>{{$spot->description}}</p>
-            <div class="flex st_flex flex_center location_wrap">
-                <span class="material_fill material-symbols-outlined">pin_drop</span>
-                <p>{{$spot->address}}</p>
+        @foreach($data['spots'] as $date)
+        <div class="date_wrap">
+            <p class="date">{{$loop->index + 1}}日目</p>
+            @foreach($date as $spot)
+            <div class="flex st_flex">
+                <p>{{substr($spot['time'], 0, 5)}}</p>
+                <div class="spot">
+                    <h4>{{$spot['title']}}</h4>
+                    <p>{{$spot['description']}}</p>
+                    <div class="flex st_flex flex_center location_wrap">
+                        <span class="material_fill material-symbols-outlined">pin_drop</span>
+                        <p>{{$spot['address']}}</p>
+                    </div>
+                </div>
             </div>
+            @endforeach
         </div>
         @endforeach
     </div>
@@ -88,11 +96,13 @@
         <div class="count">
             <h3>いいね</h3>
             @guest
-            <button>
-                <span title="ログインしてください" class="material-symbols-outlined unchecked">
-                    favorite
-                </span>
-            </button>
+            <form action="{{ route('like.store', $data['post']->id) }}" method="post">
+                <button>
+                    <span title="ログインしてください" class="material-symbols-outlined unchecked">
+                        favorite
+                    </span>
+                </button>
+            </form>
             @else
             @if (!Auth::user()->is_like($data['post']->id))
             <form action="{{ route('like.store', $data['post']->id) }}" method="post">
@@ -140,7 +150,6 @@
             <div class="card-body">
                 <div class="flex flex_center st_flex">
                     <div class="img_cover_circle general_user_icon">
-
                         <img src="{{ asset($comment->user->icon_url) }}" width="50px">
                     </div>
                     {{ $comment->user->name}}

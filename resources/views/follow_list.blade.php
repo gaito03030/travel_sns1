@@ -1,43 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.general')
+@section('content')
+<section class="main_header st_flex flex">
+    <h2>フォロー企業一覧</h2>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="manifest" href="/manifest.json">
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/serviceworker.js').then(function() {
-                console.log("Service Worker is registered!!");
-            });
-        }
-    </script>
-    <style>
-        .follow_contents {
-            border: solid 1px;
-            border-color: #ccc;
-        }
-    </style>
-</head>
-
-<body>
-
-    @extends('layouts.general')
-    @section('content')
+</section>
+<div class="main_content">
+    <div class="follow_list">
         @foreach ($followedCompanies as $company)
-        <p class="follow_contents">
-            <div class="img_overflow_fide">
-                <img src="{{ asset($company->icon_url) }}" alt="">
+        <div class="flex st_flex follow_list_item flex_center">
+            <div class="flex st_none flex_center">
+                <div class="img_cover_circle general_user_icon">
+                    <img src="{{ asset($company->icon_url) }}" alt="">
+                </div>
+                <p>{{ $company->name }}</p>
             </div>
-            <p >{{ $company->name }}</p>
-            <button><a href="{{route('follow_remove',['id'=> $company->id])}}">フォローを外す</a></button>
-        </p>
-            <!-- 他の企業情報の表示 -->
+            <a href="{{url('general/user/'.$company->id)}}" class="st_block follow_link st_flex flex_center">
+                <div class="img_cover_circle general_user_icon">
+                    <img src="{{ asset($company->icon_url) }}" alt="">
+                </div>
+                <p>{{ $company->name }}</p>
+            </a>
+            <a class="button other_btn" href="{{route('follow_remove',['id'=> $company->id])}}"><span class="st_none">フォロー</span>解除</a>
+        </div>
+
+        <!-- 他の企業情報の表示 -->
         @endforeach
-    @endsection
-
-</body>
-
-</html>
+    </div>
+</div>
+@endsection

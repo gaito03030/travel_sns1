@@ -49,7 +49,7 @@
                     <img src="{{url('img/notice_follow.png')}}">
                     @endif
                 </td>
-                <td>{!! $notification->body !!}</td>
+                <td>{!! $notification->body !!}<span class="st_block time">{{$notification->created_at->diffForHumans()}}</span> <a class="st_block st_notice_button button" href="{{url($notification->url)}}">投稿を確認</a></td>
                 <td>{{$notification->created_at->diffForHumans()}}</td>
                 <td><a class="button" href="{{url($notification->url)}}">投稿を確認</a></td>
             </tr>
@@ -77,8 +77,8 @@
                     <img src="{{url('img/notice_follow.png')}}">
                     @endif
                 </td>
-                <td>{!! $notification->body !!}</td>
-                <td>XX分前</td>
+                <td>{!! $notification->body !!}<span class="st_block time">{{$notification->created_at->diffForHumans()}}</span> <a class="st_block st_notice_button button" href="{{url($notification->url)}}">投稿を確認</a></td>
+                <td>{{$notification->created_at->diffForHumans()}}</td>
                 <td><a class="button" href="{{url($notification->url)}}">投稿を確認</a></td>
             </tr>
             @endforeach

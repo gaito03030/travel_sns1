@@ -13,7 +13,7 @@
 
 @section('content')
 <div class="main_bg">
-    <section class="main_header create_post_header flex">
+    <section class="main_header st_flex create_post_header flex">
         <h2>モデルコース作成</h2>
         <div class="header_inner flex">
             <button class="js_confirm_button button create_button">保存</button>
@@ -38,13 +38,13 @@
                     </li>
                     <li class="confirm js_slide">
                         公開状況の設定<br>
-                        <div class="flex confirm_content status_wrap">
+                        <div class="flex st_flex confirm_content status_wrap">
                             <label class="radio_label"><input type="radio" name="status" value="0">非公開</label>
                             <label class="radio_label"><input type="radio" name="status" value="1">公開</label>
                         </div>
 
                         カテゴリーを一つ選択<br>
-                        <div class="flex confirm_content category_wrap">
+                        <div class="flex st_flex confirm_content category_wrap">
                             @foreach($datas['category'] as $category)
                             <label class="radio_label"><input type="radio" name="category" value="{{$category->id}}">{{ $category->category }}</label>
                             @endforeach<br>
@@ -56,19 +56,21 @@
                             <option value="{{ $pref -> id }}">{{ $pref->name }}</option>
                             @endforeach
                         </select>
-                        <br>予算
-                        <div class="confirm_content">
-                            <input type="text" name="price" inputmode="numeric" placeholder="予算を入力" pattern="^0|([1-9][0-9]*)$" title="自然数で入力してください" required>
+                        <br>
+                        <div class="st_flex price_wrap">予算
+                            <div class="confirm_content">
+                                <input type="text" name="price" inputmode="numeric" placeholder="予算を入力" pattern="^0|([1-9][0-9]*)$" title="自然数で入力してください" required>
+                            </div>
                         </div>
                         <br>
                     </li>
 
                 </ul>
-                <ul class="flex dotted_list">
+                <ul class="flex st_flex dotted_list">
                     <li class="first_dotte dotted selected"></li>
                     <li class="second_dotte dotted"></li>
                 </ul>
-                <div class="flex button_wrap">
+                <div class="flex st_flex button_wrap">
                     <input type="button" class="button return_button js_modal_close_button" value="閉じる">
                     <input type="button" class="return_button button js_slide_back_button" value="戻る">
                     <input type="button" class="button js_slide_next_button" value="次へ">
@@ -107,10 +109,10 @@
             <ul class="js_item_list input_course" data-input="dates">
                 <li class="js_item input_date course_bg">
                     <div class="form_group date_wrap">
-                        <p class="js_date_text form_group date_text">1日目</p>
+                        <p class="js_date_text date_text">1日目</p>
                         <div class="js_items form_content">
                             <ul class="js_item_list" data-input="spots">
-                                <li class="js_item flex form_box flex_form_box">
+                                <li class="js_item flex st_flex form_box flex_form_box">
                                     <div class="input_flex_left">
                                         <input type="time" name="spot_time_1[0]" class="js_input">
                                     </div>

@@ -24,11 +24,11 @@
         </div>
         <div class="user_info">
             <h3>{{$user_info->name}}</h3>
-            <div class="flex flex_center st_flex">
+            <div class="flex flex_center follow_wrap st_flex">
                 <div class="numbers">
                     <span>お気に入り企業数<span class="strong"> {{$user_info->bookmark_posts_count}} </span></span>
                 </div>
-                <a class="js_add_button button create_button" href="{{route('follow_list')}}">フォロー一覧</a>
+                <a class="js_add_button button create_button follow_list_button" href="{{route('follow_list')}}">一覧表示</a>
             </div>
 
             @if(strlen($user_info->bio) > 0)
@@ -36,7 +36,7 @@
             @endif
         </div>
     </div>
-    <div class="user_bookmarks">
+    <div class="user_bookmarks bookmarks">
         <h2>ブックマーク</h2>
         @if(count($user_info->bookmark_posts) == 0)
         <p>ブックマークが登録されていません</p>

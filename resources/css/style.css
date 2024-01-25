@@ -408,6 +408,7 @@ a.button {
     max-width: 300px;
     height: 36px;
     width: 30%;
+    margin: 0;
 }
 
 .input_search {
@@ -1222,14 +1223,17 @@ main:has(>.main_bg) {
 .st_block {
     display: none;
 }
-.post_comment_wrap .time{
+
+.post_comment_wrap .time {
     margin-left: 1em;
     color: #9d9c9c;
 }
+
 @media screen and (max-width:780px) {
-    .st_none{
+    .st_none {
         display: none;
     }
+
     nav {
         width: 60%;
         right: -60%;
@@ -1237,29 +1241,41 @@ main:has(>.main_bg) {
         transition: all .5s;
         z-index: 3;
     }
+
     .nav_wrap a {
         padding: 16px 26px;
     }
+
     main {
         width: 100%;
         margin: 0;
+        padding-top: 60px;
     }
 
     main.main_general {
         width: 100%;
         margin: 0;
         padding-bottom: 30px;
+        padding-top: 70px;
+        margin-bottom: 8px;
     }
 
     .flex {
         display: block;
         flex: none;
         align-items: normal;
+    }
 
+    .flex.st_none {
+        display: none;
     }
 
     .st_header {
         padding-right: 46px;
+    }
+
+    .st_block {
+        display: block;
     }
 
     .st_flex {
@@ -1268,13 +1284,11 @@ main:has(>.main_bg) {
         align-items: flex-start;
     }
 
-    .st_button{
+    .st_button {
         width: 100%;
         margin-top: 10px;
     }
-    .st_block {
-        display: block;
-    }
+
 
     .nav_openbtn {
         position: fixed;
@@ -1347,4 +1361,135 @@ main:has(>.main_bg) {
         display: none;
     }
 
+
+    /*企業側ページCSS*/
+    .nav_myinfo {
+        padding-top: 40px;
+        padding-bottom: 30px;
+    }
+
+    .nav_myinfo .nav_info_wrap {
+        width: 60%;
+        margin: auto;
+        text-align: center;
+    }
+
+    .nav_myinfo .img_cover_circle {
+        width: 30%;
+        margin: 0 auto;
+    }
+
+    .nav_myinfo .myinfo_text {
+        margin-left: 0;
+    }
+
+    .st_company_header {
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
+    .search_wrap {
+        width: 100%;
+        max-width: none;
+    }
+
+    .input_search {
+        max-width: none;
+    }
+
+    .empty_box {
+        left: 50%;
+    }
+
+
+    main:has(>.main_bg) {
+        width: 100%;
+    }
+
+    .main_header {
+        justify-content: space-between;
+    }
+
+    .form_group {
+        width: 90%;
+    }
+
+    .add_btn {
+        width: 60%;
+    }
+
+    .flex_form_box {
+        align-items: stretch;
+    }
+
+    .input_flex_left {
+        width: 30%;
+    }
+
+    .confirm_wrap {
+        width: 85%;
+        padding: 10px;
+    }
+
+    .price_wrap {
+        margin-top: .5em;
+    }
+
+    .main_general .user_info_wrap{
+        margin-top: 6px;
+    }
+    .user_info_wrap .icon_wrap {
+        width: 50%;
+        max-width: none;
+        margin: auto
+    }
+
+    .user_info_edit_form .user_info {
+        width: 100%;
+    }
+
+    .notice .time {
+        margin-left: 1em;
+        font-size: .9em;
+        color: #8a8a8a;
+    }
+
+    .notice td:nth-child(2) {
+        padding: 10px;
+    }
+
+    .notice td:nth-child(3),
+    .notice td:nth-child(4) {
+        display: none;
+    }
+
+    .notice a.button {
+        width: 6em;
+        text-align: center;
+    }
+
+
+    .input_flex span {
+        width: auto;
+    }
+    .notice_form {
+        width: 90%;
+    }
+    .post{
+        padding: 0;
+        width: 95%;
+        margin: 18px auto;
+        padding-top: 16px;
+    }
+    .post_text{
+        width: 100%;
+        margin: 0;
+    }
+    .post_title .st_flex{
+        margin:  0;
+    }
+    .thumbnail{
+        width: 100%;
+        height: 20vh;
+    }
 }
