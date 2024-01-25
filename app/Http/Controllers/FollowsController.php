@@ -66,6 +66,20 @@ class FollowsController extends Controller
         return redirect()->route('general.user',['id' => $id]);
     }
 
+    //フォローを外す
+    public function follow_remove($id){
+        //ログインしているユーザ
+        $login_user = auth()->user()->id;
+        //フォローしている企業の$id
+        $company_id = $id;
+
+        Follow::where('user_id',$login_user)
+                ->where('followed_user_id',$company_id)
+                ->delete();
+
+        return redirect()->route('follow_list');
+    }
+
     //フォローしている企業一覧表
     public function showFollowedCompanies()
     {

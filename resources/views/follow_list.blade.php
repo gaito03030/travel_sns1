@@ -25,6 +25,7 @@
                 <img src="{{ asset($company->icon_url) }}" alt="">
             </div>
             <p >{{ $company->name }}</p>
+            <p><a href="{{route('follow_remove',['id'=> $company->id])}}">フォローを外す</a></p>
         </p>
             <!-- 他の企業情報の表示 -->
         @endforeach
