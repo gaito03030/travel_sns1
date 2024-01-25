@@ -1,3 +1,7 @@
+<head>
+    <link rel="manifest" href="/manifest.json">
+</head>
+
 @extends('layouts.app')
 
 @section('content')

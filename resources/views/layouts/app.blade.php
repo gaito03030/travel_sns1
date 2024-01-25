@@ -15,6 +15,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link rel="manifest" href="/manifest.json">
 
     @vite( ['resources/sass/app.scss','resources/js/jquery-3.7.0.min.js','resources/js/app.js','resources/js/preview.js','resources/js/post.js'])
 
