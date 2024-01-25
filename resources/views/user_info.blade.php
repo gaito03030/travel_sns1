@@ -15,7 +15,7 @@
         <div class="user_info">
             <h3>{{$user_info->name}}</h3>
             <div class="numbers">
-                <span>お気に入り企業数<span class="strong">@if(empty($user_info->followed_companies)) 0 @else {{$user_info->followed_companies->count()}} @endif</span></span>
+                <span>お気に入り企業数<span class="strong"> {{$user_info->bookmark_posts_count}} </span></span>
             </div>
             @if(strlen($user_info->bio) > 0)
             <p>{{ $user_info->bio }}</p>

@@ -10,7 +10,7 @@ $(function () {
     $(document).on('click', '.js_popup_cancel_btn', function () {
         $('.js_bg').fadeOut();
         $('.js_popup_delete_btn').attr('href', "#");
-
+        return false;
     });
     $(document).on('click', '.js_bg', function () {
         $('.js_bg').fadeOut();
@@ -24,11 +24,11 @@ $(function () {
         return false;
     });
 
-    $(document).on('click', '.js_popup_close_btn', function () {
+    $(document).on('click', '.js_popup_cancel_btn', function () {
         $('.js_bg').fadeOut();
         $('.js_popup').fadeOut();
 
-
+        return false;
     });
     $(document).on('click', '.js_bg', function () {
         $('.js_bg').fadeOut();

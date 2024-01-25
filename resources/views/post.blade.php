@@ -165,8 +165,8 @@
             <label for="detail" class="form-label">コメントを入力</label><br>
             <textarea name="detail" class="form-control" id="detail" rows="3"></textarea>
             <div class="form-group row mb-0">
-                <div class="col-md-6 offset-md-4">
-                    <button class="button st_button" type="submit" class="btn btn-primary">
+                <div class="comment_btn_wrap">
+                    <button class="button st_button" type="submit">
                         {{ __('コメントを投稿') }}
                     </button class="button">
                 </div>
