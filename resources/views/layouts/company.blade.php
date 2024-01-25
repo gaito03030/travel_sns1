@@ -16,6 +16,13 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link rel="manifest" href="/manifest.json">
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/serviceworker.js').then(function() {
+                console.log("Service Worker is registered!!");
+            });
+        }
+    </script>
 <body>
     <header id="header">
         <h1><a href="{{ url('/company_mypage') }}"><img  src="{{asset('/img/logo.png') }}"><span>とらべる～と</span></a></h1>

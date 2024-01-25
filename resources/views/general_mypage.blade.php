@@ -1,5 +1,12 @@
 <head>
     <link rel="manifest" href="/manifest.json">
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/serviceworker.js').then(function() {
+                console.log("Service Worker is registered!!");
+            });
+        }
+    </script>
 </head>
 
 @extends('layouts.company')
