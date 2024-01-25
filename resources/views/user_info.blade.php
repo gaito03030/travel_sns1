@@ -1,3 +1,7 @@
+<head>
+    <link rel="manifest" href="/manifest.json">
+</head>
+
 @extends('layouts.general')
 @section('content')
 <section class="main_header st_flex flex">

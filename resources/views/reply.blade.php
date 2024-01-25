@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja">
+    <head>
+        <link rel="manifest" href="/manifest.json">
+    </head>
 
 @extends('layouts.general')
 @section('content')
