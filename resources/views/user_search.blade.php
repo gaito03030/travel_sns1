@@ -6,7 +6,7 @@
 @section('content')
 <h2>検索</h2>
 <form action="{{route('post_search_result')}}" method="get">
-    <div class="flex flex_center">
+    <div class="flex st_flex flex_center">
         <input type="text" name="search_text" placeholder="フリーワード検索"><br>
         <input type="submit" class="button search_submit" value="検索">
         <div class="post_buttons">
@@ -38,7 +38,7 @@
         ￥<input type="text" name="price_min" placeholder="最低:制限なし" inputmode="numeric" pattern="^[1-9][0-9]*$" title="自然数で入力してください"> ~
         <input type="text" name="price_max" placeholder="最大:制限なし" inputmode="numeric" pattern="^[1-9][0-9]*$" title="自然数で入力してください">
         <br>
-        <div class="flex popup_buttons">
+        <div class="flex st_flex popup_buttons">
             <button class="button js_popup_cancel_btn">閉じる</button>
             <input type="submit" class="button" value="検索"></input>
         </div>

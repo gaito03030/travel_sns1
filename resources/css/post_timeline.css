@@ -259,8 +259,7 @@ ul.general_header_inner li{
 }
 .img_overflow_fide{
     overflow: hidden;
-    width: 200px;
-    height: 180px;
+    width: 100%;
     border-radius: 10px;
 }
 .slider_info img {
@@ -278,7 +277,7 @@ ul.general_header_inner li{
     padding: 5px;
     background-image: linear-gradient(180deg,
             rgba(255, 255, 255, 0),
-            rgba(106, 105, 105, 0.7));
+            rgba(46, 46, 46, 0.7));
     border-radius: 0px 0px 10px 10px;
 }
 
@@ -501,7 +500,27 @@ main:has(.post_wrap){
     display: block;
     text-align: center;
   }
-
+  .comment_detail{
+    margin-left: calc(45px + 0.5em);
+  }
+  .bookmarks .flex{
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .bookmarks {
+    width: 95%;
+    margin: auto;
+  }
+  .bookmarks .slider_info{
+    width: calc(100% / 4 - 10px);
+    margin-right: 10px;
+    margin-bottom: 20px;
+    max-width: 240px;
+  }
+  .bookmarks .slider_info img{
+    width: 240px;
+  }
   @media screen and (max-width:780px) {
     /* 投稿のarticle */
         #content_main .article {
@@ -528,5 +547,9 @@ main:has(.post_wrap){
     }
       .post_main_img img {
         height: 20vh;
+    }
+    .post_user_info{
+      width: 90%;
+      padding: 10px 20px
     }
   }

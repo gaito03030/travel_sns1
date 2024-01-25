@@ -114,11 +114,13 @@
 
     </div>
     <div class="post_user_info">
-        <div class="flex flex_center">
-            <div class="img_cover_circle general_user_icon">
-                <img src="{{asset($data['post']->user->icon_url)}}" alt="">
+        <div class="flex flex_center st_flex">
+            <div class="flex flex_center st_flex">
+                <div class="img_cover_circle general_user_icon">
+                    <img src="{{asset($data['post']->user->icon_url)}}" alt="">
+                </div>
+                <p>{{$data['post']->user->name}}</p>
             </div>
-            <p>{{$data['post']->user->name}}</p>
             <a class="button" href="{{ url('/general/user/'.$data['post']->user->id) }}">ユーザ情報を表示</a>
         </div>
     </div>
@@ -129,24 +131,26 @@
         @forelse($data['post']->comments as $comment)
         <div class="card">
             <div class="card-body">
-                <div class="flex flex_center">
+                <div class="flex flex_center st_flex">
                     <div class="img_cover_circle general_user_icon">
 
                         <img src="{{ asset($comment->user->icon_url) }}" width="50px">
                     </div>
                     {{ $comment->user->name}}
                 </div>
-                <p>{{$comment->detail}}</p>
-                @foreach($comment->replies as $reply)
-                <div class="card">
-                    <dic class="card-body">
-                        <img src="{{ asset($reply->user->icon_image_url) }}" width="50px">
-                        {{ $reply->user->name}}
-                        <p>{{$reply->detail}}</p>
-                    </dic>
+                <div class="comment_detail">
+                    <p>{{$comment->detail}}</p>
+                    @foreach($comment->replies as $reply)
+                    <div class="card">
+                        <dic class="card-body">
+                            <img src="{{ asset($reply->user->icon_image_url) }}" width="50px">
+                            {{ $reply->user->name}}
+                            <p>{{$reply->detail}}</p>
+                        </dic>
+                    </div>
+                    @endforeach
+                    <a href="{{ url('reply/'.$data['post']->id.'/'.$comment->id) }}">返信</a>
                 </div>
-                @endforeach
-                <a href="{{ url('reply/'.$data['post']->id.'/'.$comment->id) }}">返信</a>
             </div>
         </div>
         @empty
@@ -163,7 +167,7 @@
             <textarea name="detail" class="form-control" id="detail" rows="3"></textarea>
             <div class="form-group row mb-0">
                 <div class="col-md-6 offset-md-4">
-                    <button class="button" type="submit" class="btn btn-primary">
+                    <button class="button st_button" type="submit" class="btn btn-primary">
                         {{ __('コメントを投稿') }}
                     </button class="button">
                 </div>

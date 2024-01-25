@@ -4,15 +4,15 @@
 
 @extends('layouts.general')
 @section('content')
-<section class="main_header flex">
+<section class="main_header st_flex flex">
     <h2>マイページ</h2>
-    <div class="header_inner flex">
+    <div class="header_inner st_flex flex">
         <a class="js_add_button button create_button" href="{{url('/general/mypage/edit')}}">プロフィール編集</a>
         <a class="js_add_button button create_button" href="{{route('follow_list')}}">フォロー一覧</a>
     </div>
 </section>
 <div class="main_content">
-    <div class="flex user_info_wrap">
+    <div class="flex st_flex user_info_wrap">
         <div class="icon_wrap">
             <img src="{{ asset($user_info->icon_url)}}">
         </div>
@@ -28,10 +28,10 @@
     </div>
     <div class="user_bookmarks">
         <h2>ブックマーク</h2>
-        @if(empty($user_info->bookmark_posts))
-        <p>ブックマークがありません</p>
+        @if(count($user_info->bookmark_posts) == 0)
+            <p>ブックマークが登録されていません</p>
         @else
-        <div class="flex">
+        <div class="flex st_flex">
             @foreach($user_info->bookmark_posts as $item)
             <a href="{{ url('/general/posts/'.$item->id) }}" class="slider_info">
                 <div class="img_overflow_fide">

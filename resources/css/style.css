@@ -837,6 +837,8 @@ input[type="file"] {
     transform: translate(-50%, -50%);
 }
 
+
+
 /* 投稿フォーム */
 .post_form {
     padding-bottom: 40px;
@@ -1228,7 +1230,9 @@ main:has(>.main_bg) {
         transition: all .5s;
         z-index: 3;
     }
-
+    .nav_wrap a {
+        padding: 16px 26px;
+    }
     main {
         width: 100%;
         margin: 0;
@@ -1237,6 +1241,7 @@ main:has(>.main_bg) {
     main.main_general {
         width: 100%;
         margin: 0;
+        padding-bottom: 30px;
     }
 
     .flex {
@@ -1256,6 +1261,10 @@ main:has(>.main_bg) {
         align-items: flex-start;
     }
 
+    .st_button{
+        width: 100%;
+        margin-top: 10px;
+    }
     .st_block {
         display: block;
     }
