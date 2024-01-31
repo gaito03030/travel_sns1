@@ -26,7 +26,7 @@
         <label>
             <input type="radio" name="notice_all" value="0" @if(!$setting->notice_all_flg) checked @endif>通知ごとに設定<br>
             <div class="input_group">
-                <div class="flex input_flex_notice toggle_wrap">
+                <div class="flex input_flex_notice st_flex toggle_wrap">
                     <span>お気に入り企業の投稿</span>
                     <input type="hidden" name="posted" value="0">
                     <div class="toggle_button">
@@ -34,7 +34,7 @@
                         <label for="toggle" class="toggle_label"></label>
                     </div>
                 </div>
-                <div class="flex input_flex_notice toggle_wrap">
+                <div class="flex input_flex_notice st_flex toggle_wrap">
                     <span>コメントへの返信</span>
                     <input type="hidden" name="comment" value="0">
                     <div class="toggle_button">

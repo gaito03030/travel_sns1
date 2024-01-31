@@ -14,7 +14,7 @@
 
 @section('content')
 <!-- ここからがページごとの表示部分 -->
-<section class="main_header flex">
+<section class="main_header st_flex flex">
     <h2>通知</h2>
     <div class="header_inner flex">
         <a class="button create_button" href="{{url('company/notification/setting')}}">通知設定</a>
@@ -50,8 +50,8 @@
                     <img src="{{url('img/notice_follow.png')}}">
                     @endif
                 </td>
-                <td>{!! $notification->body !!}</td>
-                <td>XX分前</td>
+                <td>{!! $notification->body !!}<span class="st_block time">{{$notification->created_at->diffForHumans()}}</span> <a class="st_block st_notice_button button" href="{{url($notification->url)}}">投稿を確認</a></td>
+                <td>{{$notification->created_at->diffForHumans()}}</td>
                 <td><a class="button" href="{{url($notification->url)}}">投稿を確認</a></td>
             </tr>
             @endforeach
@@ -78,8 +78,8 @@
                     <img src="{{url('img/notice_follow.png')}}">
                     @endif
                 </td>
-                <td>{!! $notification->body !!}</td>
-                <td>XX分前</td>
+                <td>{!! $notification->body !!}<span class="st_block time">{{$notification->created_at->diffForHumans()}}</span> <a class="st_block st_notice_button button" href="{{url($notification->url)}}">投稿を確認</a></td>
+                <td>{{$notification->created_at->diffForHumans()}}</td>
                 <td><a class="button" href="{{url($notification->url)}}">投稿を確認</a></td>
             </tr>
             @endforeach

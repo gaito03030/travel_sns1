@@ -26,7 +26,7 @@
         <label>
             <input type="radio" name="notice_all" value="0" @if(!$setting->notice_all_flg) checked @endif>通知ごとに設定<br>
             <div class="input_group">
-                <div class="flex input_flex toggle_wrap">
+                <div class="flex st_flex input_flex toggle_wrap">
                     <span>いいねの通知</span>
                     <input type="hidden" name="like" value="0">
                     <div class="toggle_button">
@@ -34,7 +34,7 @@
                         <label for="toggle" class="toggle_label"></label>
                     </div>
                 </div>
-                <div class="flex input_flex toggle_wrap">
+                <div class="flex input_flex toggle_wrap st_flex">
                     <span>コメントの通知</span>
                     <input type="hidden" name="comment" value="0">
                     <div class="toggle_button">
@@ -42,7 +42,7 @@
                         <label for="toggle" class="toggle_label"></label>
                     </div>
                 </div>
-                <div class="flex input_flex toggle_wrap">
+                <div class="flex input_flex toggle_wrap st_flex">
                     <span>ブックマーク通知</span>
                     <input type="hidden" name="bookmark" value="0">
                     <div class="toggle_button">
@@ -50,7 +50,7 @@
                         <label for="toggle" class="toggle_label"></label>
                     </div>
                 </div>
-                <div class="flex input_flex toggle_wrap">
+                <div class="flex input_flex toggle_wrap st_flex">
                     <span>お気に入り登録通知</span>
                     <input type="hidden" name="follow" value="0">
                     <div class="toggle_button">

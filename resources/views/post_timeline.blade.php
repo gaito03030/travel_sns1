@@ -18,7 +18,7 @@
  </section>
  <div id="slider_top">
      <div class="slider">
-         @foreach($items as $item)
+         @foreach($popular as $item)
          <a href="{{ url('/general/posts/'.$item->id) }}" class="slider_info">
              <div class="img_overflow_fide">
                  <img src="{{asset($item->main_img_url)}}" alt="">
@@ -53,11 +53,11 @@
                              <p>{{ $item->pref->name}}</p>
                          </div>
                          @if(!empty($item->created_at))
-                         <time class="article-date">{{ $item->created_at->format('Y/m/d') }}</time>
+                         <time class="article-date">{{ $item->created_at->diffForHumans() }}</time>
                          @endif
                      </div>
                      <div class="desc_wrap">
-                         <p>{{$item->description}}</p>
+                         <p><?php echo mb_strimwidth(strip_tags($item->description), 0, 140, ' …', 'UTF-8'); ?></p>
                          <div class="article_counts st_flex flex">
                              <p class="flex st_flex flex_center"><span class="material-symbols-outlined">
                                      favorite
