@@ -195,8 +195,8 @@ class PostsController extends Controller
 
         //画像のアップロード
         // ディレクトリ名
-        // $dir = 'post';
-        $dir = 'img';
+        $dir = 'post';
+        // $dir = 'img';
         $path = "";
 
         if (isset($request['main_image'])) {
