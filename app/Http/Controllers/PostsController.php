@@ -293,7 +293,8 @@ class PostsController extends Controller
         }
 
 
-        return redirect('/company');
+        // return redirect('company.mypage');
+        return redirect()->route('company.mypage');
     }
 
     /**
