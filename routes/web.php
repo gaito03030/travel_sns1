@@ -35,7 +35,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('company/mypage', [UsersController::class, 'index'])->name('management_company');
 
     //企業側のhome
-    Route::get('/company', [PostsController::class, 'index'])->name('company_mypage');
+    Route::get('/company', [PostsController::class, 'index'])->name('company.mypage');
 
     //企業側のhomeの検索機能
     Route::get('/company/search', [PostsController::class, 'search'])->name('company_mypage.posts');
