@@ -1,4 +1,4 @@
-$(function () {
+jQuery(function ($) {
     $(".nav_openbtn").click(function () {
         if ($(this).is('.active')) {
             $('nav').css('right', '-60%');

@@ -66,7 +66,7 @@
         </main>
     </div>
     <!-- Scripts -->
-    @vite( ['resources/js/app.js','resources/js/preview.js','resources/js/post.js','resources/js/setting.js','resources/js/popup.js','resources/js/script.js'])
+    @vite( ['resources/js/jquery-3.7.0.min.js','resources/js/app.js','resources/js/preview.js','resources/js/post.js','resources/js/setting.js','resources/js/popup.js','resources/js/script.js'])
 
 </body>
 
