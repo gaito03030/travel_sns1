@@ -1,4 +1,4 @@
-jQuery(function ($) {
+window.onload = function(){
     $(".nav_openbtn").click(function () {
         if ($(this).is('.active')) {
             $('nav').css('right', '-60%');
@@ -14,5 +14,5 @@ jQuery(function ($) {
         $('.nav_bg').fadeOut();
         $(".nav_openbtn").toggleClass('active');
     })
-})
+}
 
