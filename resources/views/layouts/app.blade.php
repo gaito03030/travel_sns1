@@ -66,5 +66,4 @@
     </main>
     </div>
     <!-- Scripts -->
-    @vite( ['resources/js/jquery-3.7.0.min.js','resources/js/app.js','resources/js/preview.js','resources/js/post.js'])
 </body>
