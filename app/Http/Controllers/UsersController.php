@@ -128,7 +128,7 @@ class UsersController extends Controller
         $user = User::find($id);
 
         if ($user->company_flg == 0) {
-            return  redirect()->route('company_mypage');
+            return  redirect()->route('company.mypage');
         } else {
             return redirect()->route('timeline');
         }

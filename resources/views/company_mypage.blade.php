@@ -14,13 +14,13 @@
 @section('content')
 <!-- ここからがページごとの表示部分 -->
 <div class="js_bg">
-    <div class="js_popup">
-        <h2>削除</h2>
-        <p>削除してよろしいですか？</p>
-        <div class="js_popup_buttons">
-            <button class="button js_popup_cancel_btn">キャンセル</button>
-            <a class="button js_popup_delete_btn" href="">削除する</a>
-        </div>
+</div>
+<div class="js_popup">
+    <h2>削除</h2>
+    <p>削除してよろしいですか？</p>
+    <div class="js_popup_buttons">
+        <button class="button js_popup_cancel_btn">キャンセル</button>
+        <a class="button js_popup_delete_btn" href="">削除する</a>
     </div>
 </div>
 <section class="main_header st_company_header st_flex flex">

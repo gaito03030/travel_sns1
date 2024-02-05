@@ -149,12 +149,13 @@ class PostsController extends Controller
     {
 
 
-        return view('delete_page', compact('id'));
+        return view('company.delete_page.exe', compact('id'));
     }
 
     //投稿削除処理
     public function delete_exe($id)
     {
+
         $post = Post::find($id);
 
 
@@ -162,7 +163,7 @@ class PostsController extends Controller
         //行を削除
         $post->delete();
 
-        return redirect()->route('company_mypage');
+        return redirect()->route('company.mypage');
     }
     /**
      * Show the form for creating a new resource.
@@ -196,6 +197,7 @@ class PostsController extends Controller
         //画像のアップロード
         // ディレクトリ名
         $dir = 'post';
+        // $dir = 'img';
         $path = "";
 
         if (isset($request['main_image'])) {
@@ -204,7 +206,8 @@ class PostsController extends Controller
             $file_name = $request->file('main_image')->getClientOriginalName();
 
             // 取得したファイル名で保存
-            $request->file('main_image')->storeAs('public/' . $dir, $file_name);
+            // $request->file('main_image')->storeAs('public/' . $dir, $file_name);
+            $request->file('main_image')->storeAs($dir, $file_name);
 
             $path = 'storage/' . $dir . '/' . $file_name;
         } else {
@@ -294,7 +297,8 @@ class PostsController extends Controller
         }
 
 
-        return redirect('/company');
+        // return redirect('company.mypage');
+        return redirect()->route('company.mypage');
     }
 
     /**

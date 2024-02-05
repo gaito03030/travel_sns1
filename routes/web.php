@@ -35,15 +35,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('company/mypage', [UsersController::class, 'index'])->name('management_company');
 
     //企業側のhome
-    Route::get('/company', [PostsController::class, 'index'])->name('company_mypage');
+    Route::get('/company', [PostsController::class, 'index'])->name('company.mypage');
 
     //企業側のhomeの検索機能
     Route::get('/company/search', [PostsController::class, 'search'])->name('company_mypage.posts');
 
     //POSTを削除をする画面
-    Route::get('company/delete/{id}', [PostsController::class, 'delete_page'])->name('company_mypage.delete');
+    Route::get('company/delete/{id}', [PostsController::class, 'delete_page'])->name('company.delete');
     //POSTを削除する処理
-    Route::get('company/delete/exe/{id}', [PostsController::class, 'delete_exe'])->name('company_mypage.delete.exe');
+    Route::get('company/delete/exe/{id}', [PostsController::class, 'delete_exe'])->name('company.delete.exe');
 
     //企業側　モデルコース作成画面
     Route::get('company/create/', [PostsController::class, 'create'])->name('company_create_post');
