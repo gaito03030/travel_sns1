@@ -17,6 +17,7 @@ class Post extends Model
         'main_img_url',
         'status',
         'pref_id',
+        'price',
         'description',
     ];
 

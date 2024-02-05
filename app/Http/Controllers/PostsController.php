@@ -224,7 +224,8 @@ class PostsController extends Controller
                 'main_img_url' => $path,
                 'status' => $input_data['status'],
                 'pref_id' => $input_data['pref'],
-                'description' => $input_data['description']
+                'description' => $input_data['description'],
+                'price' => $input_data['price']
             ]
         );
 

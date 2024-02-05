@@ -13,8 +13,18 @@ $(function () {
             console.log(index);
             //〇日目
             if ($(this).children('.js_date_text')) {
-                console.log('test:'+$(this).find('.js_date_text').html());
+                console.log('test:' + $(this).find('.js_date_text').html());
                 $(this).find('.js_date_text').html((index + 1) + "日目");
+            }
+            if ($(this).is('[data-type="spot_input"]')) {
+                //.js_itemの中にjs_inputクラスの要素があるか探す
+                $(this).find('.js_input').each(function () {
+                    //js_inputクラス要素の数だけ処理する
+                    //name属性の[x]の部分を書き換える
+                    var replaceText = $(this).attr('name').replace(/\[\d+\]/, '[' + index + ']');
+                    //name属性をつけなおす
+                    $(this).attr('name', replaceText);
+                })
             }
             //.js_itemの中にjs_inputクラスの要素があるか探す
             $(this).children('.js_input').each(function () {
@@ -69,15 +79,14 @@ $(function () {
                     '<p class="js_date_text date_text">1日目</p>' +
                     '<div class="js_items form_content">' +
                     '<ul class="js_item_list" data-input="spots">' +
-                    '<li class="js_item flex form_box flex_form_box">' +
-                    '<div class="input_flex_left">' +
+                    '<li class="js_item flex st_flex form_box flex_form_box" data-type="spot_input">'+
                     '<input type="time" name="spot_time_1[0]" class="js_input">' +
                     '</div>' +
-                    '<div class="input_flex_right">'+
+                    '<div class="input_flex_right">' +
                     '<input type="text" name="spot_title_1[0]" class="js_input" placeholder="行程のタイトル">' +
                     '<textarea name="spot_description_1[0]" class="js_input" placeholder="詳細"></textarea>' +
                     '<input type="text" name="spot_address_1[0]" class="js_input" placeholder="住所">' +
-                    '</div>'+
+                    '</div>' +
                     '<button class="js_remove_btn remove_button">×</button>' +
                     '</li>' +
                     '</ul>' +
@@ -90,18 +99,18 @@ $(function () {
 
             } else if ($list.is('[data-input="spots"]')) {
                 var $num = parseInt($(".js_date_length").val());
-            
+
                 $list.append(
-                    
+
                     '<li class="js_item flex form_box flex_form_box">' +
                     '<div class="input_flex_left">' +
                     '<input type="time" name="spot_time_1[0]" class="js_input">' +
                     '</div>' +
-                    '<div class="input_flex_right">'+
+                    '<div class="input_flex_right">' +
                     '<input type="text" name="spot_title_1[0]" class="js_input" placeholder="行程のタイトル">' +
                     '<textarea name="spot_description_1[0]" class="js_input" placeholder="詳細"></textarea>' +
                     '<input type="text" name="spot_address_1[0]" class="js_input" placeholder="住所">' +
-                    '</div>'+
+                    '</div>' +
                     '<button class="js_remove_btn remove_button">×</button>' +
                     '</li>'
 
@@ -122,7 +131,7 @@ $(function () {
                     '<p class="js_date_text date_text">' + $num + '日目</p>' +
                     '<div class="js_items form_content">' +
                     '<ul class="js_item_list" data-input="spots">' +
-                    '<li class="js_item flex form_box flex_form_box">' +
+                    '<li class="js_item flex st_flex form_box flex_form_box" data-type="spot_input">' +
                     '<div class="input_flex_left">' +
                     '<input type="time" name="spot_time_' + $num + '[0]" class="js_input">' +
                     '</div>' +
