@@ -205,7 +205,8 @@ class PostsController extends Controller
             $file_name = $request->file('main_image')->getClientOriginalName();
 
             // 取得したファイル名で保存
-            $request->file('main_image')->storeAs('public/' . $dir, $file_name);
+            // $request->file('main_image')->storeAs('public/' . $dir, $file_name);
+            $request->file('main_image')->storeAs($dir, $file_name);
 
             $path = 'storage/' . $dir . '/' . $file_name;
         } else {
