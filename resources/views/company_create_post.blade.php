@@ -112,7 +112,7 @@
                         <p class="js_date_text date_text">1日目</p>
                         <div class="js_items form_content">
                             <ul class="js_item_list" data-input="spots">
-                                <li class="js_item flex st_flex form_box flex_form_box">
+                                <li class="js_item flex st_flex form_box flex_form_box" data-type="spot_input">
                                     <div class="input_flex_left">
                                         <input type="time" name="spot_time_1[0]" class="js_input">
                                     </div>
