@@ -155,6 +155,7 @@ class PostsController extends Controller
     //投稿削除処理
     public function delete_exe($id)
     {
+
         $post = Post::find($id);
 
 
