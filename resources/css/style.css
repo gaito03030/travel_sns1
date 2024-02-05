@@ -1182,7 +1182,7 @@ main:has(>.main_bg) {
 
 .js_popup {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -1190,7 +1190,7 @@ main:has(>.main_bg) {
     height: auto;
     padding: 20px 30px;
     background-color: #fff;
-    z-index: 10;
+    z-index: 5;
 }
 
 .js_popup p {
