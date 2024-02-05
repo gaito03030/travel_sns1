@@ -41,9 +41,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/company/search', [PostsController::class, 'search'])->name('company_mypage.posts');
 
     //POSTを削除をする画面
-    Route::get('company/delete/{id}', [PostsController::class, 'delete_page'])->name('company_mypage.delete');
+    Route::get('company/delete/{id}', [PostsController::class, 'delete_page'])->name('company.delete');
     //POSTを削除する処理
-    Route::get('company/delete/exe/{id}', [PostsController::class, 'delete_exe'])->name('company_mypage.delete.exe');
+    Route::get('company/delete/exe/{id}', [PostsController::class, 'delete_exe'])->name('company.delete.exe');
 
     //企業側　モデルコース作成画面
     Route::get('company/create/', [PostsController::class, 'create'])->name('company_create_post');

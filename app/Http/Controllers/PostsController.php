@@ -149,7 +149,7 @@ class PostsController extends Controller
     {
 
 
-        return view('delete_page', compact('id'));
+        return view('company.delete_page.exe', compact('id'));
     }
 
     //投稿削除処理
@@ -162,7 +162,7 @@ class PostsController extends Controller
         //行を削除
         $post->delete();
 
-        return redirect()->route('company_mypage');
+        return redirect()->route('company.mypage');
     }
     /**
      * Show the form for creating a new resource.
